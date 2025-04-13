@@ -1,0 +1,15 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:GroupBox style="align-items: stretch;">
+        <ui:VisualElement>
+            <ui:DropdownField label="State To Push:" index="-1" name="StateToPushDropDown" style="opacity: 1; justify-content: flex-start;" />
+            <ui:Button text="Push State" display-tooltip-when-elided="true" name="PushStateButton" />
+            <ui:Button text="Pop State" display-tooltip-when-elided="true" name="PopStateButton" />
+        </ui:VisualElement>
+    </ui:GroupBox>
+    <ui:VisualElement style="flex-direction: row; flex-grow: 1; align-items: stretch; justify-content: space-around;">
+        <ui:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: space-around; flex-direction: column;">
+            <ui:Label text="Application State Stack" display-tooltip-when-elided="true" style="align-items: stretch; -unity-text-align: upper-center; margin-top: 0; -unity-font-style: bold; visibility: visible; margin-left: 0; margin-right: 0; margin-bottom: 0; justify-content: flex-start; flex-grow: 0;" />
+            <ui:VisualElement name="StateStackList" style="flex-grow: 1; border-left-width: 3px; border-right-width: 3px; border-top-width: 3px; border-bottom-width: 3px; border-left-color: rgba(0, 0, 0, 0.42); border-right-color: rgba(0, 0, 0, 0.42); border-top-color: rgba(0, 0, 0, 0.42); border-bottom-color: rgba(0, 0, 0, 0.42); justify-content: space-around; max-width: none; max-height: none; align-items: stretch; min-width: auto; min-height: auto;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
