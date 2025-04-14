@@ -1,0 +1,20 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <ui:Label text="Selected GameObject" display-tooltip-when-elided="true" name="GameobjectName" style="align-items: stretch; -unity-text-align: upper-center; margin-top: 0; -unity-font-style: bold; visibility: visible; margin-left: 0; margin-right: 0; margin-bottom: 0; justify-content: flex-start; flex-grow: 0; font-size: 25px;" />
+    <ui:VisualElement name="AttributesBlock" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.33); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
+        <ui:Label text="Attributes" display-tooltip-when-elided="true" name="AttributesTitle" style="align-items: stretch; -unity-text-align: upper-center; margin-top: 0; -unity-font-style: bold; visibility: visible; margin-left: 0; margin-right: 0; margin-bottom: 0; justify-content: flex-start; flex-grow: 0; font-size: 20px;" />
+        <ui:VisualElement name="AttributesContainer" style="flex-direction: column; margin-top: 10px;" />
+    </ui:VisualElement>
+    <ui:GroupBox style="align-items: stretch;">
+        <ui:VisualElement>
+            <ui:DropdownField label="StatusEffect To Add" index="-1" name="EffectToAddDropDown" style="opacity: 1; justify-content: flex-start;" />
+            <ui:Button text="Add Effect" display-tooltip-when-elided="true" name="AddEffectButton" />
+        </ui:VisualElement>
+        <ui:Button text="Remove Effect" display-tooltip-when-elided="true" name="RemoveEffectButton" />
+    </ui:GroupBox>
+    <ui:VisualElement name="VisualElement" style="flex-direction: row; flex-grow: 1; align-items: stretch; justify-content: space-around;">
+        <ui:VisualElement style="flex-grow: 1; align-items: stretch; justify-content: space-around; flex-direction: column;">
+            <ui:Label text="Status Effects" display-tooltip-when-elided="true" style="align-items: stretch; -unity-text-align: upper-center; margin-top: 0; -unity-font-style: bold; visibility: visible; margin-left: 0; margin-right: 0; margin-bottom: 0; justify-content: flex-start; flex-grow: 0;" />
+            <ui:ListView focusable="true" name="EffectList" style="align-items: auto; flex-direction: column;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

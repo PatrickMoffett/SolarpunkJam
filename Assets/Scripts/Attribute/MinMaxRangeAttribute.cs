@@ -1,6 +1,6 @@
 using System;
 
-public class MinMaxRangeAttribute : Attribute
+public class MinMaxRangeAttribute : System.Attribute
 {
     public MinMaxRangeAttribute(float min, float max)
     {
