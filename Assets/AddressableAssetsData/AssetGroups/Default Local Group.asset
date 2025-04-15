@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: 06fe5015b639c4944952608a8941bbee
+  m_SerializeEntries:
+  - m_GUID: 18647ae4c67863847a9d6c03bf234fe7
+    m_Address: JumpHeight
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Attribute
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 809f9032542f1a047b2df5fe7c6bbc7e
+    m_Address: BasicAttackSpeed
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Attribute
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99fafdf068b2bda44b950fbcebcafb8b
+    m_Address: BasicAttackDamage
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Attribute
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: acd431724b1893746a8cccd568be7443
+    m_Address: MoveSpeed
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Attribute
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b1c54063097cf1f46bc842b2e6a15fe7
+    m_Address: MaxHealth
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Attribute
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dda8e1286e006ba4dbd17fa84b729151
+    m_Address: Health
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Attribute
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 636abd4dcaed4fb43a5ed7ee3712ec0d, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b44744e000b2f9f4998c843e1a8a48a5, type: 2}
+    - {fileID: 11400000, guid: 649217e77edaedf4e84e4418fb3e846a, type: 2}

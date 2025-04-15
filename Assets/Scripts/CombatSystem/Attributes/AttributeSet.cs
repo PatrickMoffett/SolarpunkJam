@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Services;
 using UnityEngine;
 
 [Serializable]
@@ -24,11 +25,22 @@ public class AttributeSet : MonoBehaviour
         // Clear any existing values so we always start fresh
         attributes.Clear();
 
+        #if UNITY_EDITOR
+        ServiceLocator.Initialize();
+        ServiceLocator.Instance.Register(new AssetService());
+        #endif
+        AssetService asr = ServiceLocator.Instance.Get<AssetService>();
+        
         // Iterate through every AttributeType and create a new Attribute instance for each
-        foreach (AttributeType type in Resources.LoadAll<AttributeType>(""))
+        foreach (AttributeType type in asr.LoadAllAssets<AttributeType>("Attribute"))
         {
             attributes.Add(new AttributeEntry { type = type, value = new Attribute(type.DefaultValue) });
         }
+        
+        #if UNITY_EDITOR
+        ServiceLocator.Instance.Unregister<AssetService>();
+        #endif
+        
     }
     private void Awake()
     {
