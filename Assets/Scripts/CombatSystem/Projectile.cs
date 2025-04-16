@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Services;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 
 public class Projectile : MonoBehaviour
@@ -11,6 +13,8 @@ public class Projectile : MonoBehaviour
     public event Action OnDestroyed;
     private readonly List<OutgoingStatusEffectInstance> _effectsToApply = new List<OutgoingStatusEffectInstance>();
 
+    private GameObject owner;
+    
     private static GameObject _bucket;
     private void Start()
     {
@@ -28,6 +32,12 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.gameObject.Equals(owner))
+        {
+            Debug.Log($"[{GetType().Name}] Projectile {gameObject} not interacting with owner {owner}");
+            return;
+        }
+        
         CombatSystem combatSystem = col.gameObject.GetComponent<CombatSystem>();
         if (combatSystem)
         {
@@ -39,12 +49,18 @@ public class Projectile : MonoBehaviour
 
         if (destroyOnCollision)
         {
-            Destroy(gameObject);
+            DestroyProjectile();
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        if (col.gameObject.Equals(owner))
+        {
+            Debug.Log($"[{GetType().Name}] Projectile {gameObject} not interacting with owner {owner}");
+            return;
+        }
+        
         CombatSystem combatSystem = col.gameObject.GetComponent<CombatSystem>();
         if (combatSystem)
         {
@@ -55,12 +71,22 @@ public class Projectile : MonoBehaviour
         }
         if (destroyOnCollision)
         {
-            Destroy(gameObject);
+            DestroyProjectile();
         }
     }
 
+    private void DestroyProjectile()
+    {
+        ServiceLocator.Instance.Get<AssetService>().ReleaseInstance(gameObject);
+    }
+    
     public void AddStatusEffects(List<OutgoingStatusEffectInstance> effects)
     {
         _effectsToApply.AddRange(effects);
+    }
+
+    public void SetOwner(GameObject newOwner)
+    {
+        owner = newOwner;
     }
 }

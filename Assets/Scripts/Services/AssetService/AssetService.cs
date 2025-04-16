@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -82,7 +83,14 @@ public class AssetService : IService
     /// <returns>True if the instance was unloaded. False otherwise.</returns>
     public bool ReleaseInstance(GameObject go)
     {
+        Debug.Log($"[{GetType().Name}] Releasing object {go}");
         return Addressables.ReleaseInstance(go);
+    }
+
+    public async UniTask<bool> ReleaseInstance(GameObject go, float time)
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(time));
+        return ReleaseInstance(go);
     }
     
     /// <summary>
@@ -163,6 +171,31 @@ public class AssetService : IService
         
     }
 
+    /// <summary>
+    /// Instantiate a GameObject by AssetReference
+    /// </summary>
+    /// <param name="aref">The AssetReference to instantiate</param>
+    /// <param name="position">The location to instantiate the object at</param>
+    /// <param name="rotation">The rotation to instantiate the object at</param>
+    /// <param name="instantiateInWorldSpace">If the instantiation should happen in worldspace or not</param>
+    /// <returns>The instantiated GameObject</returns>
+    /// <exception cref="InvalidKeyException">Thrown when the instantiation fails</exception>
+    public GameObject Instantiate(AssetReference aref, Vector3 position, Quaternion rotation,
+        bool instantiateInWorldSpace = false)
+    {
+        IResourceLocation loc = Addressables.LoadResourceLocationsAsync(aref).Result[0];
+        AsyncOperationHandle<GameObject> handle =
+            Addressables.InstantiateAsync(loc, position, rotation);
+        handle.WaitForCompletion();
+
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            return handle.Result;
+        }
+
+        throw new InvalidKeyException(
+            $"[{GetType().Name}] Failed to instantiate GameObject with reference {aref}");
+    }
     public async UniTask<GameObject> InstantiateAsync(string address, Transform parent = null,
         bool instantiateInWorldSpace = false)
     {

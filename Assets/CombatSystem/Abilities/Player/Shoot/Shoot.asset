@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e2d4a3589a741b68006b53c55fc312a, type: 3}
+  m_Name: Shoot
+  m_EditorClassIdentifier: 
+  passiveAbility: 0
+  activationCost: {fileID: 0}
+  cooldown: {fileID: 11400000, guid: 1eb6141b85fb4d74ebaa8e4fb908272e, type: 2}
+  projectilePrefab:
+    m_AssetGUID: a5d5ef09a35da8f448bf9cfdcaa13c81
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  projectileLifetime: 5
+  projectileVelocity: 10
+  effectsToApplyOnHit:
+  - {fileID: 11400000, guid: 7cd77a8b6ba81734c8ac6f033ecb699d, type: 2}
+  audioEvent: {fileID: 0}

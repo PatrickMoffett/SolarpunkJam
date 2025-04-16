@@ -68,6 +68,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5d5ef09a35da8f448bf9cfdcaa13c81
+    m_Address: Assets/Prefab/Character/Projectile.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: acd431724b1893746a8cccd568be7443
     m_Address: MoveSpeed
     m_ReadOnly: 0
