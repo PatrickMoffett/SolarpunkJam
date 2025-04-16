@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6943579f74bd7fc4ea86b613b6153f51, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
-  durationType: 1
+  durationType: 0
   duration:
     valueType: 0
     constantFloat: 0
@@ -28,8 +28,8 @@ MonoBehaviour:
   - attribute: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
     operation: 1
     attributeModifierValue:
-      valueType: 1
-      constantFloat: 2
+      valueType: 0
+      constantFloat: 1
       attributeSet: 0
       sourceAttributeType: {fileID: 11400000, guid: 99fafdf068b2bda44b950fbcebcafb8b, type: 2}
       preCoefficientAddition: 0
