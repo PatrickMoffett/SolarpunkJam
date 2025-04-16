@@ -9,8 +9,6 @@ namespace Services
     {
         public readonly string UI_PREFAB = UIPrefabs.UIGame;
 
-        //public readonly int SCENE_INDEX = (int)SceneIndexes.FIRST_SCENE_NAME;
-        //private AudioClip _mainMenuMusic = Resources.Load<AudioClip>("MainMenuMusic");
         private UIWidget _uiWidget;
 
         public GameState()
@@ -38,6 +36,8 @@ namespace Services
 
         protected override void SetupState(BaseState prevState, Dictionary<string, object> options)
         {
+            _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
+
             ServiceLocator.Instance.Get<LevelSceneManager>().LevelLoaded += FinishStateSetup;
 #if UNITY_EDITOR
             //don't load the next level if we're testing out a level in the editor

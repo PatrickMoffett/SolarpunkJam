@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Constants;
 using StateManager;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Services
 {
     public class MainMenuState : BaseApplicationState
     {
-        public readonly string UI_PREFAB = "UIMainMenu";
+        public readonly string UI_PREFAB = UIPrefabs.UIMainMenu;
 
         private AudioClip _mainMenuMusic = Resources.Load<AudioClip>("MainMenu-LegendOfCurseV2");
 

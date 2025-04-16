@@ -38,7 +38,7 @@ public class AttributeSet : MonoBehaviour
         }
         
         #if UNITY_EDITOR
-        ServiceLocator.Instance.Unregister<AssetService>();
+        //ServiceLocator.Instance.Unregister<AssetService>();
         #endif
         
     }

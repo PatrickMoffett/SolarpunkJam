@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     // TODO: Actually differentiate attacks based on button pressed/time pressed/etc...
     private void Attack()
     {
-        AssetService asr = ServiceLocator.Instance.Get<AssetService>();
+        //AssetService asr = ServiceLocator.Instance.Get<AssetService>();
         AbilityTargetData target = new AbilityTargetData();
         target.sourceCharacterLocation = transform.position;
         target.sourceCharacterDirection = Vector3.right;
