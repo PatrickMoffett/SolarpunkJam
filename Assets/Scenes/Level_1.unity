@@ -168,13 +168,13 @@ MonoBehaviour:
   attributes:
   - type: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
     value:
-      baseValue: 5
-  - type: {fileID: 11400000, guid: 809f9032542f1a047b2df5fe7c6bbc7e, type: 2}
+      baseValue: 2.5
+  - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
     value:
-      baseValue: 4
-  - type: {fileID: 11400000, guid: 99fafdf068b2bda44b950fbcebcafb8b, type: 2}
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
     value:
-      baseValue: 1
+      baseValue: 10
   - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
     value:
       baseValue: 5
@@ -312,7 +312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a22e5ab7d0c00d4cac2e15f68ca71c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
 --- !u!1 &1018721796
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,22 +709,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes:
-  - type: {fileID: 11400000, guid: 99fafdf068b2bda44b950fbcebcafb8b, type: 2}
-    value:
-      baseValue: 1
-  - type: {fileID: 11400000, guid: 809f9032542f1a047b2df5fe7c6bbc7e, type: 2}
-    value:
-      baseValue: 4
-  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
-    value:
-      baseValue: 10
   - type: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
     value:
       baseValue: 2.5
-  - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
+  - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
     value:
       baseValue: 10
   - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
+    value:
+      baseValue: 5
+  - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
     value:
       baseValue: 10
 --- !u!212 &1590030790

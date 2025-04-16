@@ -41,8 +41,14 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 809f9032542f1a047b2df5fe7c6bbc7e
-    m_Address: BasicAttackSpeed
+  - m_GUID: 5c62a901bfdcfbb4b9500469def3f4c0
+    m_Address: Mana
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Attribute
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75213a5dba0441840a03425ecfa2400c
+    m_Address: MaxMana
     m_ReadOnly: 0
     m_SerializedLabels:
     - Attribute
@@ -56,12 +62,6 @@ MonoBehaviour:
     m_Address: UIVolumeSettings
     m_ReadOnly: 0
     m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 99fafdf068b2bda44b950fbcebcafb8b
-    m_Address: BasicAttackDamage
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Attribute
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a2c947a00421ff644b2ca929eaddd3d2
     m_Address: UILoadingScreen

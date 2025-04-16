@@ -22,7 +22,7 @@ MonoBehaviour:
     coefficient: 1
     postCoefficientAddition: 0
     customValueCalculation: {fileID: 0}
-  isPeriodic: 1
+  isPeriodic: 0
   periodicRate: 1
   attributeModifiers: []
   grantedAbilities: []

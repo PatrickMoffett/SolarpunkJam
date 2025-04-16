@@ -4,7 +4,7 @@ using UnityEngine;
 public class AttributeType : ScriptableObject
 {
     // Default value for this attribute
-    public int DefaultValue;
+    public float DefaultValue;
 
     // Another attribute to use as a maximum value (optional). Example: MaxHealth
     public AttributeType MaxAttribute;

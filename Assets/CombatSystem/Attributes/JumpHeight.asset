@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02455b25fd249f043b3b91ce7f6588b4, type: 3}
   m_Name: JumpHeight
   m_EditorClassIdentifier: 
-  DefaultValue: 5
+  DefaultValue: 2.5
   MaxAttribute: {fileID: 0}
