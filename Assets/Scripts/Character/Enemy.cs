@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class Enemy : Character
 {
-    public AttributeType Health;
     protected void Start()
     {
-        _attributeSet.AttributesDictionary[Health].OnValueChanged += OnHealthChanged;
+        _attributeSet.AttributesDictionary[GlobalAttributes.HealthAttribute].OnValueChanged += OnHealthChanged;
     }
 
     private void OnHealthChanged(Attribute attribute, float newValue)
