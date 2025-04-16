@@ -38,6 +38,8 @@ public class Projectile : MonoBehaviour
             return;
         }
         
+        OnHitObject?.Invoke(col.gameObject);
+
         CombatSystem combatSystem = col.gameObject.GetComponent<CombatSystem>();
         if (combatSystem)
         {

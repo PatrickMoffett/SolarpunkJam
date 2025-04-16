@@ -28,7 +28,7 @@ namespace Abilities
             var rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90));
             GameObject projectile = asr.Instantiate(projectilePrefab,_owner.transform.position,rotation);
             projectile.GetComponent<Projectile>().SetOwner(_owner);
-            asr.ReleaseInstance(projectile,projectileLifetime);
+            _ = asr.ReleaseInstance(projectile, projectileLifetime);
             //Instantiate status effects
             List<OutgoingStatusEffectInstance> statusEffectInstances = new List<OutgoingStatusEffectInstance>();
             foreach (var effect in effectsToApplyOnHit)
