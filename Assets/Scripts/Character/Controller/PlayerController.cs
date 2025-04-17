@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Abilities;
 using Services;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 [RequireComponent(typeof(PlayerMovementComponent))]
 public class PlayerController : MonoBehaviour

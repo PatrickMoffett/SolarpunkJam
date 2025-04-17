@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Services;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 
 public class Projectile : MonoBehaviour
@@ -79,7 +78,7 @@ public class Projectile : MonoBehaviour
 
     private void DestroyProjectile()
     {
-        ServiceLocator.Instance.Get<AssetService>().ReleaseInstance(gameObject);
+        Destroy(gameObject);
     }
     
     public void AddStatusEffects(List<OutgoingStatusEffectInstance> effects)

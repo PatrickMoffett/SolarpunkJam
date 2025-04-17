@@ -25,16 +25,15 @@ public class UIManager : IService
         Error,
     }
     
+    private static readonly string ROOT_PREFAB = UIPrefabs.UIRoot;
     private Transform[] _layerTransforms;
     private GameObject _rootObject;
     private readonly Dictionary<string, UIWidget> _uiWidgets = new Dictionary<string, UIWidget>();
     
     public UIManager()
     {
-        AssetService assetService = ServiceLocator.Instance.Get<AssetService>();
-        _rootObject = assetService.Instantiate(UIPrefabs.UIRoot);
         // Instantiate Root UI Canvas
-        //_rootObject = Object.Instantiate<GameObject>(Resources.Load<GameObject>(UIPrefabs.UIRoot));
+        _rootObject = Object.Instantiate<GameObject>(Resources.Load<GameObject>(ROOT_PREFAB));
         Object.DontDestroyOnLoad(_rootObject);
         _layerTransforms = new Transform[((int)Enum.GetValues(typeof(UILayer)).Cast<UILayer>().Last())+1];
 
@@ -52,8 +51,7 @@ public class UIManager : IService
     /// <returns></returns>
     public UIWidget LoadUI(string uiPrefabResourceName, UILayer uICategory = UILayer.Default)
     {
-        AssetService assetService = ServiceLocator.Instance.Get<AssetService>();
-        GameObject go = assetService.Instantiate(uiPrefabResourceName, _layerTransforms[(int)uICategory]);
+        GameObject go = Object.Instantiate(Resources.Load<GameObject>(uiPrefabResourceName), _layerTransforms[(int)uICategory]);
         UIWidget uiWidget = new UIWidget(go);
         _uiWidgets[uiWidget.GUID] = uiWidget;
         return uiWidget;

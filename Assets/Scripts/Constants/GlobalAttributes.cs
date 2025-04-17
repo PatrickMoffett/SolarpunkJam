@@ -1,25 +1,23 @@
-
-using Cysharp.Threading.Tasks;
-using UnityEngine.AddressableAssets;
+using UnityEngine;
 
 // Helper to make referencing attributes easier in code (Expand with new attributes as needed)
 public static class GlobalAttributes
 {
-    public static AttributeType HealthAttribute = 
-        Addressables.LoadAssetAsync<AttributeType>("Health").WaitForCompletion();
+    public static AttributeType HealthAttribute =
+        Resources.Load<AttributeType >("Health");
 
     public static AttributeType MaxHealthAttribute =
-       Addressables.LoadAssetAsync<AttributeType>("MaxHealth").WaitForCompletion();
+       Resources.Load<AttributeType>("MaxHealth");
 
     public static AttributeType ManaAttribute =
-       Addressables.LoadAssetAsync<AttributeType>("Mana").WaitForCompletion();
+       Resources.Load<AttributeType>("Mana");
 
     public static AttributeType MaxManaAttribute =
-       Addressables.LoadAssetAsync<AttributeType>("MaxMana").WaitForCompletion();
+       Resources.Load<AttributeType>("MaxMana");
     
     public static AttributeType JumpHeightAttribute =
-       Addressables.LoadAssetAsync<AttributeType>("JumpHeight").WaitForCompletion();
+       Resources.Load<AttributeType>("JumpHeight");
     
     public static AttributeType MoveSpeedAttribute =
-       Addressables.LoadAssetAsync<AttributeType>("MoveSpeed").WaitForCompletion();
+       Resources.Load<AttributeType>("MoveSpeed");
 }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Services;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -13,7 +12,7 @@ namespace Abilities
     [CreateAssetMenu(menuName="CombatSystem/Abilities/RangedAttackAbility")]
     public class RangedAttackAbility : Ability
     {
-        [SerializeField] private AssetReference projectilePrefab;
+        [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private float projectileLifetime = 5f;
         [SerializeField] private float projectileVelocity = 10f;
         [SerializeField] private List<StatusEffect> effectsToApplyOnHit;
@@ -21,14 +20,13 @@ namespace Abilities
 
         protected override void Activate(AbilityTargetData activationData)
         {
-            AssetService asr = ServiceLocator.Instance.Get<AssetService>();
+
             _owner.GetComponent<Animator>().SetBool("Attacking", true);
             Vector2 direction = activationData.sourceCharacterDirection;
             //set rotation and spawn projectile
             var rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90));
-            GameObject projectile = asr.Instantiate(projectilePrefab,_owner.transform.position,rotation);
+            GameObject projectile = Instantiate(projectilePrefab,_owner.transform.position,rotation);
             projectile.GetComponent<Projectile>().SetOwner(_owner);
-            _ = asr.ReleaseInstance(projectile, projectileLifetime);
             //Instantiate status effects
             List<OutgoingStatusEffectInstance> statusEffectInstances = new List<OutgoingStatusEffectInstance>();
             foreach (var effect in effectsToApplyOnHit)
