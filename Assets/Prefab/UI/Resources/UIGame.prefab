@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 159367306013451052}
   - component: {fileID: 1386599948291450091}
   m_Layer: 5
-  m_Name: ManaBar
+  m_Name: SPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 7574022469370398534}
   - component: {fileID: 2173617280320379653}
   m_Layer: 5
-  m_Name: Heart
+  m_Name: SPDrop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1186538865, guid: 45046bb2d07091d44801cb5b4b1ef850, type: 3}
+  m_Sprite: {fileID: 2094683815128201257, guid: 3ccfecf4a03af2142949447a8edafc3d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   segmentPrefab: {fileID: 91021353674364762, guid: f41cd1c877fb44143b9a5a172268b799, type: 3}
   segmentCount: 6
-  spacing: 3.2
+  spacing: 1.7
 --- !u!1 &3404211065978277876
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +379,7 @@ RectTransform:
   m_GameObject: {fileID: 4458427360165445024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7789740773825774026}
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 4353587160002505966}
   - component: {fileID: 5383030808635076119}
   m_Layer: 5
-  m_Name: HealthSegments
+  m_Name: SPSegments
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -448,9 +448,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4835d99b146180a40ab7c6f8ad2aafb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segmentPrefab: {fileID: 91021353674364762, guid: f41cd1c877fb44143b9a5a172268b799, type: 3}
+  segmentPrefab: {fileID: 91021353674364762, guid: e13a822da17c00f43b3607d69f507d74, type: 3}
   segmentCount: 6
-  spacing: 3.2
+  spacing: 1.7
 --- !u!1 &5352628765524589729
 GameObject:
   m_ObjectHideFlags: 0

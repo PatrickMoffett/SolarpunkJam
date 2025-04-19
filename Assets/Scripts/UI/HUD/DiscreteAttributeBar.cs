@@ -35,15 +35,15 @@ public class DiscreteAttributeBar : MonoBehaviour
     {
         RectTransform segmentRect= segmentPrefab.GetComponent<RectTransform>();
         float segmentWidth = segmentRect.rect.width;
-        segmentWidth *= segmentPrefab.transform.lossyScale.x;
+        //segmentWidth *= segmentPrefab.transform.lossyScale.x;
         for (int i = 0; i < segmentCount; i++)
         {
             var seg = Instantiate(segmentPrefab, _container);
             seg.name = $"AttributeSegment_{i}";
 
             var rt = seg.GetComponent<RectTransform>();
-            rt.anchorMin = rt.anchorMax = new Vector2(0f, 0.5f);
-            rt.pivot = new Vector2(0f, 0.5f);
+            rt.anchorMin = rt.anchorMax = new Vector2(.5f, 0.5f);
+            rt.pivot = new Vector2(.5f, 0.5f);
             rt.anchoredPosition = new Vector2(i * (segmentWidth + spacing), 0f);
 
             _segments.Add(seg);
@@ -69,7 +69,7 @@ public class DiscreteAttributeBar : MonoBehaviour
             for(int i = 0; i < segmentCount; ++i)
             {
                 Gizmos.DrawWireCube(
-                    new Vector3(+ i * (segmentWidth * scale.x + spacing), 0, 0) + pos,
+                    new Vector3(+ i * (segmentWidth + spacing) * scale.x, 0, 0) + pos,
                     new Vector3(segmentWidth * scale.x, segmentHeight * scale.y, 0));
             }
         }

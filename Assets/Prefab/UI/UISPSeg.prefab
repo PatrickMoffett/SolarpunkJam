@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6515393610779506747}
   - component: {fileID: 3587408364029535741}
   m_Layer: 5
-  m_Name: UIHealthNug
+  m_Name: UISPSeg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3310515259335192596, guid: 0941bfd5192a8724bb0daa7e8671fca6, type: 3}
+  m_Sprite: {fileID: 3900850091638671178, guid: ef6a8c09e70814f4f868bb7f57c2b041, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
