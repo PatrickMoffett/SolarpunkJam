@@ -12,4 +12,13 @@ public class Character : MonoBehaviour
         _combatSystem = GetComponent<CombatSystem>();
         _attributeSet = GetComponent<AttributeSet>();
     }
+
+    public CombatSystem GetCombatSystem()
+    {
+        return _combatSystem;
+    }
+    public AttributeSet GetAttributeSet()
+    {
+        return _attributeSet;
+    }
 }

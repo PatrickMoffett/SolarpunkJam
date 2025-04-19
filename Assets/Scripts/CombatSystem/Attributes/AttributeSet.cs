@@ -16,10 +16,8 @@ public class AttributeSet : MonoBehaviour
     [SerializeField] 
     private List<AttributeEntry> attributes = new List<AttributeEntry>();
 
-
     private Dictionary<AttributeType, Attribute> _attributeDictionary = new Dictionary<AttributeType, Attribute>();
     protected Dictionary<AttributeType, Attribute> attributeDictionary { get => _attributeDictionary; set => _attributeDictionary = value; }
-    public Dictionary<AttributeType, Attribute> AttributesDictionary => attributeDictionary;
     public void Reset()
     {
         // Clear any existing values so we always start fresh
@@ -86,7 +84,7 @@ public class AttributeSet : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Attribute not found: " + modifier.attribute);
+            Debug.LogWarning("Attribute not found: " + modifier.attribute);
         }
     }
 
@@ -98,7 +96,7 @@ public class AttributeSet : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Attribute not found: " + modifier.attribute);
+            Debug.LogWarning("Attribute not found: " + modifier.attribute);
         }
     }
 
@@ -110,7 +108,7 @@ public class AttributeSet : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Attribute not found: " + modifier.attribute);
+            Debug.LogWarning("Attribute not found: " + modifier.attribute);
         }
     }
     
@@ -119,6 +117,15 @@ public class AttributeSet : MonoBehaviour
         return attributeDictionary.ContainsKey(type);
     }
 
+    public Attribute GetAttribute(AttributeType type)
+    {
+        if (attributeDictionary.TryGetValue(type, out var attribute))
+        {
+            return attribute;
+        }
+        Debug.LogWarning("Attribute not found: " + type);
+        return null;
+    }
     public float GetCurrentAttributeValue(AttributeType type)
     {
         if (attributeDictionary.TryGetValue(type, out var attribute))
@@ -137,6 +144,14 @@ public class AttributeSet : MonoBehaviour
         }
         Debug.LogError("Attribute not found: " + type);
         return 0f;
+    }
+
+    // Exposing this for use by CombatSystemEditor, please refrain from other uses unless necessary
+    // TODO: is there a way to just expose the dictionary to the editor without making it public?
+    // like friend keyword in C++?
+    public Dictionary<AttributeType, Attribute> GetAttributeDictionary()
+    {
+        return attributeDictionary;
     }
 }
 

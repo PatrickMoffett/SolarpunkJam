@@ -1,22 +1,56 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using Services;
+using System;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(RectTransform))]
 public class DiscreteAttributeBar : MonoBehaviour
 {
     public GameObject segmentPrefab;
-
     public int segmentCount = 10;
-
     public float spacing = 5f;
+    public AttributeType attributeType;
 
     private RectTransform _container;
     private List<GameObject> _segments = new List<GameObject>();
 
     void Awake()
     {
+        Assert.IsNotNull(attributeType, $"[{nameof(DiscreteAttributeBar)}] attributeType is not assigned.");
         Initialize();
+    }
+
+    private void OnEnable()
+    {
+        ServiceLocator.Instance.Get<PlayerManager>().OnPlayerCharacterChanged += OnPlayerCharacterChanged;
+    }
+    private void OnDisable()
+    {
+        ServiceLocator.Instance.Get<PlayerManager>().OnPlayerCharacterChanged -= OnPlayerCharacterChanged;
+    }
+    private void Start()
+    {
+        PlayerCharacter playerCharacter = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter();
+        if (playerCharacter != null)
+        {
+            OnPlayerCharacterChanged(playerCharacter);
+        }
+    }
+    private void OnPlayerCharacterChanged(PlayerCharacter character)
+    {
+        Attribute attribute = character?.GetAttributeSet().GetAttribute(attributeType);
+        if (attribute != null)
+        {
+            attribute.OnValueChanged += OnAttributeValueChanged;
+            SetCurrentValue((int)attribute.CurrentValue);
+        }
+    }
+
+    private void OnAttributeValueChanged(Attribute attribute, float arg2)
+    {
+        SetCurrentValue((int)attribute.CurrentValue);
     }
 
     private void Initialize()

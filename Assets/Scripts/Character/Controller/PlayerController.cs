@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 attackDirection = Vector2.right;
     private void Awake()
     {
+        Services.ServiceLocator.Instance.Get<PlayerManager>().SetPlayerController(this);
+
         _input = new InputSystem_Actions();
         _movementComponent = GetComponent<PlayerMovementComponent>();
 
@@ -45,6 +47,13 @@ public class PlayerController : MonoBehaviour
         _input.Player.BossSkill.canceled += ctx => EndAttack(_bossAttacks, -1);
     }
 
+    protected void OnDestroy()
+    {
+        if (Services.ServiceLocator.Instance.Get<PlayerManager>().GetPlayerController() == this)
+        {
+            Services.ServiceLocator.Instance.Get<PlayerManager>().SetPlayerController(null);
+        }
+    }
     private void StartJump()
     {
         _movementComponent.SetJump(true);

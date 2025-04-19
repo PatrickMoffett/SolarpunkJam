@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -12,9 +13,6 @@ public class PlayerMovementComponent : MonoBehaviour
     [SerializeField] private LayerMask _groundLayers;                          // A mask determining what is ground to the character
     [SerializeField] private Transform _groundTransform;                           // A position marking where to check if the player is grounded.
     [SerializeField] private Transform _ceilingTransform;                          // A position marking where to check for ceilings
-
-    [SerializeField] private AttributeType _movementSpeedAttribute;
-    [SerializeField] private AttributeType _jumpHeightAttribute;
 
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     const float k_CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
@@ -80,7 +78,9 @@ public class PlayerMovementComponent : MonoBehaviour
         if (_onGround || _airControl)
         {
             // Get the movement speed from the attribute set
-            _attributeSet.AttributesDictionary.TryGetValue(_movementSpeedAttribute, out var movementSpeed);
+            Attribute movementSpeed = _attributeSet.GetAttribute(GlobalAttributes.MoveSpeedAttribute);
+            Assert.IsNotNull(movementSpeed, $"Movement speed attribute not found: {GlobalAttributes.MoveSpeedAttribute}");
+            //_attributeSet.GetAttribute.TryGetValue(_movementSpeedAttribute, out var movementSpeed);
             // Move the character by finding the target velocity
             Vector3 targetVelocity = new Vector2(moveDirectionX * movementSpeed.CurrentValue, _rigidbody2D.linearVelocity.y);
             // And then smoothing it out and applying it to the character
@@ -106,13 +106,14 @@ public class PlayerMovementComponent : MonoBehaviour
             _canJump = false;
 
             // Get the jump height from the attribute set
-            _attributeSet.AttributesDictionary.TryGetValue(_jumpHeightAttribute, out var jumpHeight);
+            Attribute jumpHeight = _attributeSet.GetAttribute(GlobalAttributes.JumpHeightAttribute);
+            Assert.IsNotNull(jumpHeight, $"JumpHeight attribute not found: {GlobalAttributes.JumpHeightAttribute}");
+
             // Calculate the jump force to reach the jumpHeight
             float gravity = Physics2D.gravity.y * _rigidbody2D.gravityScale;
             float jumpForce = Mathf.Sqrt(-2f * gravity * jumpHeight.CurrentValue);
             // Add a vertical force to the player.
             _rigidbody2D.linearVelocityY = jumpForce;
-            Debug.Log("Jump");
         }
     }
 

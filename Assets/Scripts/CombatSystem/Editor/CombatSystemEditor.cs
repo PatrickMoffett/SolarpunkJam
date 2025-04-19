@@ -178,7 +178,7 @@ public class CombatSystemEditor : EditorWindow
         }
 
         // Iterate over each attribute entry in your AttributeSet.
-        foreach (var entry in _attributeSet.AttributesDictionary)
+        foreach (var entry in _attributeSet.GetAttributeDictionary())
         {
             // Create a new VisualElement for this attribute.
             VisualElement attributeRow = new VisualElement();

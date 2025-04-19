@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using UnityEngine;
 
@@ -5,7 +6,9 @@ public class Enemy : Character
 {
     protected void Start()
     {
-        _attributeSet.AttributesDictionary[GlobalAttributes.HealthAttribute].OnValueChanged += OnHealthChanged;
+        Attribute health = _attributeSet.GetAttribute(GlobalAttributes.HealthAttribute);
+        Assert.IsNotNull(health, $"Health attribute not found in the attribute set.");
+        health.OnValueChanged += OnHealthChanged;
     }
 
     private void OnHealthChanged(Attribute attribute, float newValue)

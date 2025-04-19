@@ -651,6 +651,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1590030787}
+  - component: {fileID: 1590030796}
   - component: {fileID: 1590030789}
   - component: {fileID: 1590030788}
   - component: {fileID: 1590030792}
@@ -821,8 +822,6 @@ MonoBehaviour:
     m_Bits: 1
   _groundTransform: {fileID: 1979695600}
   _ceilingTransform: {fileID: 1018721797}
-  _movementSpeedAttribute: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
-  _jumpHeightAttribute: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
 --- !u!50 &1590030793
 Rigidbody2D:
   serializedVersion: 5
@@ -918,6 +917,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1590030796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590030786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb232257a8e802c46a08478cfdf9b6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1979695599
 GameObject:
   m_ObjectHideFlags: 0

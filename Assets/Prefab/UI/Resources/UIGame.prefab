@@ -278,6 +278,7 @@ MonoBehaviour:
   segmentPrefab: {fileID: 91021353674364762, guid: f41cd1c877fb44143b9a5a172268b799, type: 3}
   segmentCount: 6
   spacing: 1.7
+  attributeType: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
 --- !u!1 &3404211065978277876
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +452,7 @@ MonoBehaviour:
   segmentPrefab: {fileID: 91021353674364762, guid: e13a822da17c00f43b3607d69f507d74, type: 3}
   segmentCount: 6
   spacing: 1.7
+  attributeType: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
 --- !u!1 &5352628765524589729
 GameObject:
   m_ObjectHideFlags: 0

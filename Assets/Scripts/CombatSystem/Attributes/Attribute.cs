@@ -15,7 +15,7 @@ public class Attribute
     /// <summary>
     /// Action Invoked whenever the CurrentValue of this Attribute changes
     /// </summary>
-    public event Action<Attribute,float> OnValueChanged;
+    public event Action<Attribute, float> OnValueChanged;
 
     /// <summary>
     /// Dictionary of Attribute modifiers
