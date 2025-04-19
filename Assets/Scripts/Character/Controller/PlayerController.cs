@@ -12,11 +12,17 @@ public class PlayerController : MonoBehaviour
     private PlayerMovementComponent _movementComponent;
 
     [Header("Attack information")]
-    [Tooltip("The various attacks the player currently has access to")]
-    [SerializeField] private List<RangedAttackAbility> _attacks;
+    [Tooltip("The various shoot attacks the player currently has access to")]
+    [SerializeField] private List<Ability> _shootAttacks;
+
+    [Tooltip("The various punch attacks the player currently has access to")]
+    [SerializeField] private List<Ability> _punchAttacks;
+
+    [Tooltip("The various boss skills the player currently has access to")]
+    [SerializeField] private List<Ability> _bossAttacks;
 
     [Tooltip("How long thew player needs to hold the button down for a charge attack. Make negative to disable")]
-    [SerializeField] private float chargeTime;
+    [SerializeField] private float shotChargeTime;
 
     private bool isCharging = false;
     private float chargeTimeCounter = 0;
@@ -31,8 +37,12 @@ public class PlayerController : MonoBehaviour
         _input.Player.Move.performed += ctx => Move(ctx.ReadValue<Vector2>());
         _input.Player.Move.canceled += ctx => Move(Vector2.zero);
 
-        _input.Player.Attack.performed += ctx => StartAttack();
-        _input.Player.Attack.canceled += ctx => EndAttack();
+        _input.Player.Shoot.performed += ctx => StartAttack();
+        _input.Player.Shoot.canceled += ctx => EndAttack(_shootAttacks, shotChargeTime);
+
+        _input.Player.Punch.canceled += ctx => EndAttack(_punchAttacks, -1);
+
+        _input.Player.BossSkill.canceled += ctx => EndAttack(_bossAttacks, -1);
     }
 
     private void StartJump()
@@ -59,17 +69,23 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(IncrementCharge());
     }
 
-    private void EndAttack()
+    private void EndAttack(List<Ability> abilities, float chargeTime)
     {
-        AbilityTargetData target = new AbilityTargetData();
-        target.sourceCharacterLocation = transform.position;
-        target.sourceCharacterDirection = attackDirection;
-        isCharging = false;
-        RangedAttackAbility chosenAttack = _attacks[0];
-        if (chargeTimeCounter >= chargeTime)
+        AbilityTargetData target = new AbilityTargetData
         {
-            Debug.Log($"[{GetType().Name}] Charged attack firing!");
-            chosenAttack = _attacks[1];
+            sourceCharacterLocation = transform.position,
+            sourceCharacterDirection = attackDirection
+        };
+        Ability chosenAttack = abilities[0];
+        if (chargeTime > 0)
+        {
+            isCharging = false;
+            if (chargeTimeCounter >= chargeTime)
+            {
+                Debug.Log($"[{GetType().Name}] Charged attack firing!");
+                chosenAttack = abilities[1];
+            }
+            chargeTimeCounter = 0;
         }
         chosenAttack.Initialize(gameObject);
         chosenAttack.TryActivate(target);

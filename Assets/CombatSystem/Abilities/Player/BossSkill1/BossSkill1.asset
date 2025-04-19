@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e2d4a3589a741b68006b53c55fc312a, type: 3}
-  m_Name: ChargedShoot
+  m_Name: BossSkill1
   m_EditorClassIdentifier: 
   passiveAbility: 0
   activationCost: {fileID: 0}
-  cooldown: {fileID: 11400000, guid: 739098c5d289a51429bf6f4dcf3c28a5, type: 2}
-  projectilePrefab: {fileID: 7222478627731710155, guid: c42259f26502eda439e0590619adbeb1, type: 3}
+  cooldown: {fileID: 11400000, guid: 0d8058937e0cbc04ab6393d39ef9d35e, type: 2}
+  projectilePrefab: {fileID: 7222478627731710155, guid: 07c50a9cb0277774096aa96e5bbbe4ed, type: 3}
   projectileLifetime: 10
   projectileVelocity: 5
   effectsToApplyOnHit:
-  - {fileID: 11400000, guid: eb6ac3e04e51efd4b8139ccf161199bd, type: 2}
+  - {fileID: 11400000, guid: 15f5344051993a04bb55b3046908ce23, type: 2}
   audioEvent: {fileID: 0}

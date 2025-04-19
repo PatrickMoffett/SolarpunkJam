@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5130164403042570087}
   - component: {fileID: 4395788133330116503}
-  - component: {fileID: 2624235662932448371}
+  - component: {fileID: 5770660855059578108}
   - component: {fileID: 4209192939798631952}
   - component: {fileID: 6236470887389294024}
-  m_Layer: 0
-  m_Name: Projectile
+  m_Layer: 6
+  m_Name: Punch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,9 +29,9 @@ Transform:
   m_GameObject: {fileID: 7222478627731710155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalPosition: {x: 0.744, y: 0.3312, z: 0}
+  m_LocalScale: {x: 0.5, y: 1.1622931, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.19624424, g: 0.8957182, b: 0.9245283, a: 1}
+  m_Color: {r: 0.90406334, g: 0.19607843, b: 0.9254902, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -90,8 +90,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &2624235662932448371
-CircleCollider2D:
+--- !u!70 &5770660855059578108
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -124,8 +124,9 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Offset: {x: 1.803395e-10, y: 0.0034691696}
+  m_Size: {x: 1.0000002, y: 0.98174345}
+  m_Direction: 0
 --- !u!114 &4209192939798631952
 MonoBehaviour:
   m_ObjectHideFlags: 0

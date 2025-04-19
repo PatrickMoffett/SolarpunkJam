@@ -794,10 +794,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b73b73f8c491014bbc13eebe6953f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attacks:
+  _shootAttacks:
   - {fileID: 11400000, guid: 2f3ba16d3bee2fa4d9cc5b6ed363978a, type: 2}
   - {fileID: 11400000, guid: 392f32448dc4fb744b722337e9993b5b, type: 2}
-  chargeTime: 5
+  _punchAttacks:
+  - {fileID: 11400000, guid: b0cd64b2af4bd1040a5b5e7e08d69324, type: 2}
+  _bossAttacks:
+  - {fileID: 11400000, guid: 7911d8e348b5f7543a26875b14be4118, type: 2}
+  shotChargeTime: 5
 --- !u!114 &1590030792
 MonoBehaviour:
   m_ObjectHideFlags: 0

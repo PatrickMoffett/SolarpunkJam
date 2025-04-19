@@ -15,6 +15,7 @@ namespace Abilities
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private float projectileLifetime = 5f;
         [SerializeField] private float projectileVelocity = 10f;
+        [SerializeField] private Vector2 spawnOffset = Vector2.zero;
         [SerializeField] private List<StatusEffect> effectsToApplyOnHit;
         [SerializeField] private SimpleAudioEvent audioEvent;
 
@@ -25,8 +26,9 @@ namespace Abilities
             Vector2 direction = activationData.sourceCharacterDirection;
             //set rotation and spawn projectile
             var rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90));
-            GameObject projectile = Instantiate(projectilePrefab,_owner.transform.position,rotation);
+            GameObject projectile = Instantiate(projectilePrefab,_owner.transform.position + (Vector3)(spawnOffset * activationData.sourceCharacterDirection),rotation);
             projectile.GetComponent<Projectile>().SetOwner(_owner);
+            Destroy(projectile, projectileLifetime);
             //Instantiate status effects
             List<OutgoingStatusEffectInstance> statusEffectInstances = new List<OutgoingStatusEffectInstance>();
             foreach (var effect in effectsToApplyOnHit)
