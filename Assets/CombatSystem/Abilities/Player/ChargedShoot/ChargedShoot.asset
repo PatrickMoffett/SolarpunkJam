@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e2d4a3589a741b68006b53c55fc312a, type: 3}
-  m_Name: Shoot
+  m_Name: ChargedShoot
   m_EditorClassIdentifier: 
   passiveAbility: 0
   activationCost: {fileID: 0}
   cooldown: {fileID: 11400000, guid: 1eb6141b85fb4d74ebaa8e4fb908272e, type: 2}
   projectilePrefab: {fileID: 7222478627731710155, guid: a5d5ef09a35da8f448bf9cfdcaa13c81, type: 3}
-  projectileLifetime: 5
-  projectileVelocity: 10
+  projectileLifetime: 10
+  projectileVelocity: 5
   effectsToApplyOnHit:
-  - {fileID: 11400000, guid: 7cd77a8b6ba81734c8ac6f033ecb699d, type: 2}
+  - {fileID: 11400000, guid: eb6ac3e04e51efd4b8139ccf161199bd, type: 2}
   audioEvent: {fileID: 0}

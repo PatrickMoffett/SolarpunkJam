@@ -30,6 +30,14 @@ public class PlayerMovementComponent : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private AttributeSet _attributeSet;
 
+    public Vector2 MoveDirection
+    {
+        get
+        {
+            return _movementDirection;
+        }
+    }
+    
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();

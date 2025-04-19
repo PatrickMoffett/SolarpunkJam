@@ -796,6 +796,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attacks:
   - {fileID: 11400000, guid: 2f3ba16d3bee2fa4d9cc5b6ed363978a, type: 2}
+  - {fileID: 11400000, guid: 392f32448dc4fb744b722337e9993b5b, type: 2}
+  chargeTime: 5
 --- !u!114 &1590030792
 MonoBehaviour:
   m_ObjectHideFlags: 0
