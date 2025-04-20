@@ -62,6 +62,17 @@ public class DiscreteAttributeBar : MonoBehaviour
     }
     private void OnPlayerCharacterChanged(PlayerCharacter character)
     {
+        if (_attribute != null)
+        {
+            _attribute.OnValueChanged -= OnAttributeValueChanged;
+            _maxAttribute.OnValueChanged -= OnMaxAttributeValueChanged;
+        }
+
+        if (character == null)
+        {
+            return;
+        }
+
         _attribute = character?.GetAttributeSet().GetAttribute(attributeType);
         Assert.IsNotNull(_attribute, $"[{nameof(DiscreteAttributeBar)}] Attribute not found: {attributeType}");
         _attribute.OnValueChanged += OnAttributeValueChanged;
