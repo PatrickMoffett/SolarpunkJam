@@ -66,6 +66,11 @@ public class Attribute
     /// </summary>
     public float CurrentValue { get; private set; }
 
+    public Attribute GetMaxAttribute()
+    {
+        return _maxBaseAttribute;
+    }
+
     public void SetMaxAttribute(Attribute modifiableAttributeValue)
     {
         _maxBaseAttribute = modifiableAttributeValue;

@@ -715,10 +715,10 @@ MonoBehaviour:
       baseValue: 2.5
   - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
     value:
-      baseValue: 10
+      baseValue: 13
   - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
     value:
-      baseValue: 10
+      baseValue: 13
   - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
     value:
       baseValue: 5

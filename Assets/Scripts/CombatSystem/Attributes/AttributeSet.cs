@@ -33,6 +33,7 @@ public class AttributeSet : MonoBehaviour
     {
         // Ensure the dictionary is populated before gameplay.
         InitializeAttributeDictionary();
+        InitializeMaxAttributes();
     }
 
     /// <summary>
@@ -49,10 +50,6 @@ public class AttributeSet : MonoBehaviour
                 attributeDictionary.Add(entry.type, entry.value);
             }
         }
-    }
-    private void Start()
-    {
-        InitializeMaxAttributes();
     }
 
     private void InitializeMaxAttributes()
