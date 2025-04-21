@@ -40,6 +40,10 @@ public class DiscreteAttributeBar : MonoBehaviour
 
     private void OnValidate()
     {
+        if(Application.isPlaying)
+        {
+            return;
+        }
         Initialize();
         UpdateBarUI();
     }
@@ -170,6 +174,10 @@ public class DiscreteAttributeBar : MonoBehaviour
 
         if(Application.isPlaying)
         {
+            if(_maxAttribute == null)
+            {
+                return 0f;
+            }
             maxSegments = _maxAttribute.CurrentValue;
         }
         else
