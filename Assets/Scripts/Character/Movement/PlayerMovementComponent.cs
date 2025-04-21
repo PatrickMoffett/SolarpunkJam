@@ -11,7 +11,7 @@ public class PlayerMovementComponent : MonoBehaviour
     private const string FALL_ANIM_TRIGGER = "Falling";
     private const string JUMP_ANIM_TRIGGER = "Jump";
     
-    [Range(0, .3f)][SerializeField] private float _movementSmoothing = .05f;   // How much to smooth out the movement
+    [Header("Movement Settings")]
     [SerializeField] private bool _airControl = false;                         // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask _groundLayers;                          // A mask determining what is ground to the character
     [SerializeField] private Transform _groundTransform;                           // A position marking where to check if the player is grounded.
@@ -90,34 +90,90 @@ public class PlayerMovementComponent : MonoBehaviour
 
     public void Move()
     {
-        float moveDirectionX = _movementDirection.x;
-        //only control the player if grounded or airControl is turned on
-        if (_onGround || _airControl)
-        {
-            // Get the movement speed from the attribute set
-            Attribute movementSpeed = _attributeSet.GetAttribute(GlobalAttributes.MoveSpeedAttribute);
-            Assert.IsNotNull(movementSpeed, $"Movement speed attribute not found: {GlobalAttributes.MoveSpeedAttribute}");
-            //_attributeSet.GetAttribute.TryGetValue(_movementSpeedAttribute, out var movementSpeed);
-            // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(moveDirectionX * movementSpeed.CurrentValue, 0f);
-            Vector2 xVelocity = new Vector2(_rigidbody2D.linearVelocity.x, 0f);
-            // And then smoothing it out and applying it to the character
-            float targetXVeloxity  = Vector3.SmoothDamp(xVelocity, targetVelocity, ref _velocity, _movementSmoothing).x;
+        Attribute movementSpeed = _attributeSet.GetAttribute(GlobalAttributes.MoveSpeedAttribute);
+        Assert.IsNotNull(movementSpeed, $"Movement speed attribute not found: {GlobalAttributes.MoveSpeedAttribute}");
 
-            _rigidbody2D.linearVelocity = new Vector3(targetXVeloxity, _rigidbody2D.linearVelocity.y);
-            // If the input is moving the player right and the player is facing left...
-            if (moveDirectionX > 0 && !_facingRight)
+        float moveDirectionX = _movementDirection.x;
+
+        if (moveDirectionX > 0 && !_facingRight)
+        {
+            // ... flip the player.
+            Flip();
+        }
+        // Otherwise if the input is moving the player left and the player is facing right...
+        else if (moveDirectionX < 0 && _facingRight)
+        {
+            // ... flip the player.
+            Flip();
+        }
+
+        Vector2 currentVelocity = _rigidbody2D.linearVelocity;
+        //only control the player if grounded or airControl is turned on
+        if (_onGround)
+        {
+            Attribute movementAccel = _attributeSet.GetAttribute(GlobalAttributes.MoveAccelerationAttribute);
+            Assert.IsNotNull(movementAccel, $"Move Acceleration attribute not found: {GlobalAttributes.MoveAccelerationAttribute}");
+            if(moveDirectionX == 0f)
             {
-                // ... flip the player.
-                Flip();
+                // If the player is not moving, we want to decelerate
+                if (currentVelocity.x > 0f)
+                {
+                    currentVelocity.x -= movementAccel.CurrentValue * Time.deltaTime;
+                    if (currentVelocity.x < 0f)
+                    {
+                        currentVelocity.x = 0f;
+                    }
+                }
+                else if (currentVelocity.x < 0f)
+                {
+                    currentVelocity.x += movementAccel.CurrentValue * Time.deltaTime;
+                    if (currentVelocity.x > 0f)
+                    {
+                        currentVelocity.x = 0f;
+                    }
+                }
             }
-            // Otherwise if the input is moving the player left and the player is facing right...
-            else if (moveDirectionX < 0 && _facingRight)
+            else
             {
-                // ... flip the player.
-                Flip();
+                currentVelocity.x += moveDirectionX * movementAccel.CurrentValue * Time.deltaTime;
             }
         }
+        else if (_airControl)
+        {
+            Attribute airAccel = _attributeSet.GetAttribute(GlobalAttributes.AirControlAccelerationAttribute);
+            Assert.IsNotNull(airAccel, $"Air Control attribute not found: {GlobalAttributes.AirControlAccelerationAttribute}");
+
+            if (moveDirectionX == 0f)
+            {
+                // If the player is not moving, we want to decelerate
+                if (currentVelocity.x > 0f)
+                {
+                    currentVelocity.x -= airAccel.CurrentValue * Time.deltaTime;
+                    if (currentVelocity.x < 0f)
+                    {
+                        currentVelocity.x = 0f;
+                    }
+                }
+                else if (currentVelocity.x < 0f)
+                {
+                    currentVelocity.x += airAccel.CurrentValue * Time.deltaTime;
+                    if (currentVelocity.x > 0f)
+                    {
+                        currentVelocity.x = 0f;
+                    }
+                }
+            }
+            else
+            {
+                currentVelocity.x += moveDirectionX * airAccel.CurrentValue * Time.deltaTime;
+            }
+        }
+
+        // Apply the speed to the player
+        currentVelocity.x = Mathf.Clamp(currentVelocity.x, -movementSpeed.CurrentValue, movementSpeed.CurrentValue);
+        currentVelocity.y = _rigidbody2D.linearVelocity.y;
+        _rigidbody2D.linearVelocity = currentVelocity;
+
         // If the player should jump...
         if (_onGround && _jumpPushed && _canJump)
         {

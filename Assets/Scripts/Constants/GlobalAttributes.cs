@@ -20,4 +20,10 @@ public static class GlobalAttributes
     
     public static AttributeType MoveSpeedAttribute =
        Resources.Load<AttributeType>("MoveSpeed");
+
+    public static AttributeType MoveAccelerationAttribute =
+   Resources.Load<AttributeType>("MoveAcceleration");
+
+    public static AttributeType AirControlAccelerationAttribute =
+   Resources.Load<AttributeType>("AirControlAcceleration");
 }

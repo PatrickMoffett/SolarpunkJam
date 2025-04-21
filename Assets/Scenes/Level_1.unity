@@ -166,24 +166,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes:
+  - type: {fileID: 11400000, guid: ba40c831763d40043aa3b6937c045bc9, type: 2}
+    value:
+      baseValue: 5
+  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+    value:
+      baseValue: 1
   - type: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
     value:
       baseValue: 2.5
   - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
     value:
       baseValue: 10
-  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
-    value:
-      baseValue: 10
-  - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
-    value:
-      baseValue: 5
   - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
     value:
       baseValue: 1
-  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
     value:
-      baseValue: 1
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 00487a6e262922742ae2e4fba74d15a3, type: 2}
+    value:
+      baseValue: 15
+  - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
+    value:
+      baseValue: 5
 --- !u!61 &986135986
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -735,24 +741,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attributes:
+  - type: {fileID: 11400000, guid: ba40c831763d40043aa3b6937c045bc9, type: 2}
+    value:
+      baseValue: 5
+  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+    value:
+      baseValue: 10
   - type: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
     value:
       baseValue: 2.5
   - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
     value:
-      baseValue: 13
-  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
-    value:
-      baseValue: 13
-  - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
-    value:
-      baseValue: 15
+      baseValue: 10
   - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
     value:
       baseValue: 10
-  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
     value:
       baseValue: 10
+  - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
+    value:
+      baseValue: 15
+  - type: {fileID: 11400000, guid: 00487a6e262922742ae2e4fba74d15a3, type: 2}
+    value:
+      baseValue: 15
 --- !u!212 &1590030790
 SpriteRenderer:
   m_ObjectHideFlags: 0
