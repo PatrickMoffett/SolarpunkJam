@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: BossSkill1
   m_EditorClassIdentifier: 
   passiveAbility: 0
-  activationCost: {fileID: 0}
+  activationCost: {fileID: 11400000, guid: 3d612eead3557874e850ae8dc15df4b3, type: 2}
   cooldown: {fileID: 11400000, guid: 0d8058937e0cbc04ab6393d39ef9d35e, type: 2}
   projectilePrefab: {fileID: 7222478627731710155, guid: 07c50a9cb0277774096aa96e5bbbe4ed, type: 3}
   projectileLifetime: 10
   projectileVelocity: 5
+  spawnOffset: {x: 0, y: 0}
   effectsToApplyOnHit:
   - {fileID: 11400000, guid: 15f5344051993a04bb55b3046908ce23, type: 2}
   audioEvent: {fileID: 0}

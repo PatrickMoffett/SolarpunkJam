@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Shoot
   m_EditorClassIdentifier: 
   passiveAbility: 0
-  activationCost: {fileID: 0}
+  activationCost: {fileID: 11400000, guid: e9b2585fd5c554d4e972c3459bf3f022, type: 2}
   cooldown: {fileID: 11400000, guid: 1eb6141b85fb4d74ebaa8e4fb908272e, type: 2}
   projectilePrefab: {fileID: 7222478627731710155, guid: a5d5ef09a35da8f448bf9cfdcaa13c81, type: 3}
   projectileLifetime: 5
   projectileVelocity: 10
+  spawnOffset: {x: 0, y: 0}
   effectsToApplyOnHit:
   - {fileID: 11400000, guid: 7cd77a8b6ba81734c8ac6f033ecb699d, type: 2}
   audioEvent: {fileID: 0}
