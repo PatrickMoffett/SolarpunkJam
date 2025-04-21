@@ -22,7 +22,7 @@ namespace Abilities
         protected override void Activate(AbilityTargetData activationData)
         {
 
-            _owner.GetComponent<Animator>().SetBool("Attacking", true);
+            _owner.GetComponent<Animator>().SetBool(activationData.animationTrigger, true);
             Vector2 direction = activationData.sourceCharacterDirection;
             //set rotation and spawn projectile
             var rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90));

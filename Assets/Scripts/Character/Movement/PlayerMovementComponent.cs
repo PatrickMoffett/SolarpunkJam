@@ -8,6 +8,9 @@ using UnityEngine.Events;
 public class PlayerMovementComponent : MonoBehaviour
 {
 
+    private const string FALL_ANIM_TRIGGER = "Falling";
+    private const string JUMP_ANIM_TRIGGER = "Jump";
+    
     [Range(0, .3f)][SerializeField] private float _movementSmoothing = .05f;   // How much to smooth out the movement
     [SerializeField] private bool _airControl = false;                         // Whether or not a player can steer while jumping;
     [SerializeField] private LayerMask _groundLayers;                          // A mask determining what is ground to the character
@@ -26,6 +29,7 @@ public class PlayerMovementComponent : MonoBehaviour
     private Vector3 _velocity = Vector3.zero;
 
     private Rigidbody2D _rigidbody2D;
+    private Animator _anim;
     private AttributeSet _attributeSet;
 
     public Vector2 MoveDirection
@@ -39,6 +43,7 @@ public class PlayerMovementComponent : MonoBehaviour
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
         _attributeSet = GetComponent<AttributeSet>();
     }
 
@@ -58,12 +63,24 @@ public class PlayerMovementComponent : MonoBehaviour
                 if (!startedOnGrounded)
                 {
                     // The Player has landed
+                    _anim.SetBool(FALL_ANIM_TRIGGER, false);
                 }
                 return;
             }
         }
         // The player is not grounded or we would have returned
         _canJump = true;
+
+        if (_rigidbody2D.linearVelocityY > 0)
+        {
+            _anim.SetBool(JUMP_ANIM_TRIGGER, true);
+            _anim.SetBool(FALL_ANIM_TRIGGER, false);
+        }
+        else if (_rigidbody2D.linearVelocityY < 0 && !_onGround)
+        {
+            _anim.SetBool(JUMP_ANIM_TRIGGER, false);
+            _anim.SetBool(FALL_ANIM_TRIGGER, true);
+        }
     }
 
     private void Update()

@@ -8,6 +8,10 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMovementComponent))]
 public class PlayerController : MonoBehaviour
 {
+    private const string SHOOT_ANIM_TRIGGER = "Shoot";
+    private const string PUNCH_ANIM_TRIGGER = "Punch";
+    private const string BOSS_ANIM_TRIGGER = "BossAbility";
+    
     private InputSystem_Actions _input;
     private PlayerMovementComponent _movementComponent;
 
@@ -40,11 +44,11 @@ public class PlayerController : MonoBehaviour
         _input.Player.Move.canceled += ctx => Move(Vector2.zero);
 
         _input.Player.Shoot.performed += ctx => StartAttack();
-        _input.Player.Shoot.canceled += ctx => EndAttack(_shootAttacks, shotChargeTime);
+        _input.Player.Shoot.canceled += ctx => EndAttack(_shootAttacks, SHOOT_ANIM_TRIGGER, shotChargeTime);
 
-        _input.Player.Punch.canceled += ctx => EndAttack(_punchAttacks, -1);
+        _input.Player.Punch.canceled += ctx => EndAttack(_punchAttacks, PUNCH_ANIM_TRIGGER);
 
-        _input.Player.BossSkill.canceled += ctx => EndAttack(_bossAttacks, -1);
+        _input.Player.BossSkill.canceled += ctx => EndAttack(_bossAttacks, BOSS_ANIM_TRIGGER);
     }
 
     protected void OnDestroy()
@@ -78,12 +82,13 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(IncrementCharge());
     }
 
-    private void EndAttack(List<Ability> abilities, float chargeTime)
+    private void EndAttack(List<Ability> abilities, string animationTrigger, float chargeTime = -1)
     {
         AbilityTargetData target = new AbilityTargetData
         {
             sourceCharacterLocation = transform.position,
-            sourceCharacterDirection = attackDirection
+            sourceCharacterDirection = attackDirection,
+            animationTrigger = animationTrigger
         };
         Ability chosenAttack = abilities[0];
         if (chargeTime > 0)

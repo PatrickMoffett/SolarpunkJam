@@ -7,6 +7,7 @@ public class AbilityTargetData //Expand/inherit from this class as more data is 
     public Vector3 sourceCharacterDirection;
     public Vector3 targetLocation;
     public GameObject targetGameObject;
+    public string animationTrigger;
 }
 public abstract class Ability : ScriptableObject
 {
