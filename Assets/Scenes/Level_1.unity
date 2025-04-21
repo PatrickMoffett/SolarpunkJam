@@ -721,7 +721,7 @@ MonoBehaviour:
       baseValue: 13
   - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
     value:
-      baseValue: 5
+      baseValue: 15
   - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
     value:
       baseValue: 10
@@ -815,8 +815,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6a773568bebe94ababf6c70f254137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSmoothing: 0.3
-  _airControl: 1
+  _movementSmoothing: 0.15
+  _airControl: 0
   _groundLayers:
     serializedVersion: 2
     m_Bits: 1
@@ -837,7 +837,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

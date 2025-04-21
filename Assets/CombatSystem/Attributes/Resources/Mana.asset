@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Mana
   m_EditorClassIdentifier: 
   DefaultValue: 10
-  MaxAttribute: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
+  MaxAttribute: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}

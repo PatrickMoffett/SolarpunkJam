@@ -82,10 +82,12 @@ public class PlayerMovementComponent : MonoBehaviour
             Assert.IsNotNull(movementSpeed, $"Movement speed attribute not found: {GlobalAttributes.MoveSpeedAttribute}");
             //_attributeSet.GetAttribute.TryGetValue(_movementSpeedAttribute, out var movementSpeed);
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(moveDirectionX * movementSpeed.CurrentValue, _rigidbody2D.linearVelocity.y);
+            Vector3 targetVelocity = new Vector2(moveDirectionX * movementSpeed.CurrentValue, 0f);
+            Vector2 xVelocity = new Vector2(_rigidbody2D.linearVelocity.x, 0f);
             // And then smoothing it out and applying it to the character
-            _rigidbody2D.linearVelocity = Vector3.SmoothDamp(_rigidbody2D.linearVelocity, targetVelocity, ref _velocity, _movementSmoothing);
+            float targetXVeloxity  = Vector3.SmoothDamp(xVelocity, targetVelocity, ref _velocity, _movementSmoothing).x;
 
+            _rigidbody2D.linearVelocity = new Vector3(targetXVeloxity, _rigidbody2D.linearVelocity.y);
             // If the input is moving the player right and the player is facing left...
             if (moveDirectionX > 0 && !_facingRight)
             {
