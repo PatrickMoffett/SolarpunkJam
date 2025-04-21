@@ -1,3 +1,4 @@
+using Services;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -35,6 +36,6 @@ public class PlayerCharacter : Character
 
     private void Die()
     {
-        Destroy(gameObject);
+        ServiceLocator.Instance.Get<ApplicationStateManager>().PushState<GameOverState>();
     }
 }
