@@ -3,7 +3,7 @@ name: Build project
 on:
   push:
     branches:
-      - 'release/**'
+      - 'release/itch'
 
 jobs:
   buildForAllSupportedPlatforms:
@@ -43,6 +43,19 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: ${{ matrix.targetPlatform }}
+      - name: Compute VERSION via git-describe
+        shell: bash
+        run: |
+          git fetch --tags
+          latest=$(git describe --tags --match "v[0-9]*" --abbrev=0)
+          commits=$(git rev-list "${latest}"..HEAD --count)
+          base=${latest#v}
+          if [ "$commits" -gt 0 ]; then
+            version="$base.$commits"
+          else
+            version="$base"
+          fi
+          echo "VERSION=$version" >> $GITHUB_ENV
       - uses: yeslayla/butler-publish-itchio-action@master
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
@@ -50,4 +63,4 @@ jobs:
           ITCH_GAME: solarpunk-jam
           ITCH_USER: PatrickMoffett
           PACKAGE: build/${{ matrix.targetPlatform }}
-          VERSION: ${{github.ref_name}}
+          VERSION: ${{ env.VERSION }}
