@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(CombatSystem))]
 [RequireComponent(typeof(AttributeSet))]
 public class Character : MonoBehaviour
 {
+    public Action<Character> OnCharacterDeath;
     protected CombatSystem _combatSystem;
     protected AttributeSet _attributeSet;
     protected virtual void Awake()

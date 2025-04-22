@@ -19,6 +19,7 @@ public class Enemy : Character
 
     private void Die()
     {
+        OnCharacterDeath?.Invoke(this);
         Destroy(gameObject);
     }
 }
