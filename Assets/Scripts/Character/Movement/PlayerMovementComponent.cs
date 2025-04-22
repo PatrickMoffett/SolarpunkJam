@@ -30,6 +30,7 @@ public class PlayerMovementComponent : MonoBehaviour
     private bool _islowJumpGravityApplied = false;                  // Whether or not the low jump gravity multiplier is applied
     private bool _onGround;                                         // Whether or not the player is grounded.
     private bool _jumpPushed = false;                               // is the jump button pushed
+    private bool _jumpWasTried = true;
     private bool _jumpedToLeaveGround = false;                      // Whether or not the player has jumped to leave the ground
     private bool _playerLeftGroundSinceLastJump = true;             // Whether or not the player has left the ground since the last jump
     private bool _coyoteJumpAvailable = false;                      // Whether or not the player can jump after leaving the ground
@@ -118,6 +119,7 @@ public class PlayerMovementComponent : MonoBehaviour
         {
             _rigidbody2D.linearVelocityY = -_maxFallSpeed;
         }
+        _jumpWasTried = true;
     }
     private void UpdateCharacterDirection()
     {
@@ -222,7 +224,7 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     private bool ShouldJump()
     {
-        return (_onGround || _coyoteJumpAvailable) && _jumpPushed && _playerLeftGroundSinceLastJump;
+        return (_onGround || _coyoteJumpAvailable) && _jumpPushed && !_jumpWasTried && _playerLeftGroundSinceLastJump;
     }
     private void PerformJump()
     {
@@ -326,6 +328,7 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     internal void SetJumpPushed(bool jump)
     {
+        _jumpWasTried = false;
         _jumpPushed = jump;
     }
     internal void SetMoveDirection(Vector2 moveDirection)
