@@ -60,11 +60,11 @@ public class PlayerController : MonoBehaviour
     }
     private void StartJump()
     {
-        _movementComponent.SetJump(true);
+        _movementComponent.SetJumpPushed(true);
     }
     private void EndJump()
     {
-        _movementComponent.SetJump(false);
+        _movementComponent.SetJumpPushed(false);
     }
     private void Move(Vector2 vector2)
     {

@@ -2,10 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 public class CollidableEffectComponent : MonoBehaviour
 {
-    [SerializeField] private bool ApplyOnCollision = true;
-    [SerializeField] private bool ApplyOnTrigger = true;
-    [SerializeField] private bool destroyOnApplication = true;
-    [SerializeField] private List<StatusEffect> EffectsToApply = new List<StatusEffect>();
+    [SerializeField] private bool _applyOnCollision = true;
+    [SerializeField] private bool _applyOnTrigger = true;
+    [SerializeField] private bool _destroyOnApplication = true;
+    [SerializeField] private List<StatusEffect> _effectsToApply = new List<StatusEffect>();
 
     private void TryToApplyToGameObject(GameObject obj)
     {
@@ -15,12 +15,12 @@ public class CollidableEffectComponent : MonoBehaviour
             return;
         }
 
-        foreach (var effect in EffectsToApply)
+        foreach (var effect in _effectsToApply)
         {
             OutgoingStatusEffectInstance effectInstance = new OutgoingStatusEffectInstance(effect, combatSystem);
             combatSystem?.ApplyStatusEffect(effectInstance);
         }
-        if (destroyOnApplication)
+        if (_destroyOnApplication)
         {
             Destroy(gameObject);
         }
