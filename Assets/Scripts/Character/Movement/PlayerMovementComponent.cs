@@ -22,6 +22,9 @@ public class PlayerMovementComponent : MonoBehaviour
     [SerializeField] private Transform _ceilingTransform;           // A position marking where to check for ceilings
     [SerializeField] private float _ceilingRadius = .2f;            // Radius of the overlap circle to determine if the player can stand up
 
+    [Header("Sound Effect")]
+    [SerializeField] private SimpleAudioEvent _jumpAudioEvent;
+
     // Anim Variables
     private const string FALL_ANIM_TRIGGER = "Falling";
     private const string JUMP_ANIM_TRIGGER = "Jump";
@@ -228,6 +231,8 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     private void PerformJump()
     {
+        _jumpAudioEvent.Play(gameObject);
+
         if (_coyoteJumpAvailable)
         {
             StopCoyoteTime();
