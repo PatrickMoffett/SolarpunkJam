@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicShot_ASO
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 6494df2a0754c51429e494eb4a6e7d36, type: 3}
+  - {fileID: 8300000, guid: 7805779d8469e74418429c7668f85a24, type: 3}
   volume:
     minValue: 1
     maxValue: 1

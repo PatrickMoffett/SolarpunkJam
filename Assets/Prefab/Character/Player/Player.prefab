@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _airControl: 1
-  _lowJumpGravityMultiplier: 2.5
+  _lowJumpGravityMultiplier: 2
   _maxFallSpeed: 20
   _coyoteTime: 0.1
   _groundLayers:
