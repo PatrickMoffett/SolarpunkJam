@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2683446639844951660}
   - component: {fileID: 5493656809202970434}
   - component: {fileID: 1731264774818167028}
+  - component: {fileID: 2414960825472602931}
   m_Layer: 0
   m_Name: TestEnemy
   m_TagString: Untagged
@@ -213,12 +214,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drops:
-  - prefab: {fileID: 0}
-    dropWeight: 2
-    spawnVelocity: {x: 0, y: 0, z: 0}
   - prefab: {fileID: 7467977647329332869, guid: d4669a00eda66fc4892de5dc8e6cbc89, type: 3}
     dropWeight: 1
-    spawnVelocity: {x: 0, y: 500, z: 0}
   - prefab: {fileID: 7744278790260704857, guid: d387eb5b71651154f9da060fd4e00a83, type: 3}
     dropWeight: 1
-    spawnVelocity: {x: 0, y: 500, z: 0}
+  - prefab: {fileID: 0}
+    dropWeight: 2
+  singleLootSpawn: 1
+--- !u!114 &2414960825472602931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511460746873915769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd3a40d9e9a59848868718b1aec38a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _applyOnCollision: 1
+  _applyOnTrigger: 1
+  _destroyOnApplication: 0
+  _canApplyToNonPlayer: 0
+  _effectsToApply:
+  - {fileID: 11400000, guid: 2fb8938e2cbfcfe40aa686c9558c30f3, type: 2}
