@@ -164,11 +164,21 @@ public class PlayerMovementComponent : MonoBehaviour
     {
         if (_rigidbody2D.linearVelocityY > _jumpEpsilon)
         {
+            // Don't set the bool again if its already set
+            if (_anim.GetBool(JUMP_ANIM_TRIGGER))
+            {
+                return;
+            }
             _anim.SetBool(JUMP_ANIM_TRIGGER, true);
             _anim.SetBool(FALL_ANIM_TRIGGER, false);
         }
         else if (_rigidbody2D.linearVelocityY < -_jumpEpsilon && !_onGround)
         {
+            // Don't set the bool again if its already set
+            if (_anim.GetBool(FALL_ANIM_TRIGGER))
+            {
+                return;
+            }
             _anim.SetBool(JUMP_ANIM_TRIGGER, false);
             _anim.SetBool(FALL_ANIM_TRIGGER, true);
         }

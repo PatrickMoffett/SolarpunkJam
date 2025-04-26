@@ -190,6 +190,8 @@ MonoBehaviour:
   _ceilingTransform: {fileID: 1889776012169917196}
   _ceilingRadius: 0.2
   _jumpEpsilon: 0.2
+  _knockbackSpeed: 10
+  _knockbackTime: 0.2
   _jumpAudioEvent: {fileID: 11400000, guid: aab6fb66b0a8dd34596be577e8abc27a, type: 2}
 --- !u!114 &8468066183239496644
 MonoBehaviour:
@@ -203,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b73b73f8c491014bbc13eebe6953f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthAttribute: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
   _shootAttacks:
   - {fileID: 11400000, guid: 2f3ba16d3bee2fa4d9cc5b6ed363978a, type: 2}
   - {fileID: 11400000, guid: 392f32448dc4fb744b722337e9993b5b, type: 2}

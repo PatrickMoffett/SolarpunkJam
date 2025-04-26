@@ -11,10 +11,15 @@ public class PlayerController : MonoBehaviour
     private const string SHOOT_ANIM_TRIGGER = "Shoot";
     private const string PUNCH_ANIM_TRIGGER = "Punch";
     private const string BOSS_ANIM_TRIGGER = "BossAbility";
+    private const string DAMAGED_ANIM_TRIGGER = "Hit";
     
     private InputSystem_Actions _input;
     private PlayerMovementComponent _movementComponent;
+    private AttributeSet _attributes;
 
+    [Tooltip("The player's health Attribute, used to track damage and trigger the right animations")]
+    [SerializeField] private AttributeType healthAttribute;
+    
     [Header("Attack information")]
     [Tooltip("The various shoot attacks the player currently has access to")]
     [SerializeField] private List<Ability> _shootAttacks;
@@ -37,18 +42,22 @@ public class PlayerController : MonoBehaviour
 
         _input = new InputSystem_Actions();
         _movementComponent = GetComponent<PlayerMovementComponent>();
+        _attributes = GetComponent<AttributeSet>();
 
         _input.Player.Jump.started += ctx => StartJump();
         _input.Player.Jump.canceled += ctx => EndJump();
         _input.Player.Move.performed += ctx => Move(ctx.ReadValue<Vector2>());
         _input.Player.Move.canceled += ctx => Move(Vector2.zero);
-
+        
         _input.Player.Shoot.performed += ctx => StartAttack();
         _input.Player.Shoot.canceled += ctx => EndAttack(_shootAttacks, SHOOT_ANIM_TRIGGER, shotChargeTime);
-
         _input.Player.Punch.canceled += ctx => EndAttack(_punchAttacks, PUNCH_ANIM_TRIGGER);
-
         _input.Player.BossSkill.canceled += ctx => EndAttack(_bossAttacks, BOSS_ANIM_TRIGGER);
+    }
+
+    private void Start()
+    {
+        _attributes.GetAttribute(healthAttribute).OnValueChanged += OnHealthChanged;
     }
 
     protected void OnDestroy()
@@ -73,6 +82,18 @@ public class PlayerController : MonoBehaviour
         {
             attackDirection = vector2;
         }
+    }
+    
+    private void OnHealthChanged(Attribute attr, float amt)
+    {
+        // Don't play the damaged animation if the change isn't damage
+        if (attr.CurrentValue >= amt)
+        {
+            return;
+        }
+        
+        // TODO: Better way to do this. Caching the animator seems jank, there has to be anothee location this can be done
+        GetComponent<Animator>().SetTrigger(DAMAGED_ANIM_TRIGGER);
     }
 
     // TODO: Actually differentiate attacks based on button pressed/time pressed/etc...
