@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 9184748397493918650}
   - component: {fileID: 8891755008985044627}
   - component: {fileID: -9086462626271426371}
+  - component: {fileID: 5567031890876163869}
+  - component: {fileID: 2660679378482496319}
   m_Layer: 0
   m_Name: Test Mana Item
   m_TagString: Untagged
@@ -77,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -485407967
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 2094683815128201257, guid: 3ccfecf4a03af2142949447a8edafc3d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -195,3 +197,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialVelocity: {x: 0, y: 3, z: 0}
+--- !u!114 &5567031890876163869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7744278790260704857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8d03f44dc012243a7b81be72080e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attributes:
+  - type: {fileID: 11400000, guid: ba40c831763d40043aa3b6937c045bc9, type: 2}
+    value:
+      baseValue: 5
+  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
+    value:
+      baseValue: 2.5
+  - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 00487a6e262922742ae2e4fba74d15a3, type: 2}
+    value:
+      baseValue: 15
+  - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
+    value:
+      baseValue: 5
+--- !u!114 &2660679378482496319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7744278790260704857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9929931ce52f4c4ca484f073fe40612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingEffects: []

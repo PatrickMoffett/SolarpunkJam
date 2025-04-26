@@ -41,5 +41,23 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3950804107
+    locked: 0
+  - name: Tile Decorations
+    uniqueID: 341897047
+    locked: 0
+  - name: Tiles
+    uniqueID: 1878070105
+    locked: 0
+  - name: Mid Ground
+    uniqueID: 3809559329
+    locked: 0
+  - name: Player
+    uniqueID: 3859649381
+    locked: 0
+  - name: Fore Ground
+    uniqueID: 1669113659
+    locked: 0
   m_RenderingLayers:
   - Default
