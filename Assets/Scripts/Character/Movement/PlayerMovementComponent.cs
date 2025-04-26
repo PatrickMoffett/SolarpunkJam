@@ -23,6 +23,10 @@ public class PlayerMovementComponent : MonoBehaviour
     [SerializeField] private float _ceilingRadius = .2f;            // Radius of the overlap circle to determine if the player can stand up
     [SerializeField] private float _jumpEpsilon = 0.1f; // The epsilon value used to determine if the player is jumping
 
+    [Header("Knockback Settings")]
+    [SerializeField] private float _knockbackSpeed = 10f;           // The force of the knockback
+    [SerializeField] private float _knockbackTime = 0.2f;           // The time the player is knocked back
+
     [Header("Sound Effect")]
     [SerializeField] private SimpleAudioEvent _jumpAudioEvent;
 
@@ -40,6 +44,8 @@ public class PlayerMovementComponent : MonoBehaviour
     private bool _coyoteJumpAvailable = false;                      // Whether or not the player can jump after leaving the ground
     private Coroutine _coyoteJumpCoroutine = null;                  // The coroutine that tracks the coyote jump time
 
+    // knockback variables
+    private bool _knockbackActive = false;                         // Whether or not the player is currently knocked back
 
     // Direction variables
     private bool _facingRight = true;                               // For determining which way the player is currently facing.
@@ -86,8 +92,11 @@ public class PlayerMovementComponent : MonoBehaviour
     public void Move()
     {
         UpdateCharacterDirection();
-        UpdateXVelocity();
-        UpdateYVelocity();
+        if (!_knockbackActive)
+        {
+            UpdateXVelocity();
+            UpdateYVelocity();
+        }
     }
     private void UpdateXVelocity()
     {
@@ -346,4 +355,24 @@ public class PlayerMovementComponent : MonoBehaviour
     {
         Gizmos.DrawWireSphere(_groundTransform.position, _groundedRadius);
     }
+
+    public void ApplyKnockback(Vector3 knockbackDirection)
+    {
+        _rigidbody2D.linearVelocity = knockbackDirection * _knockbackSpeed;
+        StartCoroutine(KnockbackCoroutine());
+        _knockbackActive = true;
+    }
+
+    private IEnumerator KnockbackCoroutine()
+    {
+        yield return new WaitForSeconds(_knockbackTime);
+        StopKnockback();
+    }
+
+    public void StopKnockback()
+    {
+        _knockbackActive = false;
+    }
+
+
 }

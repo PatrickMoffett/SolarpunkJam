@@ -14,14 +14,22 @@ public class StatusEffectInstance
         InitializeAttributeModifiers();
     }
 
+    public CombatSystem GetSourceCombatSystem()
+    {
+        return _effect.GetSourceCombatSystem();
+    }
+    public CombatSystem GetTargetCombatSystem()
+    {
+        return _targetCombatSystem;
+    }
     private void InitializeAttributeModifiers()
     {
         foreach (AttributeModifier mod in AttributeModifiers)
         {
-            mod.attributeModifierValue.SetSourceCombatSystem(_effect._sourceCombatSystem);
+            mod.attributeModifierValue.SetSourceCombatSystem(_effect.GetSourceCombatSystem());
             mod.attributeModifierValue.SetTargetCombatSystem(_targetCombatSystem);
         }
-        Duration.SetSourceCombatSystem(_effect._sourceCombatSystem);
+        Duration.SetSourceCombatSystem(_effect.GetSourceCombatSystem());
         Duration.SetTargetCombatSystem(_targetCombatSystem);
     }
 

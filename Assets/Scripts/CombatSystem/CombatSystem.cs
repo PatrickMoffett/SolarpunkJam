@@ -13,8 +13,8 @@ public class CombatSystem : MonoBehaviour
     private AttributeSet _attributeSet;
     private readonly List<StatusEffectInstance> _currentStatusEffects = new List<StatusEffectInstance>();
 
-    public event Action StatusEffectAdded;
-    public event Action StatusEffectRemoved;
+    public event Action<StatusEffectInstance> OnStatusEffectAdded;
+    public event Action<StatusEffectInstance> OnStatusEffectRemoved;
 
     // Start is called before the first frame update
     private void Start()
@@ -81,7 +81,7 @@ public class CombatSystem : MonoBehaviour
                 }
             }
         }
-        StatusEffectAdded?.Invoke();
+        OnStatusEffectAdded?.Invoke(effectToApply);
         return effectToApply;
     }
     private IEnumerator ApplyPeriodicEffect(StatusEffectInstance effectToApply)
@@ -115,7 +115,7 @@ public class CombatSystem : MonoBehaviour
             }
         }
 
-        StatusEffectRemoved?.Invoke();
+        OnStatusEffectRemoved?.Invoke(effectToRemove);
     }
 
     public List<StatusEffectInstance> GetStatusEffects()

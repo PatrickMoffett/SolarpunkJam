@@ -1,6 +1,10 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using System.Collections.Generic;
 using Services;
+
+
+[RequireComponent(typeof(CombatSystem))]
 public class CollidableEffectComponent : MonoBehaviour
 {
     [SerializeField] private bool _applyOnCollision = true;
@@ -9,10 +13,18 @@ public class CollidableEffectComponent : MonoBehaviour
     [SerializeField] private bool _canApplyToNonPlayer = false;
     [SerializeField] private List<StatusEffect> _effectsToApply = new List<StatusEffect>();
 
+    private CombatSystem _combatSystem;
+
+    private void Awake()
+    {
+        _combatSystem = GetComponent<CombatSystem>();
+        Assert.IsNotNull(_combatSystem, "CombatSystem component is missing on the GameObject.");
+    }
+
     private void TryToApplyToGameObject(GameObject obj)
     {
-        CombatSystem combatSystem = obj.gameObject.GetComponent<CombatSystem>();
-        if (combatSystem == null)
+        CombatSystem targetCombatSystem = obj.gameObject.GetComponent<CombatSystem>();
+        if (targetCombatSystem == null)
         {
             return;
         }
@@ -20,7 +32,7 @@ public class CollidableEffectComponent : MonoBehaviour
         if(!_canApplyToNonPlayer)
         {
             PlayerCharacter pc = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter();
-            if(pc.gameObject != combatSystem.gameObject)
+            if(pc.gameObject != targetCombatSystem.gameObject)
             {
                 return;
             }
@@ -28,8 +40,8 @@ public class CollidableEffectComponent : MonoBehaviour
 
         foreach (var effect in _effectsToApply)
         {
-            OutgoingStatusEffectInstance effectInstance = new OutgoingStatusEffectInstance(effect, combatSystem);
-            combatSystem?.ApplyStatusEffect(effectInstance);
+            OutgoingStatusEffectInstance effectInstance = new OutgoingStatusEffectInstance(effect, _combatSystem);
+            targetCombatSystem?.ApplyStatusEffect(effectInstance);
         }
         if (_destroyOnApplication)
         {

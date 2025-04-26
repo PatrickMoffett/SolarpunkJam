@@ -127,7 +127,7 @@ public class CombatSystemEditor : EditorWindow
         }
         else
         {
-            Refresh();
+            Refresh(null);
         }
     }
 
@@ -150,14 +150,14 @@ public class CombatSystemEditor : EditorWindow
             _lastSelectedCombatSystem = combatSystem;
             _attributeSet = gameObject.GetComponent<AttributeSet>();
             _statusEffectList.itemsSource = _lastSelectedCombatSystem.GetStatusEffects();
-            _lastSelectedCombatSystem.StatusEffectAdded += Refresh;
-            _lastSelectedCombatSystem.StatusEffectRemoved += Refresh;
-            Refresh();
+            _lastSelectedCombatSystem.OnStatusEffectAdded += Refresh;
+            _lastSelectedCombatSystem.OnStatusEffectRemoved += Refresh;
+            Refresh(null);
             return;           
         }
     }
 
-    private void Refresh()
+    private void Refresh(StatusEffectInstance statusEffect)
     {
         // Refresh your status effect list if needed.
         _statusEffectList.RefreshItems();

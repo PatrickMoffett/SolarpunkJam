@@ -316,6 +316,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2936414247333548806, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: _knockbackForce
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4459522989425303589, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_Name
       value: Player
@@ -11670,6 +11674,8 @@ GameObject:
   - component: {fileID: 660794712}
   - component: {fileID: 660794711}
   - component: {fileID: 660794710}
+  - component: {fileID: 660794715}
+  - component: {fileID: 660794714}
   m_Layer: 0
   m_Name: Test Infinite Health Restore
   m_TagString: Untagged
@@ -11812,6 +11818,56 @@ Transform:
   - {fileID: 594336833}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &660794714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660794709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9929931ce52f4c4ca484f073fe40612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingEffects: []
+--- !u!114 &660794715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660794709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8d03f44dc012243a7b81be72080e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attributes:
+  - type: {fileID: 11400000, guid: ba40c831763d40043aa3b6937c045bc9, type: 2}
+    value:
+      baseValue: 5
+  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
+    value:
+      baseValue: 2.5
+  - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 00487a6e262922742ae2e4fba74d15a3, type: 2}
+    value:
+      baseValue: 15
+  - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
+    value:
+      baseValue: 5
 --- !u!1 &684004380
 GameObject:
   m_ObjectHideFlags: 0
@@ -12032,6 +12088,8 @@ GameObject:
   - component: {fileID: 1007245432}
   - component: {fileID: 1007245431}
   - component: {fileID: 1007245434}
+  - component: {fileID: 1007245436}
+  - component: {fileID: 1007245435}
   m_Layer: 0
   m_Name: Test Damage
   m_TagString: Untagged
@@ -12174,6 +12232,56 @@ MonoBehaviour:
   _canApplyToNonPlayer: 0
   _effectsToApply:
   - {fileID: 11400000, guid: 4537034a747b6ed42b5017db61c7bfa7, type: 2}
+--- !u!114 &1007245435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007245430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9929931ce52f4c4ca484f073fe40612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingEffects: []
+--- !u!114 &1007245436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007245430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8d03f44dc012243a7b81be72080e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attributes:
+  - type: {fileID: 11400000, guid: ba40c831763d40043aa3b6937c045bc9, type: 2}
+    value:
+      baseValue: 5
+  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
+    value:
+      baseValue: 2.5
+  - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 00487a6e262922742ae2e4fba74d15a3, type: 2}
+    value:
+      baseValue: 15
+  - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
+    value:
+      baseValue: 5
 --- !u!1 &1099561270
 GameObject:
   m_ObjectHideFlags: 0
@@ -12890,7 +12998,7 @@ Transform:
   m_GameObject: {fileID: 1405451673}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.74, y: -8.46, z: -0.07154562}
+  m_LocalPosition: {x: 3.74, y: -8.684, z: -0.07154562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12968,6 +13076,8 @@ GameObject:
   - component: {fileID: 1505802620}
   - component: {fileID: 1505802619}
   - component: {fileID: 1505802618}
+  - component: {fileID: 1505802623}
+  - component: {fileID: 1505802622}
   m_Layer: 0
   m_Name: Test Infinite Mana Restore
   m_TagString: Untagged
@@ -13110,6 +13220,56 @@ Transform:
   - {fileID: 140511126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1505802622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505802617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9929931ce52f4c4ca484f073fe40612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingEffects: []
+--- !u!114 &1505802623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505802617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d8d03f44dc012243a7b81be72080e7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attributes:
+  - type: {fileID: 11400000, guid: ba40c831763d40043aa3b6937c045bc9, type: 2}
+    value:
+      baseValue: 5
+  - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 18647ae4c67863847a9d6c03bf234fe7, type: 2}
+    value:
+      baseValue: 2.5
+  - type: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: b1c54063097cf1f46bc842b2e6a15fe7, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 75213a5dba0441840a03425ecfa2400c, type: 2}
+    value:
+      baseValue: 10
+  - type: {fileID: 11400000, guid: 00487a6e262922742ae2e4fba74d15a3, type: 2}
+    value:
+      baseValue: 15
+  - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
+    value:
+      baseValue: 5
 --- !u!1 &1519010479
 GameObject:
   m_ObjectHideFlags: 0

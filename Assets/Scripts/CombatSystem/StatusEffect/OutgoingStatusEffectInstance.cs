@@ -5,7 +5,13 @@ using Unity.VisualScripting;
 public class OutgoingStatusEffectInstance
 {
     public readonly StatusEffect _effect;
-    public readonly CombatSystem _sourceCombatSystem;
+    protected CombatSystem _sourceCombatSystem;
+
+    public CombatSystem GetSourceCombatSystem()
+    {
+        return _sourceCombatSystem;
+    }
+
     public OutgoingStatusEffectInstance(StatusEffect effect,CombatSystem combatSystem)
     {
         _effect = Object.Instantiate(effect);
