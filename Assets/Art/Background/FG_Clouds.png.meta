@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: bc1b446f47658b84d8873f26e4d28685
+guid: ed27f44e0add3894593f2ea986ebfe5e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5639420961517990519
-    second: Falling-Sheet_0
-  - first:
-      213: 8140034052895859765
-    second: Falling-Sheet_1
-  - first:
-      213: -8479415560711970243
-    second: Falling-Sheet_2
-  - first:
-      213: -8826151313244952618
-    second: Falling-Sheet_3
+      213: -5291206897967632363
+    second: FG_Clouds_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -55,12 +46,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 25
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -122,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Falling-Sheet_0
+      name: FG_Clouds_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 960
+        height: 97
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,74 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 772fb2e4c7f334e40800000000000000
-      internalID: 5639420961517990519
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Falling-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 534e076e7d537f070800000000000000
-      internalID: 8140034052895859765
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Falling-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d32e7d03970135a80800000000000000
-      internalID: -8479415560711970243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Falling-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6d7ef20c426338580800000000000000
-      internalID: -8826151313244952618
+      spriteID: 510fa8d3c5bd196b0800000000000000
+      internalID: -5291206897967632363
       vertices: []
       indices: 
       edges: []
@@ -213,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 65f3a65d19e5670459d1724b79f563fa
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Falling-Sheet_0: 5639420961517990519
-      Falling-Sheet_1: 8140034052895859765
-      Falling-Sheet_2: -8479415560711970243
-      Falling-Sheet_3: -8826151313244952618
+      FG_Clouds_0: -5291206897967632363
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
