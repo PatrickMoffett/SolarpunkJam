@@ -273,8 +273,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9045273776370784416, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7000748150251334660, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
@@ -1675,7 +1680,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11.25
+  orthographic size: 6.1363635
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1787,7 +1792,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothTime: 0.3
-  deadZone: {x: 3, y: 3}
+  deadZone: {x: 2, y: 0.5}
+  deadZoneOffset: {x: -3, y: 0, z: 0}
 --- !u!1 &1144191915
 GameObject:
   m_ObjectHideFlags: 0

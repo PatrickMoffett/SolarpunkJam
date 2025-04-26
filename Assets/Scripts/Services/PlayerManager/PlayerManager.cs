@@ -9,6 +9,7 @@ public class PlayerManager : IService
 
     private PlayerCharacter _playerCharacter;
     private PlayerController _playerController;
+    private CameraFollow _playerFollowCamera;
     
     public void SetPlayerCharacter(PlayerCharacter playerCharacter)
     {
@@ -18,6 +19,14 @@ public class PlayerManager : IService
             OnPlayerCharacterChanged?.Invoke(_playerCharacter);
         }
 
+    }
+    public CameraFollow GetPlayerFollowCamera()
+    {
+        return _playerFollowCamera;
+    }
+    public void SetPlayerFollowCamera(CameraFollow playerFollowCamera)
+    {
+        _playerFollowCamera = playerFollowCamera;
     }
     public PlayerCharacter GetPlayerCharacter()
     {
