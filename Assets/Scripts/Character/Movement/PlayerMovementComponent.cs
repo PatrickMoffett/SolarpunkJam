@@ -21,6 +21,7 @@ public class PlayerMovementComponent : MonoBehaviour
     [SerializeField] private float _groundedRadius = .2f;           // Radius of the overlap circle to determine if grounded
     [SerializeField] private Transform _ceilingTransform;           // A position marking where to check for ceilings
     [SerializeField] private float _ceilingRadius = .2f;            // Radius of the overlap circle to determine if the player can stand up
+    [SerializeField] private float _jumpEpsilon = 0.1f; // The epsilon value used to determine if the player is jumping
 
     [Header("Sound Effect")]
     [SerializeField] private SimpleAudioEvent _jumpAudioEvent;
@@ -38,6 +39,7 @@ public class PlayerMovementComponent : MonoBehaviour
     private bool _playerLeftGroundSinceLastJump = true;             // Whether or not the player has left the ground since the last jump
     private bool _coyoteJumpAvailable = false;                      // Whether or not the player can jump after leaving the ground
     private Coroutine _coyoteJumpCoroutine = null;                  // The coroutine that tracks the coyote jump time
+
 
     // Direction variables
     private bool _facingRight = true;                               // For determining which way the player is currently facing.
@@ -111,7 +113,7 @@ public class PlayerMovementComponent : MonoBehaviour
         {
             PerformJump();
         }
-        else if (_rigidbody2D.linearVelocity.y > 0f && !_jumpPushed && !_islowJumpGravityApplied)
+        else if (_rigidbody2D.linearVelocity.y > _jumpEpsilon && _jumpedToLeaveGround && !_jumpPushed && !_islowJumpGravityApplied)
         {
             // If the player released the jump button early and is still going up,
             // use extra gravity to cut the jump height
@@ -151,12 +153,12 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     private void UpdateCharacterAnim()
     {
-        if (_rigidbody2D.linearVelocityY > 0)
+        if (_rigidbody2D.linearVelocityY > _jumpEpsilon)
         {
             _anim.SetBool(JUMP_ANIM_TRIGGER, true);
             _anim.SetBool(FALL_ANIM_TRIGGER, false);
         }
-        else if (_rigidbody2D.linearVelocityY < 0 && !_onGround)
+        else if (_rigidbody2D.linearVelocityY < -_jumpEpsilon && !_onGround)
         {
             _anim.SetBool(JUMP_ANIM_TRIGGER, false);
             _anim.SetBool(FALL_ANIM_TRIGGER, true);
