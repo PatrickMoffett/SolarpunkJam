@@ -49,7 +49,9 @@ public class CameraFollow : MonoBehaviour
     {
         var playerCharacter = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter();
         if (playerCharacter != null)
+        {
             followTarget = playerCharacter.transform;
+        }
     }
 
     private void OnEnable()
@@ -70,8 +72,52 @@ public class CameraFollow : MonoBehaviour
     void LateUpdate()
     {
         if (followTarget == null)
+        {
             return;
+        }
+        Vector3 targetPos = CalculateTargetPosition();
+        SmoothToTargetPosition(targetPos);
+        ClampPositionToMaxDistanceFromTarget();
+    }
 
+    private void SmoothToTargetPosition(Vector3 targetPos)
+    {
+        // Smoothly move with SmoothDamp
+        transform.position = Vector3.SmoothDamp(
+            transform.position,
+            new Vector3(targetPos.x, targetPos.y, transform.position.z),
+            ref currentVelocity,
+            smoothTime
+        );
+    }
+
+    private void ClampPositionToMaxDistanceFromTarget()
+    {
+        // After SmoothDamp, clamp against the same box you're drawing:
+        Vector3 clampCenter = followTarget.position - deadZoneOffset;
+        Vector3 halfExtents = new Vector3(
+            maxDistance.x,
+            maxDistance.y,
+            0f
+        );
+
+        Vector3 clamped = transform.position;
+        clamped.x = Mathf.Clamp(
+            clamped.x,
+            clampCenter.x - halfExtents.x,
+            clampCenter.x + halfExtents.x
+        );
+        clamped.y = Mathf.Clamp(
+            clamped.y,
+            clampCenter.y - halfExtents.y,
+            clampCenter.y + halfExtents.y
+        );
+        // preserve Z
+        transform.position = new Vector3(clamped.x, clamped.y, transform.position.z);
+    }
+
+    private Vector3 CalculateTargetPosition()
+    {
         // Figure out how far outside the dead-zone we are
         Vector3 delta = followTarget.position - deadZoneOffset - transform.position;
         Vector3 offset = Vector3.zero;
@@ -82,22 +128,7 @@ public class CameraFollow : MonoBehaviour
 
         // Compute the desired target position (preserve Z)
         Vector3 targetPos = transform.position + new Vector3(offset.x, offset.y, 0f);
-
-        // Smoothly move with SmoothDamp
-        transform.position = Vector3.SmoothDamp(
-            transform.position,
-            new Vector3(targetPos.x, targetPos.y, transform.position.z),
-            ref currentVelocity,
-            smoothTime
-        );
-
-        // Clamp the camera position to the max distance
-        Vector3 clampedPos = transform.position;
-        clampedPos.x = Mathf.Clamp(clampedPos.x, followTarget.position.x - maxDistance.x, followTarget.position.x + maxDistance.x);
-        clampedPos.y = Mathf.Clamp(clampedPos.y, followTarget.position.y - maxDistance.y, followTarget.position.y + maxDistance.y);
-        clampedPos.z = transform.position.z; // Preserve the original Z position
-        transform.position = clampedPos;
-
+        return targetPos;
     }
 
     private void OnDrawGizmosSelected()
@@ -108,6 +139,13 @@ public class CameraFollow : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + deadZoneOffset, new Vector3(w, h, 0f));
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + deadZoneOffset, new Vector3(w + maxDistance.x * 2f, h + maxDistance.y * 2f, 0f));
+        Gizmos.DrawWireCube(transform.position + deadZoneOffset, new Vector3(maxDistance.x * 2f, maxDistance.y * 2f, 0f));
+
+        if (followTarget == null)
+            return;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(followTarget.position, 0.5f);
+        Gizmos.DrawLine(followTarget.position, transform.position + deadZoneOffset);
     }
 }
