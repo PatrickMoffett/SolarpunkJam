@@ -1,17 +1,24 @@
 using Services;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerMovementComponent))]
 [RequireComponent(typeof(CombatSystem))]
-
-
+[RequireComponent(typeof(SpriteColorOscillator))]
 public class PlayerCharacter : Character
-{ 
+{
+    [Tooltip("IFrame")]
+    [SerializeField] private float _iFrameDuration = 1f;
+    [SerializeField] private Color _iFrameColor = new Color(1f, 1f, 1f, .5f);
+    [SerializeField] private float _iFrameColorOscillationFrequency = 5f;
+
+    private bool _isInvulnerable = false;
+
     private PlayerController _playerController;
     private PlayerMovementComponent _movementComponent;
-
+    private SpriteColorOscillator _spriteColorOscillator;
     protected override void Awake()
     {
         base.Awake();
@@ -56,6 +63,12 @@ public class PlayerCharacter : Character
 
     private void OnTakeDamage(StatusEffectInstance instance)
     {
+        _spriteColorOscillator.StartSpriteOscillation(
+            Color.white,
+            _iFrameColor,
+            _iFrameDuration,
+            _iFrameColorOscillationFrequency);
+
         // apply knockback
         Vector2 knockbackDirection = (transform.position - instance.GetSourceCombatSystem().gameObject.transform.position).normalized;
         _movementComponent.ApplyKnockback(knockbackDirection);
@@ -72,6 +85,9 @@ public class PlayerCharacter : Character
 
         _playerController = GetComponent<PlayerController>();
         Assert.IsNotNull(_playerController, $"PlayerController not found on {gameObject.name}.");
+
+        _spriteColorOscillator = GetComponent<SpriteColorOscillator>();
+        Assert.IsNotNull(_spriteColorOscillator, $"SpriteColorOscillator not found on {gameObject.name}.");
     }
 
     private void OnHealthChanged(Attribute attribute, float newValue)
