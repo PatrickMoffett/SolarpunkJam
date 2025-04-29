@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7570426864722581935}
   - component: {fileID: 1134049591265505961}
   - component: {fileID: 8760277678700976422}
+  - component: {fileID: 7559046913046615674}
   m_Layer: 0
   m_Name: Heal Item
   m_TagString: Untagged
@@ -247,3 +248,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingEffects: []
+--- !u!95 &7559046913046615674
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7467977647329332869}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2d9d38aceb5173848964baee1b7fd8b7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

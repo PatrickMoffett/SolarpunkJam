@@ -317,12 +317,32 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2936414247333548806, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: _iFrameColor.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2936414247333548806, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: _knockbackForce
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2936414247333548806, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: _iFrameColorOscillationFrequency
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4459522989425303589, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402700048715302262, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: _knockbackSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402700048715302262, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: _knockbackDirection.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402700048715302262, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: _knockbackDirection.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -330,7 +350,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.02
+      value: -8.34
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -364,10 +384,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9045273776370784416, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4459522989425303589, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 842043919}
   m_SourcePrefab: {fileID: 100100000, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
 --- !u!1 &214867130
 GameObject:
@@ -11995,6 +12022,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1111906352}
   parallaxEffectMultiplier: 0.3
+--- !u!1 &842043908 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4459522989425303589, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+  m_PrefabInstance: {fileID: 184075437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &842043919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842043908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b9aaee0fb56244cbd8784b21cabbc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &852912346
 GameObject:
   m_ObjectHideFlags: 0

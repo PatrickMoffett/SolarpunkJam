@@ -21,7 +21,7 @@ MonoBehaviour:
     preCoefficientAddition: 0
     coefficient: 1
     postCoefficientAddition: 0
-    customValueCalculation: {fileID: 0}
+    customValueCalculation: {fileID: 11400000, guid: 2d51a72dca3a8a7458096835f19db978, type: 2}
   isPeriodic: 0
   periodicRate: 1
   attributeModifiers: []

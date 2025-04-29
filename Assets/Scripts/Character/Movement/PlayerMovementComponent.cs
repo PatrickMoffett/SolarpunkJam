@@ -11,20 +11,15 @@ public class PlayerMovementComponent : MonoBehaviour
 {    
     [Header("Movement Settings")]
     [SerializeField] private bool _airControl = false;              // Whether or not a player can steer while jumping;
-    [SerializeField] private float _lowJumpGravityMultiplier = 2.5f;  // The gravity multiplier used when the player is holding the jump button
+    [SerializeField] private CollisionObserver2D _groundObserver;   // The ground observer used to check if the player is on the ground
+    [SerializeField] private float _lowJumpGravityMultiplier = 2.5f;// The gravity multiplier used when the player is holding the jump button
     [SerializeField] private float _maxFallSpeed = 20f;             // The maximum fall speed of the player
     [SerializeField] private float _coyoteTime = 0.1f;              // The time the player can jump after leaving the ground
-
-    [Header("Collision Settings")]
-    [SerializeField] private LayerMask _groundLayers;               // A mask determining what is ground to the character
-    [SerializeField] private Transform _groundTransform;            // A position marking where to check if the player is grounded.
-    [SerializeField] private float _groundedRadius = .2f;           // Radius of the overlap circle to determine if grounded
-    [SerializeField] private Transform _ceilingTransform;           // A position marking where to check for ceilings
-    [SerializeField] private float _ceilingRadius = .2f;            // Radius of the overlap circle to determine if the player can stand up
-    [SerializeField] private float _jumpEpsilon = 0.1f; // The epsilon value used to determine if the player is jumping
+    [SerializeField] private float _jumpEpsilon = 0.1f;             // The epsilon value used to determine if the player is jumping
 
     [Header("Knockback Settings")]
     [SerializeField] private float _knockbackSpeed = 10f;           // The force of the knockback
+    [SerializeField] private Vector2 _knockbackDirection = (Vector2.up + Vector2.left); // The direction of the knockback  
     [SerializeField] private float _knockbackTime = 0.2f;           // The time the player is knocked back
 
     [Header("Sound Effect")]
@@ -52,8 +47,9 @@ public class PlayerMovementComponent : MonoBehaviour
         get => _onGround;
     }
     
+    private int _groundCollisionCount = 0;                          // The number of collisions with the ground
     // knockback variables
-    private bool _knockbackActive = false;                         // Whether or not the player is currently knocked back
+    private bool _knockbackActive = false;                          // Whether or not the player is currently knocked back
 
     // Direction variables
     private bool _facingRight = true;                               // For determining which way the player is currently facing.
@@ -77,18 +73,34 @@ public class PlayerMovementComponent : MonoBehaviour
         _anim = GetComponent<Animator>();
         _attributeSet = GetComponent<AttributeSet>();
     }
-    private void FixedUpdate()
+    private void OnEnable()
     {
-        bool startedOnGround = _onGround;
-        _onGround = checkIfOnGround();
+        Assert.IsNotNull(_groundObserver, "Ground observer is not set");
+        _groundObserver.OnTriggerEnter += OnGroundCollisionEnter;
+        _groundObserver.OnTriggerExit += OnGroundCollisionExit;
+    }
+    private void OnDisable()
+    {
+        _groundObserver.OnTriggerEnter -= OnGroundCollisionEnter;
+        _groundObserver.OnTriggerExit -= OnGroundCollisionExit;
+    }
 
-        // if the Player has landed
-        if (!startedOnGround && _onGround)
+    private void OnGroundCollisionEnter()
+    {
+        _groundCollisionCount++;
+        if(_groundCollisionCount == 1)
         {
+            _onGround = true;
             OnLandedOnGround();
         }
-        else if(startedOnGround && !_onGround)
+    }
+
+    private void OnGroundCollisionExit()
+    {
+        _groundCollisionCount--;
+        if(_groundCollisionCount == 0)
         {
+            _onGround = false;
             OnLeftTheGround();
         }
     }
@@ -239,21 +251,6 @@ public class PlayerMovementComponent : MonoBehaviour
             _coyoteJumpAvailable = false;
         }
     }
-    private bool checkIfOnGround()
-    {
-        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
-        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(_groundTransform.position, _groundedRadius, _groundLayers);
-        for (int i = 0; i < colliders.Length; i++)
-        {
-            // if we collide with anything but ourselve, we are on the ground
-            if (colliders[i].gameObject != gameObject) 
-            {
-                return true;
-            }
-        }
-        return false;
-    }
     private bool ShouldJump()
     {
         return (_onGround || _coyoteJumpAvailable) && _jumpPushed && !_jumpWasTried && _playerLeftGroundSinceLastJump;
@@ -369,14 +366,12 @@ public class PlayerMovementComponent : MonoBehaviour
     {
         _movementDirection = moveDirection;
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(_groundTransform.position, _groundedRadius);
-    }
 
-    public void ApplyKnockback(Vector3 knockbackDirection)
+    public void ApplyKnockback(Vector2 knockbackDirection)
     {
-        _rigidbody2D.linearVelocity = knockbackDirection * _knockbackSpeed;
+        Vector2 velocity = _knockbackDirection * _knockbackSpeed;
+        velocity.x *= Vector2.Dot(_movementDirection, Vector2.left) >= 0f ? 1 : -1;
+        _rigidbody2D.linearVelocity = velocity;
         StartCoroutine(KnockbackCoroutine());
         _knockbackActive = true;
     }
