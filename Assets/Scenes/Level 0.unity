@@ -722,17 +722,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3124108200020220051, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: m_Size.x
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4459522989425303589, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8457530565425196773, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: m_Size.x
+      value: 0.38
+      objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -41.9
+      value: -42.185
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.21
+      value: -7.335
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.z
