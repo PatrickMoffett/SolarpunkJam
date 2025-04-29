@@ -57,7 +57,7 @@ public class PlayerCharacter : Character
     private void OnTakeDamage(StatusEffectInstance instance)
     {
         // apply knockback
-        Vector3 knockbackDirection = (transform.position - instance.GetSourceCombatSystem().gameObject.transform.position).normalized;
+        Vector2 knockbackDirection = (transform.position - instance.GetSourceCombatSystem().gameObject.transform.position).normalized;
         _movementComponent.ApplyKnockback(knockbackDirection);
     }
 

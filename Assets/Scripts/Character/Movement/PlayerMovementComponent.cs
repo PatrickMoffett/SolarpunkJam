@@ -16,7 +16,7 @@ public class PlayerMovementComponent : MonoBehaviour
 
     [Header("Knockback Settings")]
     [SerializeField] private float _knockbackSpeed = 10f;           // The force of the knockback
-    [SerializeField] private Vector2 _knockbackDirection = Vector2.zero; // The direction of the knockback  
+    [SerializeField] private Vector2 _knockbackDirection = (Vector2.up + Vector2.left); // The direction of the knockback  
     [SerializeField] private float _knockbackTime = 0.2f;           // The time the player is knocked back
 
     [Header("Sound Effect")]
@@ -61,11 +61,16 @@ public class PlayerMovementComponent : MonoBehaviour
         _anim = GetComponent<Animator>();
         _attributeSet = GetComponent<AttributeSet>();
     }
-    private void Start()
+    private void OnEnable()
     {
         Assert.IsNotNull(_groundObserver, "Ground observer is not set");
         _groundObserver.OnTriggerEnter += OnGroundCollisionEnter;
         _groundObserver.OnTriggerExit += OnGroundCollisionExit;
+    }
+    private void OnDisable()
+    {
+        _groundObserver.OnTriggerEnter -= OnGroundCollisionEnter;
+        _groundObserver.OnTriggerExit -= OnGroundCollisionExit;
     }
 
     private void OnGroundCollisionEnter()
@@ -352,8 +357,9 @@ public class PlayerMovementComponent : MonoBehaviour
 
     public void ApplyKnockback(Vector2 knockbackDirection)
     {
-        
-        _rigidbody2D.linearVelocity = knockbackDirection * _knockbackSpeed;
+        Vector2 velocity = _knockbackDirection * _knockbackSpeed;
+        velocity.x *= Vector2.Dot(_movementDirection, Vector2.left) >= 0f ? 1 : -1;
+        _rigidbody2D.linearVelocity = velocity;
         StartCoroutine(KnockbackCoroutine());
         _knockbackActive = true;
     }
