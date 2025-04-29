@@ -44,6 +44,14 @@ public class PlayerMovementComponent : MonoBehaviour
     private bool _coyoteJumpAvailable = false;                      // Whether or not the player can jump after leaving the ground
     private Coroutine _coyoteJumpCoroutine = null;                  // The coroutine that tracks the coyote jump time
 
+    /// <summary>
+    /// Public getter for checking if the player is on the ground or not
+    /// </summary>
+    public bool OnGround
+    {
+        get => _onGround;
+    }
+    
     // knockback variables
     private bool _knockbackActive = false;                         // Whether or not the player is currently knocked back
 

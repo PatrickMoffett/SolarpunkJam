@@ -214,6 +214,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0cd64b2af4bd1040a5b5e7e08d69324, type: 2}
   _bossAttacks:
   - {fileID: 11400000, guid: 7911d8e348b5f7543a26875b14be4118, type: 2}
+  _jumpAttacks:
+  - {fileID: 11400000, guid: 805fb05a19798f244801e696ac092252, type: 2}
   shotChargeTime: 5
 --- !u!212 &9045273776370784416
 SpriteRenderer:

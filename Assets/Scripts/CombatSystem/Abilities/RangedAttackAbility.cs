@@ -28,7 +28,11 @@ namespace Abilities
             var rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90));
             GameObject projectile = Instantiate(projectilePrefab,_owner.transform.position + (Vector3)(spawnOffset * activationData.sourceCharacterDirection),rotation);
             projectile.GetComponent<Projectile>().SetOwner(_owner);
-            Destroy(projectile, projectileLifetime);
+            // Set negative lifetime to make it live forever (or until destroyed by something else)
+            if (projectileLifetime >= 0)
+            {
+                Destroy(projectile, projectileLifetime);
+            }
             //Instantiate status effects
             List<OutgoingStatusEffectInstance> statusEffectInstances = new List<OutgoingStatusEffectInstance>();
             foreach (var effect in effectsToApplyOnHit)

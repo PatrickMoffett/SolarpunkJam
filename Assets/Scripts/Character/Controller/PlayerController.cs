@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private const string PUNCH_ANIM_TRIGGER = "Punch";
     private const string BOSS_ANIM_TRIGGER = "BossAbility";
     private const string DAMAGED_ANIM_TRIGGER = "Hit";
+    private const string JUMP_SLAM_ANIM_TRIGGER = "JumpSlam";
     
     private InputSystem_Actions _input;
     private PlayerMovementComponent _movementComponent;
@@ -30,6 +31,9 @@ public class PlayerController : MonoBehaviour
     [Tooltip("The various boss skills the player currently has access to")]
     [SerializeField] private List<Ability> _bossAttacks;
 
+    [Tooltip("The various jump/in-air attacks the player has")]
+    [SerializeField] private List<Ability> _jumpAttacks;
+    
     [Tooltip("How long thew player needs to hold the button down for a charge attack. Make negative to disable")]
     [SerializeField] private float shotChargeTime;
 
@@ -81,6 +85,13 @@ public class PlayerController : MonoBehaviour
         if (vector2 != Vector2.zero)
         {
             attackDirection = vector2;
+        }
+        // Jump slam attack
+        if (vector2.y < 0 && !_movementComponent.OnGround)
+        {
+            attackDirection = Vector2.down;
+            _movementComponent.SetMoveDirection(Vector2.down);
+            EndAttack(_jumpAttacks, JUMP_SLAM_ANIM_TRIGGER);
         }
     }
     
