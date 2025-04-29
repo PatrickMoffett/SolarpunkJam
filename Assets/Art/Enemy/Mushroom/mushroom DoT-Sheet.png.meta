@@ -151,10 +151,10 @@ TextureImporter:
       name: mushroom DoT-Sheet_0
       rect:
         serializedVersion: 2
-        x: 66
+        x: 0
         y: 0
-        width: 29
-        height: 29
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,10 +173,10 @@ TextureImporter:
       name: mushroom DoT-Sheet_1
       rect:
         serializedVersion: 2
-        x: 95
-        y: 17
-        width: 8
-        height: 12
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,10 +195,10 @@ TextureImporter:
       name: mushroom DoT-Sheet_2
       rect:
         serializedVersion: 2
-        x: 118
-        y: 24
-        width: 11
-        height: 8
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,10 +217,10 @@ TextureImporter:
       name: mushroom DoT-Sheet_3
       rect:
         serializedVersion: 2
-        x: 159
-        y: 21
-        width: 10
-        height: 11
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,10 +239,10 @@ TextureImporter:
       name: mushroom DoT-Sheet_4
       rect:
         serializedVersion: 2
-        x: 184
-        y: 22
-        width: 9
-        height: 10
+        x: 128
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -261,10 +261,10 @@ TextureImporter:
       name: mushroom DoT-Sheet_5
       rect:
         serializedVersion: 2
-        x: 191
-        y: 27
-        width: 6
-        height: 5
+        x: 160
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,9 +284,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 192
-        y: 5
-        width: 11
-        height: 22
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,231 +301,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_7
-      rect:
-        serializedVersion: 2
-        x: 212
-        y: 22
-        width: 12
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5f69c875995726800800000000000000
-      internalID: 604174601480345333
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_8
-      rect:
-        serializedVersion: 2
-        x: 3
-        y: 0
-        width: 27
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e63fb5bb5b492bb70800000000000000
-      internalID: 8913350120772989806
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_9
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 0
-        width: 27
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 55cc79ea8b1c819f0800000000000000
-      internalID: -497434759877112747
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_10
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 13
-        width: 9
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f15bf3eb4df422320800000000000000
-      internalID: 2531673715679147295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_11
-      rect:
-        serializedVersion: 2
-        x: 100
-        y: 0
-        width: 27
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0dc5158487fc56c80800000000000000
-      internalID: -8330023820235547440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_12
-      rect:
-        serializedVersion: 2
-        x: 121
-        y: 19
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 202a431496df771f0800000000000000
-      internalID: -1047089759832989182
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_13
-      rect:
-        serializedVersion: 2
-        x: 132
-        y: 0
-        width: 27
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 401157e0ece7651f0800000000000000
-      internalID: -1056517639100886780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_14
-      rect:
-        serializedVersion: 2
-        x: 164
-        y: 0
-        width: 27
-        height: 20
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 247fddd472bd56940800000000000000
-      internalID: 5288874299273115458
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_15
-      rect:
-        serializedVersion: 2
-        x: 213
-        y: 15
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0b20b1b946cd668d0800000000000000
-      internalID: -2853350989235551568
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: mushroom DoT-Sheet_16
-      rect:
-        serializedVersion: 2
-        x: 217
-        y: 0
-        width: 7
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: de7b8272295d57cc0800000000000000
-      internalID: -3713827493998184467
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b9c972adb4f4393459af52b7ab9bffa9
     internalID: 0
     vertices: []
     indices: 
@@ -537,21 +317,11 @@ TextureImporter:
     nameFileIdTable:
       mushroom DoT-Sheet_0: -2592115857756485448
       mushroom DoT-Sheet_1: -382077190363682580
-      mushroom DoT-Sheet_10: 2531673715679147295
-      mushroom DoT-Sheet_11: -8330023820235547440
-      mushroom DoT-Sheet_12: -1047089759832989182
-      mushroom DoT-Sheet_13: -1056517639100886780
-      mushroom DoT-Sheet_14: 5288874299273115458
-      mushroom DoT-Sheet_15: -2853350989235551568
-      mushroom DoT-Sheet_16: -3713827493998184467
       mushroom DoT-Sheet_2: -5815124679781806003
       mushroom DoT-Sheet_3: 3923463502633427430
       mushroom DoT-Sheet_4: 6678396606818342809
       mushroom DoT-Sheet_5: 5909095611995370255
       mushroom DoT-Sheet_6: 7601626325174794871
-      mushroom DoT-Sheet_7: 604174601480345333
-      mushroom DoT-Sheet_8: 8913350120772989806
-      mushroom DoT-Sheet_9: -497434759877112747
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
