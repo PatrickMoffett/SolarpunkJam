@@ -18,6 +18,14 @@ public class PlayerController : MonoBehaviour
     private PlayerMovementComponent _movementComponent;
     private AttributeSet _attributes;
 
+    enum PlayerControllerState
+    {
+        Default,
+        Dialogue,
+        Menu
+    }
+    private PlayerControllerState _controllerState = PlayerControllerState.Default;
+
     [Tooltip("The player's health Attribute, used to track damage and trigger the right animations")]
     [SerializeField] private AttributeType healthAttribute;
     
@@ -57,6 +65,41 @@ public class PlayerController : MonoBehaviour
         _input.Player.Shoot.canceled += ctx => EndAttack(_shootAttacks, SHOOT_ANIM_TRIGGER, shotChargeTime);
         _input.Player.Punch.canceled += ctx => EndAttack(_punchAttacks, PUNCH_ANIM_TRIGGER);
         _input.Player.BossSkill.canceled += ctx => EndAttack(_bossAttacks, BOSS_ANIM_TRIGGER);
+
+        _input.Dialogue.NextDialogue.performed += ctx => NextDialogue();
+        _input.Dialogue.SkipDialogue.performed += ctx => SkipDialogue();
+        _input.Dialogue.SpeedUpDialogue.started += ctx => SpeedUpDialogue(true);
+        _input.Dialogue.SpeedUpDialogue.canceled += ctx => SpeedUpDialogue(false);
+
+
+        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueStart += OnDialogueStart;
+        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueEnd += OnDialogueEnd;
+    }
+
+    private void SpeedUpDialogue(bool shouldSpeedUp)
+    {
+        ServiceLocator.Instance.Get<DialogueSystem>().SetSpeedUpText(shouldSpeedUp);
+    }
+
+    private void SkipDialogue()
+    {
+        ServiceLocator.Instance.Get<DialogueSystem>().ForceCompleteLine();
+    }
+
+    private void NextDialogue()
+    {
+        ServiceLocator.Instance.Get<DialogueSystem>().RequestNextLine();
+    }
+    private void OnDialogueEnd()
+    {
+        _input.Player.Enable();
+        _input.Dialogue.Disable();
+    }
+
+    private void OnDialogueStart()
+    {
+        _input.Dialogue.Enable();
+        _input.Player.Disable(); 
     }
 
     private void Start()
@@ -149,6 +192,8 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         _input.Enable();
+        _input.Dialogue.Disable();
+
     }
 
     private void OnDisable()

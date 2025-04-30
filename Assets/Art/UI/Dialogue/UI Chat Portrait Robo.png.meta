@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: ebe02df2fbae1a14f83fe0bf9c5b1b85
+guid: a97f747fc56d034409dc456482ffaa22
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8083181225548200312
-    second: SP Potion-Sheet_Blue_0
-  - first:
-      213: -763577465202206060
-    second: SP Potion-Sheet_Blue_1
-  - first:
-      213: -4120889310616066078
-    second: SP Potion-Sheet_Blue_2
-  - first:
-      213: -7850034070024921746
-    second: SP Potion-Sheet_Blue_3
-  - first:
-      213: 5001638444264945878
-    second: SP Potion-Sheet_Blue_4
+      213: -7398457426408199152
+    second: UI Chat Portrait Robo_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -108,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SP Potion-Sheet_Blue_0
+      name: UI Chat Portrait Robo_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 16
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,96 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87938e38f7a3d2070800000000000000
-      internalID: 8083181225548200312
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SP Potion-Sheet_Blue_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 49a112c475a3765f0800000000000000
-      internalID: -763577465202206060
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SP Potion-Sheet_Blue_2
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2e766026109afc6c0800000000000000
-      internalID: -4120889310616066078
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SP Potion-Sheet_Blue_3
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e6d5375ca931f0390800000000000000
-      internalID: -7850034070024921746
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SP Potion-Sheet_Blue_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6d8795d4aa3696540800000000000000
-      internalID: 5001638444264945878
+      spriteID: 01ca61d5b26635990800000000000000
+      internalID: -7398457426408199152
       vertices: []
       indices: 
       edges: []
@@ -235,11 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SP Potion-Sheet_Blue_0: 8083181225548200312
-      SP Potion-Sheet_Blue_1: -763577465202206060
-      SP Potion-Sheet_Blue_2: -4120889310616066078
-      SP Potion-Sheet_Blue_3: -7850034070024921746
-      SP Potion-Sheet_Blue_4: 5001638444264945878
+      UI Chat Portrait Robo_0: -7398457426408199152
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

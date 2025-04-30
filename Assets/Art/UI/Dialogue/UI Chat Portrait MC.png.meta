@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c10b277323bc06f4a8da0ace568b70df
+guid: f413ef3b774a94f4f86a375d808b4a11
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7805497908212142316
-    second: 04142025 Character Portrait_Blue_0
+      213: -8320257629329390716
+    second: UI Chat Portrait MC_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,30 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 04142025 Character Portrait_Blue_0
+      name: UI Chat Portrait MC_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 96
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 41fe5fdf10d4da390800000000000000
-      internalID: -7805497908212142316
+      spriteID: 483861cc4c1888c80800000000000000
+      internalID: -8320257629329390716
       vertices: []
       indices: 
       edges: []
@@ -125,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c0b1154b9df0db34e89287f4afd4830b
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      04142025 Character Portrait_Blue_0: -7805497908212142316
+      UI Chat Portrait MC_0: -8320257629329390716
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

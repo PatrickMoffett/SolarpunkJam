@@ -1,10 +1,12 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting.FullSerializer;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AttributeSet))]
@@ -99,12 +101,14 @@ public class PlayerMovementComponent : MonoBehaviour
     private void OnGroundCollisionExit()
     {
         _groundCollisionCount--;
+
 #if UNITY_EDITOR
         if(!gameObject.activeSelf)
         {
             return;
         }
 #endif
+
         if(_groundCollisionCount == 0)
         {
             _onGround = false;

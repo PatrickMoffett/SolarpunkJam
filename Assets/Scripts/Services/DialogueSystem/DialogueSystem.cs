@@ -1,10 +1,12 @@
 using Services;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class DialogueSystem : IService
@@ -19,6 +21,10 @@ public class DialogueSystem : IService
     private Coroutine typingCoroutine;
     private string currentFullText;
     private bool isSpeedUpActive = false;
+    private bool isCurrentLineFinished = false;
+
+    public event Action OnDialogueStart;
+    public event Action OnDialogueEnd;
     public DialogueSystem()
     {
         Assert.IsNotNull(_settings, "DialogueSystemSettings not found in Resources.");
@@ -39,6 +45,11 @@ public class DialogueSystem : IService
         _dialogueUI.UIObject.SetActive(false);
     }
 
+    public void SetSpeedUpText(bool shouldSpeedUp)
+    {
+        isSpeedUpActive = shouldSpeedUp;
+    }
+
     /// <summary>
     /// Call this to start a conversation.
     /// </summary>
@@ -49,7 +60,7 @@ public class DialogueSystem : IService
         {
             lines.Enqueue(line);
         }
-
+        OnDialogueStart?.Invoke();
         _dialogueUI.UIObject.SetActive(true);
         ShowNextLine();
     }
@@ -77,6 +88,7 @@ public class DialogueSystem : IService
 
     IEnumerator RevealDialogueLine(DialogueLine dialogueLine)
     {
+        isCurrentLineFinished = false;
         AudioManager audioManager = ServiceLocator.Instance.Get<AudioManager>();
         _dialogueText.text = "";
         for (int i = 0; i < dialogueLine.text.Length; i++)
@@ -87,9 +99,10 @@ public class DialogueSystem : IService
             float delay = isSpeedUpActive ? _settings.speedUpDelay : _settings.letterDelay;
             yield return new WaitForSeconds(delay);
         }
+        isCurrentLineFinished = true;
     }
 
-    void ForceCompleteLine()
+    public void ForceCompleteLine()
     {
         if (typingCoroutine != null)
         {
@@ -98,10 +111,20 @@ public class DialogueSystem : IService
         }
 
         _dialogueText.text = currentFullText;
+        isCurrentLineFinished = true;
+    }
+
+    public void RequestNextLine()
+    {
+        if(isCurrentLineFinished)
+        {
+            ShowNextLine();
+        }
     }
 
     void EndDialogue()
     {
         _dialogueUI.UIObject.SetActive(false);
+        OnDialogueEnd?.Invoke();
     }
 }

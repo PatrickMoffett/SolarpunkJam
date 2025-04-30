@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ec13d9d6ab83f2440978e3d97d8ed492, type: 3}
-  m_Name: TestCharacter
+  m_Name: YarraBrightwater_Dialogue
   m_EditorClassIdentifier: 
-  characterName: NotMainCharacter
-  portrait: {fileID: 7523629020018650767, guid: d33138548e27a7043aaaf0efdf3c14af, type: 3}
+  characterName: Yarra BrightWater
+  portrait: {fileID: 2341377823837204164, guid: 16c0c3b575cd44d4989e860480edc039, type: 3}
   voiceBlip: {fileID: 0}
