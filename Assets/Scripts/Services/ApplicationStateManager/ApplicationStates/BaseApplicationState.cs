@@ -1,7 +1,7 @@
 ﻿
-using StateManager;
+using StackStateMachine;
 
 namespace Services
 {
-    public abstract class BaseApplicationState : BaseState { }
+    public abstract class BaseApplicationState : StackStateMachineBaseState { }
 }

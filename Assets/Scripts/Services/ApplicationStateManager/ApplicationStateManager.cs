@@ -1,6 +1,4 @@
-﻿using System;
-using StateManager;
-using UnityEditor;
+﻿using StackStateMachine;
 
 
 namespace Services
@@ -10,5 +8,5 @@ namespace Services
     /// <summary>
     /// Used to manage the overall state of the application
     /// </summary>
-    public class ApplicationStateManager : StateManager<BaseApplicationState>, IService { }
+    public class ApplicationStateManager : StackStateMachine<BaseApplicationState>, IService { }
 }

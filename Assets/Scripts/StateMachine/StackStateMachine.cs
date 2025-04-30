@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
-namespace StateManager
+namespace StackStateMachine
 {
     /// <summary>
     /// 
     /// </summary>
-    public class StateManager<TBaseStateType> where TBaseStateType : BaseState
+    public class StackStateMachine<TBaseStateType> where TBaseStateType : StackStateMachineBaseState
     {
         /// <summary>
         /// Stack holding the applications current states
         /// </summary>
-        private readonly Stack<BaseState> _states = new Stack<BaseState>();
+        private readonly Stack<StackStateMachineBaseState> _states = new Stack<StackStateMachineBaseState>();
 
-        public event Action<BaseState> StatePushed;
-        public event Action<BaseState> StatePopped;
+        public event Action<StackStateMachineBaseState> StatePushed;
+        public event Action<StackStateMachineBaseState> StatePopped;
 
-        public StateManager()
+        public StackStateMachine()
         {
 
         }
@@ -35,7 +33,7 @@ namespace StateManager
             where TStateType : TBaseStateType, new()
         {
             // Grab previous state if one exists
-            BaseState prevState = null;
+            StackStateMachineBaseState prevState = null;
             if (_states.Count > 0)
             {
                 prevState = _states.Peek();
@@ -48,15 +46,15 @@ namespace StateManager
             }
             else
             {
-                prevState?.Transition(BaseState.StateStatus.Background);
+                prevState?.Transition(StackStateMachineBaseState.StateStatus.Background);
             }
             
             //Create a new state of type T and add it to the stack
-            BaseState newState = new TStateType();
+            StackStateMachineBaseState newState = new TStateType();
             _states.Push(newState);
             
             // Transition new state to active
-            newState.Transition(BaseState.StateStatus.Active, prevState, options);
+            newState.Transition(StackStateMachineBaseState.StateStatus.Active, prevState, options);
             StatePushed?.Invoke(newState);
         }
 
@@ -66,11 +64,11 @@ namespace StateManager
         public void PopState(bool setTopActive = true)
         {
             //Pop top state and set to inactive
-            BaseState popState;
+            StackStateMachineBaseState popState;
             if (_states.Count > 0)
             {
                 popState = _states.Pop();
-                popState.Transition(BaseState.StateStatus.Inactive);
+                popState.Transition(StackStateMachineBaseState.StateStatus.Inactive);
                 StatePopped?.Invoke(popState);
             }
             else
@@ -81,8 +79,8 @@ namespace StateManager
             if (setTopActive)
             {
                 //Set new top state to active if it exists
-                BaseState newTopState = _states.Count == 0 ? null : _states.Peek();
-                newTopState?.Transition(BaseState.StateStatus.Active, popState);
+                StackStateMachineBaseState newTopState = _states.Count == 0 ? null : _states.Peek();
+                newTopState?.Transition(StackStateMachineBaseState.StateStatus.Active, popState);
             }
         }
 
@@ -90,7 +88,7 @@ namespace StateManager
         /// Get the current application state 
         /// </summary>
         /// <returns>current active state</returns>
-        public BaseState GetCurrentState()
+        public StackStateMachineBaseState GetCurrentState()
         {
             return _states.Peek();
         }
@@ -108,9 +106,9 @@ namespace StateManager
         /// Gets all the states in the stack as an array
         /// </summary>
         /// <returns>An array of the states in the stack</returns>
-        public List<BaseState> GetStates()
+        public List<StackStateMachineBaseState> GetStates()
         {
-            return new List<BaseState>(_states.ToArray());
+            return new List<StackStateMachineBaseState>(_states.ToArray());
         }
     }
 }

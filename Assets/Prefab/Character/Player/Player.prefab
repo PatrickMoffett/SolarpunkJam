@@ -223,7 +223,7 @@ MonoBehaviour:
   _jumpEpsilon: 0.2
   _knockbackSpeed: 5
   _knockbackDirection: {x: 1, y: 1}
-  _knockbackTime: 0.2
+  _knockbackTime: 0.5
   _jumpAudioEvent: {fileID: 11400000, guid: aab6fb66b0a8dd34596be577e8abc27a, type: 2}
 --- !u!114 &8468066183239496644
 MonoBehaviour:

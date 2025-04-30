@@ -1,17 +1,13 @@
-using System;
+using StateMachine;
 using System.Collections;
-using Unity.VisualScripting.FullSerializer;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Events;
-using UnityEngine.EventSystems;
-
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AttributeSet))]
 public class PlayerMovementComponent : MonoBehaviour
-{    
+{
+    #region Serialized Fields
     [Header("Movement Settings")]
     [SerializeField] private bool _airControl = false;              // Whether or not a player can steer while jumping;
     [SerializeField] private CollisionObserver2D _groundObserver;   // The ground observer used to check if the player is on the ground
@@ -27,54 +23,68 @@ public class PlayerMovementComponent : MonoBehaviour
 
     [Header("Sound Effect")]
     [SerializeField] private SimpleAudioEvent _jumpAudioEvent;
-
+    #endregion
+    #region Private Variables
+    private StateMachine<PlayerMovementComponent, BaseMovementState> _stateMachine;
     // Anim Variables
     private const string FALL_ANIM_TRIGGER = "Falling";
     private const string JUMP_ANIM_TRIGGER = "Jump";
 
-    // Jump variables
-    private bool _islowJumpGravityApplied = false;                  // Whether or not the low jump gravity multiplier is applied
-    private bool _onGround;                                         // Whether or not the player is grounded.
-    private bool _jumpPushed = false;                               // is the jump button pushed
-    private bool _jumpWasTried = true;
-    private bool _jumpedToLeaveGround = false;                      // Whether or not the player has jumped to leave the ground
-    private bool _playerLeftGroundSinceLastJump = true;             // Whether or not the player has left the ground since the last jump
-    private bool _coyoteJumpAvailable = false;                      // Whether or not the player can jump after leaving the ground
-    private Coroutine _coyoteJumpCoroutine = null;                  // The coroutine that tracks the coyote jump time
-
-    /// <summary>
-    /// Public getter for checking if the player is on the ground or not
-    /// </summary>
-    public bool OnGround
-    {
-        get => _onGround;
-    }
+    // The number of collisions with the ground
+    private int _groundCollisionCount = 0;  
     
-    private int _groundCollisionCount = 0;                          // The number of collisions with the ground
-    // knockback variables
-    private bool _knockbackActive = false;                          // Whether or not the player is currently knocked back
-
     // Direction variables
     private bool _facingRight = true;                               // For determining which way the player is currently facing.
     private Vector2 _movementDirection = Vector2.zero;
 
-    // Components
+    #region Cached Components
     private Rigidbody2D _rigidbody2D;
     private Animator _anim;
     private AttributeSet _attributeSet;
+    #endregion
 
-    public Vector2 MoveDirection
+    #region Cached Attributes
+    Attribute _airAccel;
+    Attribute _movementSpeed;
+    Attribute _jumpHeight;
+    Attribute _movementAccel;
+    #endregion
+    #endregion
+    #region Public Interface
+    public bool OnGround
     {
-        get
-        {
-            return _movementDirection;
-        }
+        get { return _stateMachine.CurrentState.GetType() == typeof(GroundState); }
     }
+    public Vector2 GetMoveDirection()
+    {
+        return _movementDirection;
+    }
+    public void SetMoveDirection(Vector2 moveDirection)
+    {
+        _movementDirection = moveDirection;
+    }
+    public void ExecuteJump()
+    {
+        _stateMachine.CurrentState.ExecuteJump();
+    }
+    public void AbortJump()
+    {
+        _stateMachine.CurrentState.AbortJump();
+    }
+    public void ApplyKnockback(Vector2 knockbackDirection)
+    {
+        _stateMachine.TransitionTo<KnockbackState>();
+    }
+    #endregion
+    #region Unity MonoBehaviour Callbacks
     private void Awake()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _attributeSet = GetComponent<AttributeSet>();
+
+        _stateMachine = new StateMachine<PlayerMovementComponent, BaseMovementState>(this);
+        _stateMachine.TransitionTo<GroundState>();
     }
     private void OnEnable()
     {
@@ -87,17 +97,35 @@ public class PlayerMovementComponent : MonoBehaviour
         _groundObserver.OnTriggerEnter -= OnGroundCollisionEnter;
         _groundObserver.OnTriggerExit -= OnGroundCollisionExit;
     }
+    private void Start()
+    {
+        _airAccel = _attributeSet.GetAttribute(GlobalAttributes.AirControlAccelerationAttribute);
+        Assert.IsNotNull(_airAccel, $"Air Control attribute not found: {GlobalAttributes.AirControlAccelerationAttribute}");
 
+        _movementSpeed = _attributeSet.GetAttribute(GlobalAttributes.MoveSpeedAttribute);
+        Assert.IsNotNull(_movementSpeed, $"Movement speed attribute not found: {GlobalAttributes.MoveSpeedAttribute}");
+
+        _jumpHeight = _attributeSet.GetAttribute(GlobalAttributes.JumpHeightAttribute);
+        Assert.IsNotNull(_jumpHeight, $"JumpHeight attribute not found: {GlobalAttributes.JumpHeightAttribute}");
+
+        _movementAccel = _attributeSet.GetAttribute(GlobalAttributes.MoveAccelerationAttribute);
+        Assert.IsNotNull(_movementAccel, $"Move Acceleration attribute not found: {GlobalAttributes.MoveAccelerationAttribute}");
+    }
+    private void Update()
+    {
+        _stateMachine.CurrentState.Update();
+        UpdateCharacterAnim();
+    }
+    #endregion
+    #region Collision Callbacks
     private void OnGroundCollisionEnter()
     {
         _groundCollisionCount++;
         if(_groundCollisionCount == 1)
         {
-            _onGround = true;
             OnLandedOnGround();
         }
     }
-
     private void OnGroundCollisionExit()
     {
         _groundCollisionCount--;
@@ -111,61 +139,23 @@ public class PlayerMovementComponent : MonoBehaviour
 
         if(_groundCollisionCount == 0)
         {
-            _onGround = false;
             OnLeftTheGround();
         }
     }
-    private void Update()
-    {
-        Move();
-        UpdateCharacterAnim();
-    }
-    public void Move()
-    {
-        UpdateCharacterDirection();
-        if (!_knockbackActive)
-        {
-            UpdateXVelocity();
-            UpdateYVelocity();
-        }
-    }
-    private void UpdateXVelocity()
-    {
-        float moveDirectionX = _movementDirection.x;
 
-        Vector2 currentVelocity = Vector2.zero;
-
-        if (_onGround)
-        {
-            ApplyGroundControl(moveDirectionX);
-        }
-        else if (_airControl)
-        {
-            ApplyAirControl(moveDirectionX);
-        }
-
-
-    }
-    private void UpdateYVelocity()
+    private void OnLeftTheGround()
     {
-        // If the player should jump...
-        if (ShouldJump())
-        {
-            PerformJump();
-        }
-        else if (_rigidbody2D.linearVelocity.y > _jumpEpsilon && _jumpedToLeaveGround && !_jumpPushed && !_islowJumpGravityApplied)
-        {
-            // If the player released the jump button early and is still going up,
-            // use extra gravity to cut the jump height
-            _rigidbody2D.gravityScale *= _lowJumpGravityMultiplier;
-            _islowJumpGravityApplied = true;
-        }
-        if (_rigidbody2D.linearVelocity.y < -_maxFallSpeed)
-        {
-            _rigidbody2D.linearVelocityY = -_maxFallSpeed;
-        }
-        _jumpWasTried = true;
+        _stateMachine.CurrentState.OnLeftGround();
     }
+    private void OnLandedOnGround()
+    {
+        _stateMachine.CurrentState.OnLandedOnGround();
+
+        // set the anim value
+        _anim.SetBool(FALL_ANIM_TRIGGER, false);
+    }
+    #endregion
+    #region Animation
     private void UpdateCharacterDirection()
     {
         float moveDirectionX = _movementDirection.x;
@@ -203,7 +193,7 @@ public class PlayerMovementComponent : MonoBehaviour
             _anim.SetBool(JUMP_ANIM_TRIGGER, true);
             _anim.SetBool(FALL_ANIM_TRIGGER, false);
         }
-        else if (_rigidbody2D.linearVelocityY < -_jumpEpsilon && !_onGround)
+        else if (_rigidbody2D.linearVelocityY < -_jumpEpsilon)
         {
             // Don't set the bool again if its already set
             if (_anim.GetBool(FALL_ANIM_TRIGGER))
@@ -219,92 +209,33 @@ public class PlayerMovementComponent : MonoBehaviour
             _anim.SetBool(FALL_ANIM_TRIGGER, false);
         }
     }
-    private void OnLeftTheGround()
+    #endregion
+    #region Motion Updates
+    private void ClampFallSpeed()
     {
-        // we reset _canJump here so that we can jump again
-        // if we reset when we first jump, sometimes we jump twice
-        // because we are still colliding with the ground
-        _playerLeftGroundSinceLastJump = true;
-
-        if (!_jumpedToLeaveGround)
+        if (_rigidbody2D.linearVelocity.y < -_maxFallSpeed)
         {
-            _coyoteJumpCoroutine = StartCoroutine(TrackCoyoteTime());
+            _rigidbody2D.linearVelocityY = -_maxFallSpeed;
         }
     }
-    IEnumerator TrackCoyoteTime()
+    private void AddJumpVelocity()
     {
-        _coyoteJumpAvailable = true;
-        yield return new WaitForSeconds(_coyoteTime);
-        _coyoteJumpAvailable = false;
-    }
-    private void OnLandedOnGround()
-    {
-        // set the anim value
-        _anim.SetBool(FALL_ANIM_TRIGGER, false);
-        _jumpedToLeaveGround = false;
-
-        // Reset the gravity scale to normal
-        if (_islowJumpGravityApplied)
-        {
-            _rigidbody2D.gravityScale /= _lowJumpGravityMultiplier;
-            _islowJumpGravityApplied = false;
-        }
-
-        StopCoyoteTime();
-    }
-    private void StopCoyoteTime()
-    {
-        // Stop the coyote jump coroutine if it is running
-        if (_coyoteJumpCoroutine != null)
-        {
-            StopCoroutine(_coyoteJumpCoroutine);
-            _coyoteJumpCoroutine = null;
-            _coyoteJumpAvailable = false;
-        }
-    }
-    private bool ShouldJump()
-    {
-        return (_onGround || _coyoteJumpAvailable) && _jumpPushed && !_jumpWasTried && _playerLeftGroundSinceLastJump;
-    }
-    private void PerformJump()
-    {
-        _jumpAudioEvent.Play(gameObject);
-
-        if (_coyoteJumpAvailable)
-        {
-            StopCoyoteTime();
-        }
-        else
-        { 
-            _playerLeftGroundSinceLastJump = false;
-        }
-        _jumpedToLeaveGround = true;
-
-        // Get the jump height from the attribute set
-        Attribute jumpHeight = _attributeSet.GetAttribute(GlobalAttributes.JumpHeightAttribute);
-        Assert.IsNotNull(jumpHeight, $"JumpHeight attribute not found: {GlobalAttributes.JumpHeightAttribute}");
-
         // Calculate the jump force to reach the jumpHeight
         float gravity = Physics2D.gravity.y * _rigidbody2D.gravityScale;
-        float jumpForce = Mathf.Sqrt(-2f * gravity * jumpHeight.CurrentValue);
+        float jumpForce = Mathf.Sqrt(-2f * gravity * _jumpHeight.CurrentValue);
         // Add a vertical force to the player.
         _rigidbody2D.linearVelocityY = jumpForce;
     }
-    private void ApplyGroundControl(float moveDirectionX)
+    private void UpdateXVelocity(float moveDirectionX, float acceleration)
     {
         Vector2 currentVelocity = _rigidbody2D.linearVelocity;
-        Attribute movementAccel = _attributeSet.GetAttribute(GlobalAttributes.MoveAccelerationAttribute);
-        Assert.IsNotNull(movementAccel, $"Move Acceleration attribute not found: {GlobalAttributes.MoveAccelerationAttribute}");
-        
-        Attribute movementSpeed = _attributeSet.GetAttribute(GlobalAttributes.MoveSpeedAttribute);
-        Assert.IsNotNull(movementSpeed, $"Movement speed attribute not found: {GlobalAttributes.MoveSpeedAttribute}");
 
         if (moveDirectionX == 0f)
         {
             // If the player is not moving, we want to decelerate
             if (currentVelocity.x > 0f)
             {
-                currentVelocity.x -= movementAccel.CurrentValue * Time.deltaTime;
+                currentVelocity.x -= acceleration * Time.deltaTime;
                 if (currentVelocity.x < 0f)
                 {
                     currentVelocity.x = 0f;
@@ -312,7 +243,7 @@ public class PlayerMovementComponent : MonoBehaviour
             }
             else if (currentVelocity.x < 0f)
             {
-                currentVelocity.x += movementAccel.CurrentValue * Time.deltaTime;
+                currentVelocity.x += acceleration * Time.deltaTime;
                 if (currentVelocity.x > 0f)
                 {
                     currentVelocity.x = 0f;
@@ -321,82 +252,202 @@ public class PlayerMovementComponent : MonoBehaviour
         }
         else
         {
-            currentVelocity.x += moveDirectionX * movementAccel.CurrentValue * Time.deltaTime;
+            currentVelocity.x += moveDirectionX * acceleration * Time.deltaTime;
         }
 
         // Apply the speed to the player
-        currentVelocity.x = Mathf.Clamp(currentVelocity.x, -movementSpeed.CurrentValue, movementSpeed.CurrentValue);
+        currentVelocity.x = Mathf.Clamp(currentVelocity.x, -_movementSpeed.CurrentValue, _movementSpeed.CurrentValue);
         currentVelocity.y = _rigidbody2D.linearVelocity.y;
         _rigidbody2D.linearVelocity = currentVelocity;
     }
-    private void ApplyAirControl(float moveDirectionX)
+    #endregion
+    #region MovementStates
+    private abstract class BaseMovementState : BaseState<PlayerMovementComponent>
     {
-        Vector2 currentVelocity = _rigidbody2D.linearVelocity;
-        Attribute airAccel = _attributeSet.GetAttribute(GlobalAttributes.AirControlAccelerationAttribute);
-        Assert.IsNotNull(airAccel, $"Air Control attribute not found: {GlobalAttributes.AirControlAccelerationAttribute}");
-
-        Attribute movementSpeed = _attributeSet.GetAttribute(GlobalAttributes.MoveSpeedAttribute);
-        Assert.IsNotNull(movementSpeed, $"Movement speed attribute not found: {GlobalAttributes.MoveSpeedAttribute}");
-
-        if (moveDirectionX == 0f)
+        public abstract void Update();
+        public abstract void ExecuteJump();
+        public abstract void AbortJump();
+        public abstract void OnLeftGround();
+        public abstract void OnLandedOnGround();
+    }
+    private class GroundState : BaseMovementState
+    {
+        bool _jumpRequested = false;
+        public override void ExecuteJump()
         {
-            // If the player is not moving, we want to decelerate
-            if (currentVelocity.x > 0f)
-            {
-                currentVelocity.x -= airAccel.CurrentValue * Time.deltaTime;
-                if (currentVelocity.x < 0f)
-                {
-                    currentVelocity.x = 0f;
-                }
-            }
-            else if (currentVelocity.x < 0f)
-            {
-                currentVelocity.x += airAccel.CurrentValue * Time.deltaTime;
-                if (currentVelocity.x > 0f)
-                {
-                    currentVelocity.x = 0f;
-                }
-            }
-        }
-        else
-        {
-            currentVelocity.x += moveDirectionX * airAccel.CurrentValue * Time.deltaTime;
+            _jumpRequested = true;
+            Context._stateMachine.TransitionTo<JumpingState>();
         }
 
-        // Apply the speed to the player
-        currentVelocity.x = Mathf.Clamp(currentVelocity.x, -movementSpeed.CurrentValue, movementSpeed.CurrentValue);
-        currentVelocity.y = _rigidbody2D.linearVelocity.y;
-        _rigidbody2D.linearVelocity = currentVelocity;
-    }
-    internal void SetJumpPushed(bool jump)
-    {
-        _jumpWasTried = false;
-        _jumpPushed = jump;
-    }
-    internal void SetMoveDirection(Vector2 moveDirection)
-    {
-        _movementDirection = moveDirection;
-    }
+        public override void AbortJump() { }
 
-    public void ApplyKnockback(Vector2 knockbackDirection)
-    {
-        Vector2 velocity = _knockbackDirection * _knockbackSpeed;
-        velocity.x *= Vector2.Dot(_movementDirection, Vector2.left) >= 0f ? 1 : -1;
-        _rigidbody2D.linearVelocity = velocity;
-        StartCoroutine(KnockbackCoroutine());
-        _knockbackActive = true;
+        public override void EnterState(BaseState<PlayerMovementComponent> previousState)
+        {
+
+        }
+
+        public override void ExitState(BaseState<PlayerMovementComponent> nextState)
+        {
+
+        }
+
+        public override void OnLandedOnGround()
+        {
+
+        }
+
+        public override void OnLeftGround()
+        { 
+            Context._stateMachine.TransitionTo<FallingState>();
+        }
+
+        public override void Update()
+        {
+            Context.UpdateCharacterDirection();
+            Context.UpdateXVelocity(Context._movementDirection.x,Context._movementAccel.CurrentValue);
+            Context.UpdateCharacterAnim();
+        }
     }
-
-    private IEnumerator KnockbackCoroutine()
+    private class JumpingState : BaseMovementState
     {
-        yield return new WaitForSeconds(_knockbackTime);
-        StopKnockback();
+        bool _islowJumpGravityApplied = false;
+        public override void ExecuteJump()
+        {
+        }
+        public override void AbortJump()
+        {
+            if(!_islowJumpGravityApplied)
+            {
+                Context._rigidbody2D.gravityScale *= Context._lowJumpGravityMultiplier;
+                _islowJumpGravityApplied = true;
+            }
+        }
+        public override void EnterState(BaseState<PlayerMovementComponent> previousState)
+        {
+            Context._jumpAudioEvent.Play(Context.gameObject);
+            Context.AddJumpVelocity();
+        }
+        public override void ExitState(BaseState<PlayerMovementComponent> nextState)
+        {
+            if (_islowJumpGravityApplied)
+            {
+                Context._rigidbody2D.gravityScale /= Context._lowJumpGravityMultiplier;
+                _islowJumpGravityApplied = false;
+            }
+        }
+        public override void OnLandedOnGround()
+        {
+            Context._stateMachine.TransitionTo<GroundState>();
+        }
+        public override void OnLeftGround()
+        {
+        }
+        public override void Update()
+        {
+            Context.UpdateCharacterDirection();
+            Context.UpdateXVelocity(Context._movementDirection.x, Context._airAccel.CurrentValue);
+            Context.ClampFallSpeed();
+            Context.UpdateCharacterAnim();
+        }
     }
-
-    public void StopKnockback()
+    private class FallingState : BaseMovementState
     {
-        _knockbackActive = false;
+        public bool _coyoteJumpAvailable = false;
+        private Coroutine _coyoteJumpCoroutine = null;
+        public override void ExecuteJump()
+        {
+            if(_coyoteJumpAvailable)
+            {
+                _coyoteJumpAvailable = false;
+                Context._stateMachine.TransitionTo<JumpingState>();
+            }
+        }
+        public override void AbortJump()
+        {
+        }
+        public override void EnterState(BaseState<PlayerMovementComponent> previousState)
+        {
+            Context.StartCoroutine(TrackCoyoteTime());
+        }
+        public override void ExitState(BaseState<PlayerMovementComponent> nextState)
+        {
+            if(_coyoteJumpCoroutine != null)
+            {
+                Context.StopCoroutine(_coyoteJumpCoroutine);
+                _coyoteJumpCoroutine = null;
+            }
+        }
+        public override void OnLandedOnGround()
+        {
+            Context._stateMachine.TransitionTo<GroundState>();
+        }
+        public override void OnLeftGround()
+        {
+        }
+        public override void Update()
+        {
+            Context.UpdateCharacterDirection();
+            Context.UpdateXVelocity(Context._movementDirection.x, Context._movementAccel.CurrentValue);
+            Context.ClampFallSpeed();
+            Context.UpdateCharacterAnim();
+        }
+        IEnumerator TrackCoyoteTime()
+        {
+            _coyoteJumpAvailable = true;
+            yield return new WaitForSeconds(Context._coyoteTime);
+            _coyoteJumpAvailable = false;
+        }
     }
-
-
+    private class KnockbackState : BaseMovementState
+    {
+        Coroutine _knockbackCoroutine;
+        public override void ExecuteJump()
+        {
+        }
+        public override void AbortJump()
+        {
+        }
+        public override void EnterState(BaseState<PlayerMovementComponent> previousState)
+        {
+            Vector2 velocity = Context._knockbackDirection * Context._knockbackSpeed;
+            // TODO: _movementDirection should be knockback direction
+            velocity.x *= Vector2.Dot(Context._movementDirection, Vector2.left) >= 0f ? 1 : -1;
+            Context._rigidbody2D.linearVelocity = velocity;
+            Context.StartCoroutine(KnockbackCoroutine());
+        }
+        public override void ExitState(BaseState<PlayerMovementComponent> nextState)
+        {
+            if(_knockbackCoroutine != null)
+            {
+                Context.StopCoroutine(_knockbackCoroutine);
+                _knockbackCoroutine = null;
+            }
+        }
+        public override void OnLandedOnGround()
+        {
+        }
+        public override void OnLeftGround()
+        {
+        }
+        public override void Update()
+        {
+        }
+        private IEnumerator KnockbackCoroutine()
+        {
+            yield return new WaitForSeconds(Context._knockbackTime);
+            OnKnockbackComplete();
+        }
+        public void OnKnockbackComplete()
+        {
+            if(Context._groundObserver.IsCurrentlyTriggering())
+            {
+                Context._stateMachine.TransitionTo<GroundState>();
+            }
+            else
+            {
+                Context._stateMachine.TransitionTo<FallingState>();
+            }
+        }
+    }
+    #endregion
 }

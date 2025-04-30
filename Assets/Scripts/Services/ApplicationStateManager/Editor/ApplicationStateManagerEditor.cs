@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using StateManager;
+using StackStateMachine;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -71,7 +71,7 @@ namespace Services
             _pushButton.clicked -= PushButtonClicked;
         }
 
-        private void RefreshStateListVisual(BaseState baseState)
+        private void RefreshStateListVisual(StackStateMachineBaseState baseState)
         {
             for (int i = _visualStateStackList.childCount - 1; i >= 0; i--)
             {

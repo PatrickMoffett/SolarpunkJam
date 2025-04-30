@@ -56,8 +56,8 @@ public class PlayerController : MonoBehaviour
         _movementComponent = GetComponent<PlayerMovementComponent>();
         _attributes = GetComponent<AttributeSet>();
 
-        _input.Player.Jump.started += ctx => StartJump();
-        _input.Player.Jump.canceled += ctx => EndJump();
+        _input.Player.Jump.started += ctx => ExecuteJump();
+        _input.Player.Jump.canceled += ctx => AbortJump();
         _input.Player.Move.performed += ctx => Move(ctx.ReadValue<Vector2>());
         _input.Player.Move.canceled += ctx => Move(Vector2.zero);
         
@@ -114,13 +114,13 @@ public class PlayerController : MonoBehaviour
             Services.ServiceLocator.Instance.Get<PlayerManager>().SetPlayerController(null);
         }
     }
-    private void StartJump()
+    private void ExecuteJump()
     {
-        _movementComponent.SetJumpPushed(true);
+        _movementComponent.ExecuteJump();
     }
-    private void EndJump()
+    private void AbortJump()
     {
-        _movementComponent.SetJumpPushed(false);
+        _movementComponent.AbortJump();
     }
     private void Move(Vector2 vector2)
     {

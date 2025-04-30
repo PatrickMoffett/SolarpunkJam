@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Constants;
-using StateManager;
+using StackStateMachine;
 
 namespace Services
 {
@@ -14,7 +14,7 @@ namespace Services
 
         }
 
-        protected override void SetToBackgroundStateFromActive(BaseState prevState, Dictionary<string, object> options)
+        protected override void SetToBackgroundStateFromActive(StackStateMachineBaseState prevState, Dictionary<string, object> options)
         {
             if (_uiWidget != null)
             {
@@ -22,7 +22,7 @@ namespace Services
             }
         }
 
-        protected override void SetToActiveStateFromBackground(BaseState prevState, Dictionary<string, object> options)
+        protected override void SetToActiveStateFromBackground(StackStateMachineBaseState prevState, Dictionary<string, object> options)
         {
             if (_uiWidget != null)
             {
@@ -30,18 +30,18 @@ namespace Services
             }
         }
 
-        protected override void SetupState(BaseState prevState, Dictionary<string, object> options)
+        protected override void SetupState(StackStateMachineBaseState prevState, Dictionary<string, object> options)
         {
             _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
         }
 
-        protected override void SetupStateInBackground(BaseState prevState, Dictionary<string, object> options)
+        protected override void SetupStateInBackground(StackStateMachineBaseState prevState, Dictionary<string, object> options)
         {
             SetupState(prevState, options);
             SetToBackgroundStateFromActive(prevState, options);
         }
 
-        protected override void TeardownState(BaseState prevState, Dictionary<string, object> options)
+        protected override void TeardownState(StackStateMachineBaseState prevState, Dictionary<string, object> options)
         {
             if (_uiWidget != null)
             {
