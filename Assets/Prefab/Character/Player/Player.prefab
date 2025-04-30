@@ -113,6 +113,8 @@ GameObject:
   - component: {fileID: 3567976672251922630}
   - component: {fileID: 7174431052930047565}
   - component: {fileID: 3124108200020220051}
+  - component: {fileID: 1451945921163668311}
+  - component: {fileID: 1509187471342584480}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -148,6 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb232257a8e802c46a08478cfdf9b6fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _iFrameDuration: 1
+  _iFrameColor: {r: 1, g: 1, b: 1, a: 0}
+  _iFrameColorOscillationFrequency: 20
 --- !u!114 &1513114109731085291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,8 +221,8 @@ MonoBehaviour:
   _maxFallSpeed: 20
   _coyoteTime: 0.1
   _jumpEpsilon: 0.2
-  _knockbackSpeed: 10
-  _knockbackDirection: {x: 0, y: 0}
+  _knockbackSpeed: 5
+  _knockbackDirection: {x: 1, y: 1}
   _knockbackTime: 0.2
   _jumpAudioEvent: {fileID: 11400000, guid: aab6fb66b0a8dd34596be577e8abc27a, type: 2}
 --- !u!114 &8468066183239496644
@@ -393,3 +398,27 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.4, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1451945921163668311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4459522989425303589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b9aaee0fb56244cbd8784b21cabbc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1509187471342584480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4459522989425303589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6b9aaee0fb56244cbd8784b21cabbc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

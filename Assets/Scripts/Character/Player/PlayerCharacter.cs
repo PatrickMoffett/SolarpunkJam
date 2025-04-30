@@ -14,8 +14,6 @@ public class PlayerCharacter : Character
     [SerializeField] private Color _iFrameColor = new Color(1f, 1f, 1f, .5f);
     [SerializeField] private float _iFrameColorOscillationFrequency = 5f;
 
-    private bool _isInvulnerable = false;
-
     private PlayerController _playerController;
     private PlayerMovementComponent _movementComponent;
     private SpriteColorOscillator _spriteColorOscillator;

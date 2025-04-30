@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -98,6 +99,12 @@ public class PlayerMovementComponent : MonoBehaviour
     private void OnGroundCollisionExit()
     {
         _groundCollisionCount--;
+#if UNITY_EDITOR
+        if(!gameObject.activeSelf)
+        {
+            return;
+        }
+#endif
         if(_groundCollisionCount == 0)
         {
             _onGround = false;

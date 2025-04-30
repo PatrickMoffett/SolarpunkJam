@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd3a40d9e9a59848868718b1aec38a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _applyOnCollision: 0
+  _applyOnCollision: 1
   _applyOnTrigger: 1
   _destroyOnApplication: 1
   _canApplyToNonPlayer: 0

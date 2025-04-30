@@ -50,10 +50,16 @@ public class CollidableEffectComponent : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D col)
     {
-        TryToApplyToGameObject(col.gameObject);
+        if (_applyOnCollision)
+        {
+            TryToApplyToGameObject(col.gameObject);
+        }
     }
     private void OnTriggerEnter2D(Collider2D col)
     {
-        TryToApplyToGameObject(col.gameObject);
+        if (_applyOnTrigger)
+        {
+            TryToApplyToGameObject(col.gameObject);
+        }
     }
 }

@@ -4,14 +4,14 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(SpriteRenderer))]
 public class Parallax : MonoBehaviour
 {
-    public GameObject camera;
-    public float parallaxEffectMultiplier = 0.5f;
+    [SerializeField] private GameObject _camera;
+    [SerializeField] private float parallaxEffectMultiplier = 0.5f;
 
     private float _spriteLength, _startPos;
 
     private void Start()
     {
-        Assert.IsNotNull(camera, "Camera is not assigned in the inspector.");
+        Assert.IsNotNull(_camera, "Camera is not assigned in the inspector.");
 
         _startPos = transform.position.x;
         _spriteLength = GetComponent<SpriteRenderer>().bounds.size.x;
@@ -19,8 +19,8 @@ public class Parallax : MonoBehaviour
 
     private void Update()
     {
-        float temp = (camera.transform.position.x * (1 - parallaxEffectMultiplier));
-        float distance = (camera.transform.position.x * parallaxEffectMultiplier);
+        float temp = (_camera.transform.position.x * (1 - parallaxEffectMultiplier));
+        float distance = (_camera.transform.position.x * parallaxEffectMultiplier);
 
         transform.position = new Vector3(_startPos + distance, transform.position.y, transform.position.z);
 

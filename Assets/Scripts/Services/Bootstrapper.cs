@@ -31,6 +31,7 @@ public static class Bootstrapper
         ServiceLocator.Instance.Register(new UIManager());
         ServiceLocator.Instance.Register(new TileMapManager());
         ServiceLocator.Instance.Register(new PlayerManager());
+        ServiceLocator.Instance.Register(new DialogueSystem());
 
         //Start MainMenuState
         ServiceLocator.Instance.Get<ApplicationStateManager>().PushState<MainMenuState>();

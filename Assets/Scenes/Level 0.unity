@@ -104212,7 +104212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3256e90e617c8743b2a13f8163d1857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1111906352}
+  _camera: {fileID: 1111906352}
   parallaxEffectMultiplier: 0.3
 --- !u!1001 &685857381
 PrefabInstance:
@@ -104687,7 +104687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3256e90e617c8743b2a13f8163d1857, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 1111906352}
+  _camera: {fileID: 1111906352}
   parallaxEffectMultiplier: 0.6
 --- !u!4 &867805438 stripped
 Transform:
