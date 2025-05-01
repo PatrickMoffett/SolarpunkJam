@@ -55,6 +55,7 @@ public class DialogueSystem : IService
     /// </summary>
     public void StartDialogue(Dialogue dialogue)
     {
+        Time.timeScale = 0f; // Ensure time is running at normal speed
         lines.Clear();
         foreach (var line in dialogue.lines)
         {
@@ -97,7 +98,7 @@ public class DialogueSystem : IService
             //audioManager.PlaySfx(dialogueLine.character.voiceBlip);
 
             float delay = isSpeedUpActive ? _settings.speedUpDelay : _settings.letterDelay;
-            yield return new WaitForSeconds(delay);
+            yield return new WaitForSecondsRealtime(delay);
         }
         isCurrentLineFinished = true;
     }
@@ -124,6 +125,7 @@ public class DialogueSystem : IService
 
     void EndDialogue()
     {
+        Time.timeScale = 1f; // Ensure time is running at normal speed
         _dialogueUI.UIObject.SetActive(false);
         OnDialogueEnd?.Invoke();
     }
