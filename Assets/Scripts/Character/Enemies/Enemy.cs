@@ -7,7 +7,7 @@ public class Enemy : Character
     {
         Die();
     }
-    protected void Start()
+    protected virtual void Start()
     {
         Attribute health = _attributeSet.GetAttribute(GlobalAttributes.HealthAttribute);
         Assert.IsNotNull(health, $"Health attribute not found in the attribute set.");
@@ -24,7 +24,7 @@ public class Enemy : Character
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         OnCharacterDeath?.Invoke(this);
 
