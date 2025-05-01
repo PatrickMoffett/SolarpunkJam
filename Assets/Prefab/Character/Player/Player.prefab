@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1672563087189678447}
   - component: {fileID: 8457530565425196773}
   - component: {fileID: 3925894556471443856}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GroundObserver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 1451945921163668311}
   - component: {fileID: 1509187471342584480}
   - component: {fileID: 3246415804335016977}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
