@@ -2,15 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Assertions;
 
 [RequireComponent(typeof(AttributeSet))]
+[RequireComponent(typeof(CombatTagContainer))]
 public class CombatSystem : MonoBehaviour
 {
     [SerializeField]
     private List<StatusEffect> startingEffects = new List<StatusEffect>();
     
     private AttributeSet _attributeSet;
+    private CombatTagContainer _combatTagContainer;
+
     private readonly List<StatusEffectInstance> _currentStatusEffects = new List<StatusEffectInstance>();
 
     public event Action<StatusEffectInstance> OnStatusEffectAdded;
@@ -20,6 +23,10 @@ public class CombatSystem : MonoBehaviour
     private void Start()
     {
         _attributeSet = GetComponent<AttributeSet>();
+        Assert.IsNotNull(_attributeSet, "AttributeSet is not assigned in CombatSystem.");
+
+        _combatTagContainer = GetComponent<CombatTagContainer>();
+        Assert.IsNotNull(_combatTagContainer, "CombatTagContainer is not assigned in CombatSystem.");
         //force update current values before apply effects
         _attributeSet.UpdateCurrentValues();
         
@@ -40,6 +47,12 @@ public class CombatSystem : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     public StatusEffectInstance ApplyStatusEffect(OutgoingStatusEffectInstance effect)
     {
+        if(_combatTagContainer.HasAnyTag(effect._effect.immunityTags))
+        {
+            //if the target has any of the tags to ignore, don't apply the effect
+            return null;
+        }
+        _combatTagContainer.AddTags(effect._effect.providedTags);
         //set this as the targetCombatSystem
         StatusEffectInstance effectToApply = new StatusEffectInstance(effect, this);
 
@@ -101,6 +114,7 @@ public class CombatSystem : MonoBehaviour
     public void RemoveStatusEffect(StatusEffectInstance effectToRemove)
     {
         _currentStatusEffects.Remove(effectToRemove);
+        _combatTagContainer.RemoveTags(effectToRemove._effect._effect.providedTags); // TODO: WTF?
         if (effectToRemove.DurationType == StatusEffect.DurationType.Instant)
         {
             Debug.LogError("Tried to remove Instant Status Effect");

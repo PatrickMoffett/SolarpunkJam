@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StatusEffectInstance
 {
-    private readonly OutgoingStatusEffectInstance _effect;
+    public readonly OutgoingStatusEffectInstance _effect;
     private readonly CombatSystem _targetCombatSystem;
     
     public StatusEffectInstance(OutgoingStatusEffectInstance effect,CombatSystem targetCombatSystem) 

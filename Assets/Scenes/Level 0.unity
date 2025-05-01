@@ -142448,9 +142448,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0.09847328
-    width: 0.99999994
-    height: 0.8025286
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -142480,7 +142480,7 @@ Transform:
   m_GameObject: {fileID: 1111906352}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.01, y: -5.61, z: -10}
+  m_LocalPosition: {x: -38.19, y: -6.11, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -142569,9 +142569,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smoothTime: 0.45
-  deadZone: {x: 2, y: 0.5}
-  deadZoneOffset: {x: -3, y: -1.5, z: 0}
-  maxDistance: {x: 6, y: 4}
+  deadZone: {x: 1, y: 0.5}
+  deadZoneOffset: {x: -4, y: -1.5, z: 0}
+  maxDistance: {x: 7, y: 4}
 --- !u!1001 &1156550344
 PrefabInstance:
   m_ObjectHideFlags: 0

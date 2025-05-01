@@ -50,6 +50,19 @@ public class StatusEffect : ScriptableObject
     /// List of attribute modifiers this effect applies
     /// </summary>
     public List<AttributeModifier> attributeModifiers = new List<AttributeModifier>();
+
+    /// <summary>
+    /// List of Tags this effect provides (Instant Effects do not provide tags)
+    /// </summary>
+    [Tooltip("Tags that this effect provides. Instant effects do not provide tags")]
+    public List<CombatTag> providedTags = new List<CombatTag>();
+
+    /// <summary>
+    /// Tags that if present on the target, this effect will not apply
+    /// </summary>
+    [Tooltip("Tags that if present on the target, this effect will not apply")]
+    public List<CombatTag> immunityTags = new List<CombatTag>();
+
     /// <summary>
     /// List of abilities granted while this effect is active
     /// </summary>

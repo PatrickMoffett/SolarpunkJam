@@ -9,10 +9,11 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(SpriteColorOscillator))]
 public class PlayerCharacter : Character
 {
-    [Tooltip("IFrame")]
+    [Tooltip("IFrames")]
     [SerializeField] private float _iFrameDuration = 1f;
     [SerializeField] private Color _iFrameColor = new Color(1f, 1f, 1f, .5f);
     [SerializeField] private float _iFrameColorOscillationFrequency = 5f;
+    [SerializeField] private StatusEffect _immunityEffect;
 
     private PlayerController _playerController;
     private PlayerMovementComponent _movementComponent;
@@ -22,6 +23,31 @@ public class PlayerCharacter : Character
         base.Awake();
         Services.ServiceLocator.Instance.Get<PlayerManager>().SetPlayerCharacter(this);
     }
+    protected void OnEnable()
+    {
+        _combatSystem.OnStatusEffectAdded += OnStatusEffectAdded;
+    }
+    protected void Start()
+    {
+        Attribute health = _attributeSet.GetAttribute(GlobalAttributes.HealthAttribute);
+        Assert.IsNotNull(health, $"Health attribute not found in the attribute set.");
+        health.OnValueChanged += OnHealthChanged;
+
+        _movementComponent = GetComponent<PlayerMovementComponent>();
+        Assert.IsNotNull(_movementComponent, $"PlayerMovementComponent not found on {gameObject.name}.");
+
+        _playerController = GetComponent<PlayerController>();
+        Assert.IsNotNull(_playerController, $"PlayerController not found on {gameObject.name}.");
+
+        _spriteColorOscillator = GetComponent<SpriteColorOscillator>();
+        Assert.IsNotNull(_spriteColorOscillator, $"SpriteColorOscillator not found on {gameObject.name}.");
+
+        Assert.IsNotNull(_immunityEffect, $"Immunity effect not assigned in {gameObject.name}.");
+    }
+    protected void OnDisable()
+    {
+        _combatSystem.OnStatusEffectAdded -= OnStatusEffectAdded;
+    }
     protected void OnDestroy()
     {
         if (Services.ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter() == this)
@@ -29,15 +55,6 @@ public class PlayerCharacter : Character
             Services.ServiceLocator.Instance.Get<PlayerManager>().SetPlayerCharacter(null);
         }
     }
-    protected void OnEnable()
-    {
-        _combatSystem.OnStatusEffectAdded += OnStatusEffectAdded;
-    }
-    protected void OnDisable()
-    {
-        _combatSystem.OnStatusEffectAdded -= OnStatusEffectAdded;
-    }
-
     private void OnStatusEffectAdded(StatusEffectInstance instance)
     {
         foreach(var modifier in instance.AttributeModifiers)
@@ -61,31 +78,18 @@ public class PlayerCharacter : Character
 
     private void OnTakeDamage(StatusEffectInstance instance)
     {
+        OutgoingStatusEffectInstance immunityEffectOutgoing = new OutgoingStatusEffectInstance(_immunityEffect, _combatSystem);
+        var immunityEffectInstance = _combatSystem.ApplyStatusEffect(immunityEffectOutgoing);
+
         _spriteColorOscillator.StartSpriteOscillation(
             Color.white,
             _iFrameColor,
-            _iFrameDuration,
+            immunityEffectInstance.Duration.Value,
             _iFrameColorOscillationFrequency);
 
         // apply knockback
         Vector2 knockbackDirection = (transform.position - instance.GetSourceCombatSystem().gameObject.transform.position).normalized;
         _movementComponent.ApplyKnockback(knockbackDirection);
-    }
-
-    protected void Start()
-    {
-        Attribute health = _attributeSet.GetAttribute(GlobalAttributes.HealthAttribute);
-        Assert.IsNotNull(health, $"Health attribute not found in the attribute set.");
-        health.OnValueChanged += OnHealthChanged;
-
-        _movementComponent = GetComponent<PlayerMovementComponent>();
-        Assert.IsNotNull(_movementComponent, $"PlayerMovementComponent not found on {gameObject.name}.");
-
-        _playerController = GetComponent<PlayerController>();
-        Assert.IsNotNull(_playerController, $"PlayerController not found on {gameObject.name}.");
-
-        _spriteColorOscillator = GetComponent<SpriteColorOscillator>();
-        Assert.IsNotNull(_spriteColorOscillator, $"SpriteColorOscillator not found on {gameObject.name}.");
     }
 
     private void OnHealthChanged(Attribute attribute, float newValue)
