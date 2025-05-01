@@ -1,3 +1,4 @@
+using Services;
 using StateMachine;
 using System.Collections;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerMovementComponent : MonoBehaviour
 {
     #region Serialized Fields
     [Header("Movement Settings")]
+    [SerializeField] private bool _flipCameraOffset = true;       // Whether or not to flip the camera offset when the player flips
     [SerializeField] private bool _airControl = false;              // Whether or not a player can steer while jumping;
     [SerializeField] private CollisionObserver2D _groundObserver;   // The ground observer used to check if the player is on the ground
     [SerializeField] private float _lowJumpGravityMultiplier = 2.5f;// The gravity multiplier used when the player is holding the jump button
@@ -16,6 +18,7 @@ public class PlayerMovementComponent : MonoBehaviour
     [SerializeField] private float _coyoteTime = 0.1f;              // The time the player can jump after leaving the ground
     [SerializeField] private float _jumpEpsilon = 0.1f;             // The epsilon value used to determine if the player is jumping
 
+    
     [Header("Knockback Settings")]
     [SerializeField] private float _knockbackSpeed = 10f;           // The force of the knockback
     [SerializeField] private Vector2 _knockbackDirection = (Vector2.up + Vector2.left); // The direction of the knockback  
@@ -180,6 +183,12 @@ public class PlayerMovementComponent : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+
+        if (_flipCameraOffset) 
+        { 
+            var playerFollowCamera = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerFollowCamera();
+            playerFollowCamera.SetDeadZoneOffset(new Vector3(playerFollowCamera.GetDeadZoneOffset().x * -1, playerFollowCamera.GetDeadZoneOffset().y, playerFollowCamera.GetDeadZoneOffset().z));
+        }   
     }
     private void UpdateCharacterAnim()
     {

@@ -115,9 +115,10 @@ GameObject:
   - component: {fileID: 3124108200020220051}
   - component: {fileID: 1451945921163668311}
   - component: {fileID: 1509187471342584480}
+  - component: {fileID: 3246415804335016977}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,6 +154,7 @@ MonoBehaviour:
   _iFrameDuration: 1
   _iFrameColor: {r: 1, g: 1, b: 1, a: 0}
   _iFrameColorOscillationFrequency: 20
+  _immunityEffect: {fileID: 11400000, guid: 516c675f5e028aa4293de09745774178, type: 2}
 --- !u!114 &1513114109731085291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6a773568bebe94ababf6c70f254137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _flipCameraOffset: 1
   _airControl: 1
   _groundObserver: {fileID: 3925894556471443856}
   _lowJumpGravityMultiplier: 2
@@ -420,5 +423,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6b9aaee0fb56244cbd8784b21cabbc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3246415804335016977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4459522989425303589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4368966c9291a25428898e9173bccdea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
