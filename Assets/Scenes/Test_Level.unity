@@ -484,13 +484,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6402700048715302262, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: _knockbackDirection.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8457530565425196773, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 887
+      objectReference: {fileID: 0}
+    - target: {fileID: 8457530565425196773, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.31
+      value: -8.09
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -695,7 +707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3149205211050070495, guid: 73d286ac786b9e3478aaacc323b93aa3, type: 3}
-  spawnDelay: 0.5
+  spawnDelay: 1
   maxEnemiesSpawned: 100
   dontSpawnOnScreen: 1
 --- !u!4 &380262855
@@ -13867,7 +13879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1985992098}
   - component: {fileID: 1985992097}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

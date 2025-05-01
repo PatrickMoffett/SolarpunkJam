@@ -1043,6 +1043,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Universal",
+            "id": "abef62b5-67ad-4726-853a-90147c337c55",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "250665ea-68a2-4cb6-8d83-4c7c217c2273",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bfcccd4b-21f7-4237-ad6c-5276607c98d9",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

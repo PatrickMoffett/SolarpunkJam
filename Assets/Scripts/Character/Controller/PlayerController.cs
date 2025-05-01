@@ -71,9 +71,29 @@ public class PlayerController : MonoBehaviour
         _input.Dialogue.SpeedUpDialogue.started += ctx => SpeedUpDialogue(true);
         _input.Dialogue.SpeedUpDialogue.canceled += ctx => SpeedUpDialogue(false);
 
+        _input.Universal.Pause.performed += ctx => ToggleMenu();
 
         ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueStart += OnDialogueStart;
         ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueEnd += OnDialogueEnd;
+    }
+
+    private void ToggleMenu()
+    {
+        var currentState = ServiceLocator.Instance.Get<ApplicationStateManager>().GetCurrentState();
+        if (currentState.GetType() == typeof(GameState))
+        {
+            ServiceLocator.Instance.Get<ApplicationStateManager>().PushState<PauseMenuState>();
+            return;
+        }
+        else
+        {
+            while (currentState.GetType() != typeof(GameState))
+            {
+                ServiceLocator.Instance.Get<ApplicationStateManager>().PopState();
+                currentState = ServiceLocator.Instance.Get<ApplicationStateManager>().GetCurrentState();
+            }
+        }
+
     }
 
     private void SpeedUpDialogue(bool shouldSpeedUp)
