@@ -79,6 +79,13 @@ public class PlayerController : MonoBehaviour
 
     private void ToggleMenu()
     {
+        // No opening menu during dialogue (which also means no closing)
+        // but since we can never open it with dialogue, that shouldn't be needed
+        if(ServiceLocator.Instance.Get<DialogueSystem>().IsDialogueActive())
+        {
+            return;
+        }
+
         var currentState = ServiceLocator.Instance.Get<ApplicationStateManager>().GetCurrentState();
         if (currentState.GetType() == typeof(GameState))
         {

@@ -50,6 +50,10 @@ public class DialogueSystem : IService
         isSpeedUpActive = shouldSpeedUp;
     }
 
+    public bool IsDialogueActive()
+    {
+        return _dialogueUI.UIObject.activeSelf;
+    }
     /// <summary>
     /// Call this to start a conversation.
     /// </summary>
