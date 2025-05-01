@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraFollow : MonoBehaviour
 {
+    #region Inspector Variables
     [Tooltip("Time it takes to reach the target. Smaller = snappier.")]
     [SerializeField] private float smoothTime = 0.3f;
 
@@ -13,9 +14,46 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private Vector2 maxDistance = new Vector2(5f, 5f);
 
+    #endregion
+    #region Private Variables
     private Transform followTarget;
     private Vector3 currentVelocity;  // for SmoothDamp
-
+    #endregion
+    #region Public Interface
+    public void SetDeadZoneOffset(Vector3 deadZoneOffset)
+    {
+        this.deadZoneOffset = deadZoneOffset;
+    }
+    public void SetDeadZone(Vector2 deadZone)
+    {
+        this.deadZone = deadZone;
+    }
+    public void SetMaxDistance(Vector2 maxDistance)
+    {
+        this.maxDistance = maxDistance;
+    }
+    public void SetFollowTarget(Transform followTarget)
+    {
+        this.followTarget = followTarget;
+    }
+    public Vector2 GetDeadZone()
+    {
+        return deadZone;
+    }
+    public Vector3 GetDeadZoneOffset()
+    {
+        return deadZoneOffset;
+    }
+    public Vector2 GetMaxDistance()
+    {
+        return maxDistance;
+    }
+    public Transform GetFollowTarget()
+    {
+        return followTarget;
+    }
+    #endregion
+    #region Unity Messages
     protected void Awake()
     {
         Services.ServiceLocator.Instance.Get<PlayerManager>().SetPlayerFollowCamera(this);
@@ -28,23 +66,6 @@ public class CameraFollow : MonoBehaviour
             Services.ServiceLocator.Instance.Get<PlayerManager>().SetPlayerCharacter(null);
         }
     }
-
-    public void SetDeadZoneOffset(Vector3 deadZoneOffset)
-    {
-        this.deadZoneOffset = deadZoneOffset;
-    }
-    public void SetDeadZone(Vector2 deadZone)
-    {
-        this.deadZone = deadZone;
-    }
-    public Vector2 GetDeadZone()
-    {
-        return deadZone;
-    }
-    public Vector3 GetDeadZoneOffset()
-    {
-        return deadZoneOffset;
-    }
     void Start()
     {
         var playerCharacter = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter();
@@ -53,22 +74,14 @@ public class CameraFollow : MonoBehaviour
             followTarget = playerCharacter.transform;
         }
     }
-
     private void OnEnable()
     {
         ServiceLocator.Instance.Get<PlayerManager>().OnPlayerCharacterChanged += OnPlayerCharacterChanged;
     }
-
     private void OnDisable()
     {
         ServiceLocator.Instance.Get<PlayerManager>().OnPlayerCharacterChanged -= OnPlayerCharacterChanged;
     }
-
-    private void OnPlayerCharacterChanged(PlayerCharacter character)
-    {
-        followTarget = character != null ? character.transform : null;
-    }
-
     void LateUpdate()
     {
         if (followTarget == null)
@@ -79,7 +92,29 @@ public class CameraFollow : MonoBehaviour
         SmoothToTargetPosition(targetPos);
         ClampPositionToMaxDistanceFromTarget();
     }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        float w = deadZone.x * 2f;
+        float h = deadZone.y * 2f;
+        Gizmos.DrawWireCube(transform.position + deadZoneOffset, new Vector3(w, h, 0f));
 
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position + deadZoneOffset, new Vector3(maxDistance.x * 2f, maxDistance.y * 2f, 0f));
+
+        if (followTarget == null)
+            return;
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(followTarget.position, 0.5f);
+        Gizmos.DrawLine(followTarget.position, transform.position + deadZoneOffset);
+    }
+    #endregion
+    #region Private Methods
+    private void OnPlayerCharacterChanged(PlayerCharacter character)
+    {
+        followTarget = character != null ? character.transform : null;
+    }
     private void SmoothToTargetPosition(Vector3 targetPos)
     {
         // Smoothly move with SmoothDamp
@@ -90,7 +125,6 @@ public class CameraFollow : MonoBehaviour
             smoothTime
         );
     }
-
     private void ClampPositionToMaxDistanceFromTarget()
     {
         // After SmoothDamp, clamp against the same box you're drawing:
@@ -115,7 +149,6 @@ public class CameraFollow : MonoBehaviour
         // preserve Z
         transform.position = new Vector3(clamped.x, clamped.y, transform.position.z);
     }
-
     private Vector3 CalculateTargetPosition()
     {
         // Figure out how far outside the dead-zone we are
@@ -130,22 +163,5 @@ public class CameraFollow : MonoBehaviour
         Vector3 targetPos = transform.position + new Vector3(offset.x, offset.y, 0f);
         return targetPos;
     }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        float w = deadZone.x * 2f;
-        float h = deadZone.y * 2f;
-        Gizmos.DrawWireCube(transform.position + deadZoneOffset, new Vector3(w, h, 0f));
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + deadZoneOffset, new Vector3(maxDistance.x * 2f, maxDistance.y * 2f, 0f));
-
-        if (followTarget == null)
-            return;
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(followTarget.position, 0.5f);
-        Gizmos.DrawLine(followTarget.position, transform.position + deadZoneOffset);
-    }
+    #endregion
 }
