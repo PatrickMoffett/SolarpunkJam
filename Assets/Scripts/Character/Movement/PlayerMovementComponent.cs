@@ -1,3 +1,6 @@
+#if UNITY_EDITOR
+//#define MOVEMENT_COMPONENT_LOGGING
+#endif
 using Services;
 using StateMachine;
 using System.Collections;
@@ -37,9 +40,6 @@ public class PlayerMovementComponent : MonoBehaviour
     // Anim Variables
     private const string FALL_ANIM_TRIGGER = "Falling";
     private const string JUMP_ANIM_TRIGGER = "Jump";
-
-    // The number of collisions with the ground
-    private int _groundCollisionCount = 0;  
     
     // Direction variables
     private bool _facingRight = true;                               // For determining which way the player is currently facing.
@@ -82,7 +82,7 @@ public class PlayerMovementComponent : MonoBehaviour
     public void ApplyKnockback(Vector2 knockbackDirection)
     {
         // TODO: Find a way to pass knockbackDirection to the KnockbackState
-        _cachedKnockbackVelocity = knockbackDirection * _knockbackSpeed;
+        _cachedKnockbackVelocity = _knockbackDirection * _knockbackSpeed;
         _cachedKnockbackVelocity.x *= Vector2.Dot(knockbackDirection, Vector2.left) >= 0f ? 1 : -1;
 
         _stateMachine.TransitionTo<KnockbackState>();
@@ -111,13 +111,13 @@ public class PlayerMovementComponent : MonoBehaviour
     private void OnEnable()
     {
         Assert.IsNotNull(_groundObserver, "Ground observer is not set");
-        _groundObserver.OnTriggerEnter += OnGroundCollisionEnter;
-        _groundObserver.OnTriggerExit += OnGroundCollisionExit;
+        _groundObserver.OnTriggerEnter += OnGroundTriggerEnter;
+        _groundObserver.OnTriggerExit += OnGroundTriggerExit;
     }
     private void OnDisable()
     {
-        _groundObserver.OnTriggerEnter -= OnGroundCollisionEnter;
-        _groundObserver.OnTriggerExit -= OnGroundCollisionExit;
+        _groundObserver.OnTriggerEnter -= OnGroundTriggerEnter;
+        _groundObserver.OnTriggerExit -= OnGroundTriggerExit;
     }
     private void Start()
     {
@@ -140,18 +140,15 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     #endregion
     #region Collision Callbacks
-    private void OnGroundCollisionEnter()
+    private void OnGroundTriggerEnter()
     {
-        _groundCollisionCount++;
-        if(_groundCollisionCount == 1)
+        if(_groundObserver.GetTriggerCount() == 1)
         {
             OnLandedOnGround();
         }
     }
-    private void OnGroundCollisionExit()
+    private void OnGroundTriggerExit()
     {
-        _groundCollisionCount--;
-
 #if UNITY_EDITOR
         if(!gameObject.activeSelf)
         {
@@ -159,7 +156,7 @@ public class PlayerMovementComponent : MonoBehaviour
         }
 #endif
 
-        if(_groundCollisionCount == 0)
+        if(_groundObserver.GetTriggerCount() == 0)
         {
             OnLeftTheGround();
         }
@@ -172,9 +169,6 @@ public class PlayerMovementComponent : MonoBehaviour
     private void OnLandedOnGround()
     {
         _stateMachine.CurrentState.OnLandedOnGround();
-
-        // set the anim value
-        _anim.SetBool(FALL_ANIM_TRIGGER, false);
     }
     #endregion
     #region Animation
@@ -236,6 +230,14 @@ public class PlayerMovementComponent : MonoBehaviour
             _anim.SetBool(JUMP_ANIM_TRIGGER, false);
             _anim.SetBool(FALL_ANIM_TRIGGER, false);
         }
+    }
+    #endregion
+    #region Logging
+    public void Log(string message)
+    {
+#if MOVEMENT_COMPONENT_LOGGING
+        Debug.Log($"[{gameObject.name}] {message}");
+#endif
     }
     #endregion
     #region Motion Updates
@@ -311,7 +313,8 @@ public class PlayerMovementComponent : MonoBehaviour
 
         public override void EnterState(BaseState<PlayerMovementComponent> previousState)
         {
-
+            // set the anim value
+            Context._anim.SetBool(FALL_ANIM_TRIGGER, false);
         }
 
         public override void ExitState(BaseState<PlayerMovementComponent> nextState)
@@ -395,7 +398,13 @@ public class PlayerMovementComponent : MonoBehaviour
         }
         public override void EnterState(BaseState<PlayerMovementComponent> previousState)
         {
-            Context.StartCoroutine(TrackCoyoteTime());
+            // Don't provide coyote time jump if the player came from a knockback state
+            // we don't want to allow the player to jump after being knocked back
+            // because we don't know how long they might have been falling already
+            if (previousState.GetType() != typeof(KnockbackState))
+            {
+                Context.StartCoroutine(TrackCoyoteTime());
+            }
         }
         public override void ExitState(BaseState<PlayerMovementComponent> nextState)
         {
@@ -467,10 +476,12 @@ public class PlayerMovementComponent : MonoBehaviour
             if(Context._groundObserver.IsCurrentlyTriggering())
             {
                 Context._stateMachine.TransitionTo<GroundState>();
+                Context.Log("Knockback complete, transitioning to GroundState");
             }
             else
             {
                 Context._stateMachine.TransitionTo<FallingState>();
+                Context.Log("Knockback complete, transitioning to FallingState");
             }
         }
     }

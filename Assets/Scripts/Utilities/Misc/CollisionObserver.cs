@@ -13,19 +13,27 @@ public class CollisionObserver2D : MonoBehaviour
     public event Action OnTriggerEnter;
     public event Action OnTriggerExit;
 
-    private bool _currentlyColliding = false;
-    private bool _currentlyTriggering = false;
+    private int _collisionCount = 0;
+    private int _currentTriggerCount = 0;
     public bool IsCurrentlyColliding()
     {
-        return _currentlyColliding;
+        return _collisionCount > 0;
     }
     public bool IsCurrentlyTriggering()
     {
-        return _currentlyTriggering;
+        return _currentTriggerCount > 0;
+    }
+    public int GetCollisionCount()
+    {
+        return _collisionCount;
+    }
+    public int GetTriggerCount()
+    {
+        return _currentTriggerCount;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        _currentlyColliding = true;
+        _collisionCount++;
         if (_broadcastOnCollisionEnter)
         {
             OnCollisionEnter?.Invoke();
@@ -33,7 +41,7 @@ public class CollisionObserver2D : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        _currentlyColliding = false;
+        _collisionCount--;
         if (_broadcastOnCollisionExit)
         {
             OnCollisionExit?.Invoke();
@@ -41,7 +49,7 @@ public class CollisionObserver2D : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        _currentlyTriggering = true;
+        _currentTriggerCount++;
         if (_broadcastOnTriggerEnter)
         {
             OnTriggerEnter?.Invoke();
@@ -49,7 +57,7 @@ public class CollisionObserver2D : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collider)
     {
-        _currentlyTriggering = false;
+        _currentTriggerCount--;
         if (_broadcastOnTriggerExit)
         {
             OnTriggerExit?.Invoke();
