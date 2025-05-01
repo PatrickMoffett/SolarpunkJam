@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6943579f74bd7fc4ea86b613b6153f51, type: 3}
-  m_Name: BossSkill1DamageStatus
+  m_Name: TumbleWeedDamage
   m_EditorClassIdentifier: 
   durationType: 0
   duration:
@@ -29,7 +29,7 @@ MonoBehaviour:
     operation: 1
     attributeModifierValue:
       valueType: 0
-      constantFloat: 3
+      constantFloat: 1
       attributeSet: 0
       sourceAttributeType: {fileID: 0}
       preCoefficientAddition: 0

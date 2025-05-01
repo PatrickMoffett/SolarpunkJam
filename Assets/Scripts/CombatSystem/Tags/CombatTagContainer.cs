@@ -11,7 +11,7 @@ public class CombatTagContainer : MonoBehaviour
 
         if (_combatTagsSet.ContainsKey(tag))
         {
-            _combatTagsSet.Add(tag, 1);
+            _combatTagsSet[tag]++;
         }
         else
         {

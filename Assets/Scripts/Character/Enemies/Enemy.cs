@@ -3,6 +3,10 @@ using UnityEngine.Assertions;
 public class Enemy : Character
 {
     private LootSpawner _lootSpawner;
+    public void Kill()
+    {
+        Die();
+    }
     protected void Start()
     {
         Attribute health = _attributeSet.GetAttribute(GlobalAttributes.HealthAttribute);

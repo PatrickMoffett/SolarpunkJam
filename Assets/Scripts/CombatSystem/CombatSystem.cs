@@ -47,12 +47,6 @@ public class CombatSystem : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     public StatusEffectInstance ApplyStatusEffect(OutgoingStatusEffectInstance effect)
     {
-        if(_combatTagContainer.HasAnyTag(effect._effect.immunityTags))
-        {
-            //if the target has any of the tags to ignore, don't apply the effect
-            return null;
-        }
-        _combatTagContainer.AddTags(effect._effect.providedTags);
         //set this as the targetCombatSystem
         StatusEffectInstance effectToApply = new StatusEffectInstance(effect, this);
 
@@ -61,6 +55,12 @@ public class CombatSystem : MonoBehaviour
     
     private StatusEffectInstance ApplyStatusEffectInstance(StatusEffectInstance effectToApply)
     {
+        if (_combatTagContainer.HasAnyTag(effectToApply._effect._effect.immunityTags)) // TODO: WTF
+        {
+            //if the target has any of the tags to ignore, don't apply the effect
+            return null;
+        }
+
         if (effectToApply.DurationType == StatusEffect.DurationType.Instant)
         {
             //apply all modifiers instantly
@@ -71,12 +71,14 @@ public class CombatSystem : MonoBehaviour
         }
         else
         {
+            _combatTagContainer.AddTags(effectToApply._effect._effect.providedTags); // TODO: WTF
+
             //if the effect has a duration start a coroutine to remove the effect when it's done.
             if (effectToApply.DurationType == StatusEffect.DurationType.Duration)
             {
                 StartCoroutine(WaitToRemoveStatusEffect(effectToApply));
             }
-            
+
             //Add it to the list of current status effects
             _currentStatusEffects.Add(effectToApply);
 

@@ -1,23 +1,34 @@
+using System;
 using UnityEngine;
 public class TumbleWeed : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private float speed = 5f;
+    [SerializeField] CollisionObserver2D collisionObserver;
 
-    private Rigidbody2D rb;
-    
+    private Rigidbody2D _rb;
+    private Enemy _enemy;
+
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _enemy = GetComponent<Enemy>();
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
+        _rb.linearVelocity = new Vector2(speed, _rb.linearVelocity.y);
+        collisionObserver.OnTriggerEnter += OnHitWall;
     }
+
+    private void OnHitWall()
+    {
+        _enemy.Kill();
+    }
+
     private void Update()
     {
         // maintain the speed
-        rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
+        _rb.linearVelocity = new Vector2(speed, _rb.linearVelocity.y);
     }
 }
