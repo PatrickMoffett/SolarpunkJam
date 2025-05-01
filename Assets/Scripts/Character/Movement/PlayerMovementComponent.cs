@@ -44,7 +44,7 @@ public class PlayerMovementComponent : MonoBehaviour
     // Direction variables
     private bool _facingRight = true;                               // For determining which way the player is currently facing.
     private Vector2 _movementDirection = Vector2.zero;
-
+    private Vector2 _cachedKnockbackVelocity = Vector2.zero; // The direction of the knockback
     #region Cached Components
     private Rigidbody2D _rigidbody2D;
     private Animator _anim;
@@ -81,6 +81,10 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     public void ApplyKnockback(Vector2 knockbackDirection)
     {
+        // TODO: Find a way to pass knockbackDirection to the KnockbackState
+        _cachedKnockbackVelocity = knockbackDirection * _knockbackSpeed;
+        _cachedKnockbackVelocity.x *= Vector2.Dot(knockbackDirection, Vector2.left) >= 0f ? 1 : -1;
+
         _stateMachine.TransitionTo<KnockbackState>();
     }
 
@@ -433,10 +437,7 @@ public class PlayerMovementComponent : MonoBehaviour
         }
         public override void EnterState(BaseState<PlayerMovementComponent> previousState)
         {
-            Vector2 velocity = Context._knockbackDirection * Context._knockbackSpeed;
-            // TODO: _movementDirection should be knockback direction
-            velocity.x *= Vector2.Dot(Context._movementDirection, Vector2.left) >= 0f ? 1 : -1;
-            Context._rigidbody2D.linearVelocity = velocity;
+            Context._rigidbody2D.linearVelocity = Context._cachedKnockbackVelocity;
             Context.StartCoroutine(KnockbackCoroutine());
         }
         public override void ExitState(BaseState<PlayerMovementComponent> nextState)
