@@ -6,7 +6,6 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class DialogueSystem : IService
@@ -19,6 +18,7 @@ public class DialogueSystem : IService
 
     private Queue<DialogueLine> lines = new Queue<DialogueLine>();
     private Coroutine typingCoroutine;
+    private Coroutine audioBlipCoroutine;
     private string currentFullText;
     private bool isSpeedUpActive = false;
     private bool isCurrentLineFinished = false;
@@ -85,6 +85,8 @@ public class DialogueSystem : IService
         currentFullText = line.text;
         typingCoroutine = ServiceLocator.Instance.Get<MonoBehaviorService>().
             StartCoroutine(RevealDialogueLine(line));
+        audioBlipCoroutine = ServiceLocator.Instance.Get<MonoBehaviorService>().
+            StartCoroutine(PlayDialogueBlips(line));
     }
 
     IEnumerator RevealDialogueLine(DialogueLine dialogueLine)
@@ -95,20 +97,32 @@ public class DialogueSystem : IService
         for (int i = 0; i < dialogueLine.text.Length; i++)
         {
             _dialogueText.text += dialogueLine.text[i];
-            //audioManager.PlaySfx(dialogueLine.character.voiceBlip);
 
             float delay = isSpeedUpActive ? _settings.speedUpDelay : _settings.letterDelay;
             yield return new WaitForSecondsRealtime(delay);
         }
+        // Stop blips
+        ServiceLocator.Instance.Get<MonoBehaviorService>()
+            .StopCoroutine(audioBlipCoroutine);
         isCurrentLineFinished = true;
     }
-
+    IEnumerator PlayDialogueBlips(DialogueLine dialogueLine)
+    {
+        GameObject go = ServiceLocator.Instance.Get<MonoBehaviorService>().gameObject;
+        while (true)
+        {
+            float playTime = dialogueLine.character.voiceBlip.Play(go);
+            yield return new WaitForSecondsRealtime(playTime);
+        }
+    }
     public void ForceCompleteLine()
     {
         if (typingCoroutine != null)
         {
             ServiceLocator.Instance.Get<MonoBehaviorService>()
                 .StopCoroutine(typingCoroutine);
+            ServiceLocator.Instance.Get<MonoBehaviorService>()
+                .StopCoroutine(audioBlipCoroutine);
         }
 
         _dialogueText.text = currentFullText;

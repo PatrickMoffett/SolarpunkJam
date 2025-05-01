@@ -32,11 +32,11 @@ public class SimpleAudioEvent : AudioEvent , IResetOnExitPlay
         _lastTimePlayed = 0f;
     }
 
-    public override void Play(GameObject gameObject)
+    public override float Play(GameObject gameObject)
     {
-        if (clips.Length == 0) return;
+        if (clips.Length == 0) return 0f;
 
-        if (Time.fixedUnscaledTime - _lastTimePlayed < minimumReplayTime) return;
+        if (Time.fixedUnscaledTime - _lastTimePlayed < minimumReplayTime) return 0f;
         _lastTimePlayed = Time.fixedUnscaledTime;
         
         AudioClip clip = clips[Random.Range(0, clips.Length)];
@@ -48,7 +48,8 @@ public class SimpleAudioEvent : AudioEvent , IResetOnExitPlay
             .gameObject;
 
         sfx.transform.parent = gameObject.transform;
-        
+
+        return clip.length;
     }
 
     public override void Preview(AudioSource previewer)

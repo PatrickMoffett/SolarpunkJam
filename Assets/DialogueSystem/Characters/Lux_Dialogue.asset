@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Lux
   portrait: {fileID: -8320257629329390716, guid: f413ef3b774a94f4f86a375d808b4a11, type: 3}
-  voiceBlip: {fileID: 0}
+  voiceBlip: {fileID: 11400000, guid: 2e74f04b86f2d8a4780c852a33726ced, type: 2}

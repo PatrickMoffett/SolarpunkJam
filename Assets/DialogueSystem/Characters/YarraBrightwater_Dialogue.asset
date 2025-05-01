@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Yarra BrightWater
   portrait: {fileID: 2341377823837204164, guid: 16c0c3b575cd44d4989e860480edc039, type: 3}
-  voiceBlip: {fileID: 0}
+  voiceBlip: {fileID: 11400000, guid: 2e74f04b86f2d8a4780c852a33726ced, type: 2}
