@@ -583,7 +583,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: asdfasdfosadflkasdjflksajdlkfjasdlkdfjlskajdf
+  m_text: asdfasdfosadflkasdjflksajdlkfjasdlkdfjlskajdfaslkdjflkasdjflkasdjdlkfjasldkdjflk
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 83e79a890395b614e92c67f353b198ee, type: 2}
   m_sharedMaterial: {fileID: 895977408102126549, guid: 83e79a890395b614e92c67f353b198ee, type: 2}
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 30
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
