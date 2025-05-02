@@ -166,10 +166,10 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    private void OnHealthChanged(Attribute attr, float amt)
+    private void OnHealthChanged(Attribute attr, float previousValue)
     {
         // Don't play the damaged animation if the change isn't damage
-        if (attr.CurrentValue >= amt)
+        if (attr.CurrentValue >= previousValue)
         {
             return;
         }

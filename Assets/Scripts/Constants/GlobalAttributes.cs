@@ -26,4 +26,6 @@ public static class GlobalAttributes
 
     public static AttributeType AirControlAccelerationAttribute =
    Resources.Load<AttributeType>("AirControlAcceleration");
+
+    public static AttributeType KnockbackAttribute = Resources.Load<AttributeType>("Knockback");
 }

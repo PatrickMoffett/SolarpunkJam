@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e2d4a3589a741b68006b53c55fc312a, type: 3}
+  m_Script: {fileID: 11500000, guid: 58899a85f7f342749d28b49051e462de, type: 3}
   m_Name: Punch
   m_EditorClassIdentifier: 
   passiveAbility: 0
   activationCost: {fileID: 0}
   cooldown: {fileID: 11400000, guid: 0dcd21b6244d75b4286f7f485cd2e18a, type: 2}
+  stopEvent: {fileID: 11400000, guid: af91dbf844c3c46479aabe5be644b50e, type: 2}
+  spawnDelay: 0.2
   projectilePrefab: {fileID: 7222478627731710155, guid: 0dc88216bfed8e24a9b29a0e3c0ad610, type: 3}
-  projectileLifetime: 0.5
-  projectileVelocity: 0
-  spawnOffset: {x: 0.5, y: 0}
+  projectileLifetime: 0.2
+  spawnOffset: {x: 0.5, y: -0.2}
   effectsToApplyOnHit:
   - {fileID: 11400000, guid: 782771eedc2548041be24ba726a4faae, type: 2}
   audioEvent: {fileID: 0}

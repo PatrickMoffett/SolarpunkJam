@@ -13,6 +13,7 @@ namespace Abilities
     public class RangedAttackAbility : Ability
     {
         [SerializeField] private GameObject projectilePrefab;
+        [SerializeField] private float spawnDelay = 0;
         [SerializeField] private float projectileLifetime = 5f;
         [SerializeField] private float projectileVelocity = 10f;
         [SerializeField] private Vector2 spawnOffset = Vector2.zero;
@@ -21,8 +22,13 @@ namespace Abilities
 
         protected override void Activate(AbilityTargetData activationData)
         {
-
             _owner.GetComponent<Animator>().SetBool(activationData.animationTrigger, true);
+            ServiceLocator.Instance.Get<MonoBehaviorService>().StartCoroutine(Spawn(activationData));
+        }
+
+        private IEnumerator Spawn(AbilityTargetData activationData)
+        {
+            yield return new WaitForSeconds(spawnDelay);
             Vector2 direction = activationData.sourceCharacterDirection;
             //set rotation and spawn projectile
             var rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90));

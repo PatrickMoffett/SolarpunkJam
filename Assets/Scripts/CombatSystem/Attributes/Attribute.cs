@@ -75,6 +75,7 @@ public class Attribute
     {
         _maxBaseAttribute = modifiableAttributeValue;
     }
+    
     // ReSharper disable Unity.PerformanceAnalysis
     /// <summary>
     /// Updates the current value of this attribute including all the modifiers affecting it
@@ -109,7 +110,20 @@ public class Attribute
             }
         }
         CurrentValue = (baseValue + sumToAdd) * multiplier;
-        OnValueChanged?.Invoke(this,previousValue);
+        if (!Mathf.Approximately(previousValue, CurrentValue))
+        {
+            OnValueChanged?.Invoke(this, previousValue);
+        }
+    }
+    
+    /// <summary>
+    /// Set the attribute directly, does NOT do any safety, valid value checks, or modifier checks
+    /// </summary>
+    public void SetAttributeBaseValueDangerous(float newValue)
+    {
+        baseValue = newValue;
+        UpdateCurrentValue();
+        //OnValueChanged?.Invoke(this, previousValue);
     }
     
     /// <summary>

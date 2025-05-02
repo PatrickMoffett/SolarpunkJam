@@ -15,7 +15,7 @@ MonoBehaviour:
   durationType: 1
   duration:
     valueType: 0
-    constantFloat: 1
+    constantFloat: 0.5
     attributeSet: 0
     sourceAttributeType: {fileID: 11400000, guid: 37d1e0fe64bbd3f429129c8315aea86d, type: 2}
     preCoefficientAddition: 0
@@ -25,4 +25,6 @@ MonoBehaviour:
   isPeriodic: 0
   periodicRate: 1
   attributeModifiers: []
+  providedTags: []
+  immunityTags: []
   grantedAbilities: []

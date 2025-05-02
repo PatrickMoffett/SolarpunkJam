@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f008b3980fc14d44794dce8bc51e71b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedKnockbackStrength: {x: 1, y: 1}
   speed: -5
   collisionObserver: {fileID: 1343653454927238754}
   deathEffect: {fileID: 8073280247134044443, guid: e8affe12fec609044a823600b8e8ac66, type: 3}
@@ -328,6 +329,9 @@ MonoBehaviour:
   - type: {fileID: 11400000, guid: acd431724b1893746a8cccd568be7443, type: 2}
     value:
       baseValue: 5
+  - type: {fileID: 11400000, guid: 22b8b2f325ccdc148a92dba1ed524cfb, type: 2}
+    value:
+      baseValue: 0
 --- !u!114 &6568756791100496321
 MonoBehaviour:
   m_ObjectHideFlags: 0

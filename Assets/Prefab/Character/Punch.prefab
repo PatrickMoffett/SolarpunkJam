@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4395788133330116503}
   - component: {fileID: 5770660855059578108}
   - component: {fileID: 4209192939798631952}
-  - component: {fileID: 6236470887389294024}
+  - component: {fileID: -450099785456887579}
   m_Layer: 6
   m_Name: Punch
   m_TagString: Untagged
@@ -140,30 +140,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnCollision: 0
---- !u!50 &6236470887389294024
-Rigidbody2D:
-  serializedVersion: 5
+  isBucketable: 0
+--- !u!114 &-450099785456887579
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7222478627731710155}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef13bc8bc914d69a9c5628f34e09c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: af91dbf844c3c46479aabe5be644b50e, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
