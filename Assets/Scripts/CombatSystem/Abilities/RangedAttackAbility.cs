@@ -20,16 +20,25 @@ namespace Abilities
         [SerializeField] private List<StatusEffect> effectsToApplyOnHit;
         [SerializeField] private SimpleAudioEvent audioEvent;
 
+        public GameObject GetProjectilePrefab()
+        {
+            return projectilePrefab;
+        }
+        public float GetProjectileVelocity()
+        {
+            return projectileVelocity;
+        }
         protected override void Activate(AbilityTargetData activationData)
         {
             _owner.GetComponent<Animator>().SetBool(activationData.animationTrigger, true);
             ServiceLocator.Instance.Get<MonoBehaviorService>().StartCoroutine(Spawn(activationData));
         }
-
+        
         private IEnumerator Spawn(AbilityTargetData activationData)
         {
             yield return new WaitForSeconds(spawnDelay);
             Vector2 direction = activationData.sourceCharacterDirection;
+            direction.Normalize();
             //set rotation and spawn projectile
             var rotation = Quaternion.Euler(0, 0, (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90));
             GameObject projectile = Instantiate(projectilePrefab,_owner.transform.position + (Vector3)(spawnOffset * activationData.sourceCharacterDirection),rotation);

@@ -149,13 +149,10 @@ public class CombatSystem : MonoBehaviour
         return _attributeSet;
     }
 
-    public bool TryActivationCost(StatusEffect activationCost)
+    public bool CheckActivationCosts(StatusEffect activationCost)
     {
-        StatusEffectInstance statusEffectToApply = 
-            new StatusEffectInstance(new OutgoingStatusEffectInstance(activationCost, this),this);
-
         //for every modifier
-        foreach (var modifier in statusEffectToApply.AttributeModifiers)
+        foreach (var modifier in activationCost.attributeModifiers)
         {
 #if UNITY_EDITOR
             //we're pretty much assuming subtract only at this point
@@ -172,8 +169,23 @@ public class CombatSystem : MonoBehaviour
                 return false;
             }
         }
-        //apply the cost and return true
-        ApplyStatusEffectInstance(statusEffectToApply);
         return true;
+    }
+    public bool TryActivationCost(StatusEffect activationCost)
+    {
+        if (CheckActivationCosts(activationCost))
+        {
+            //apply the cost and return true
+            StatusEffectInstance statusEffectToApply =
+                new StatusEffectInstance(new OutgoingStatusEffectInstance(activationCost, this), this);
+            ApplyStatusEffectInstance(statusEffectToApply);
+            return true;
+        }
+        else
+        {
+            //if we can't apply the cost, return false
+            return false;
+
+        }
     }
 }

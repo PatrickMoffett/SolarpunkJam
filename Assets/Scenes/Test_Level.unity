@@ -239,7 +239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &139320723
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -502,7 +502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.7
+      value: -26.14
       objectReference: {fileID: 0}
     - target: {fileID: 8632227757973156699, guid: 85f4b219e2bf2a74f9d0fc7e285bc87d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13928,11 +13928,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2316202735357578842, guid: 4348cec8e073f6049adcace33a9ce98a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.01
+      value: -22.52
       objectReference: {fileID: 0}
     - target: {fileID: 2316202735357578842, guid: 4348cec8e073f6049adcace33a9ce98a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.61
+      value: -7.59
       objectReference: {fileID: 0}
     - target: {fileID: 2316202735357578842, guid: 4348cec8e073f6049adcace33a9ce98a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13975,6 +13975,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4348cec8e073f6049adcace33a9ce98a, type: 3}
+--- !u!1001 &8975518910531705853
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -32.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -8.358
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.06562042
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1541910829387530776, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261417087593002842, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
+      propertyPath: m_Name
+      value: MushroomEnemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fafeeea3fb1c29547b54e6dea055c5fd, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -13990,3 +14047,4 @@ SceneRoots:
   - {fileID: 1985992098}
   - {fileID: 1486978692}
   - {fileID: 139320726}
+  - {fileID: 8975518910531705853}

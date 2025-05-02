@@ -28,6 +28,21 @@ public abstract class Ability : ScriptableObject
         _combatSystem = _owner.GetComponent<CombatSystem>();
         _attributes = _owner.GetComponent<AttributeSet>();
     }
+    public virtual bool CanActivate(AbilityTargetData activationData)
+    {
+        if (activationCost != null)
+        {
+            if (!_combatSystem.CheckActivationCosts(activationCost))
+            {
+                return false;
+            }
+        }
+        if (_appliedCooldown != null && _combatSystem.GetStatusEffects().Contains(_appliedCooldown))
+        {
+            return false;
+        }
+        return true;
+    }
     public virtual bool TryActivate(AbilityTargetData activationData)
     {
         if ((_appliedCooldown == null || !_combatSystem.GetStatusEffects().Contains(_appliedCooldown)) 
