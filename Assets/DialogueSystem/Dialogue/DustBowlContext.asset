@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 036601ff83453a44c8e3729a31af2c69, type: 3}
+  m_Name: DustBowlContext
+  m_EditorClassIdentifier: 
+  lines:
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "Ok Lux, we\u2019re here at the Dust Bowl. This is where it all started."
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: As you might know, Galegrasp, now known as The Corrupted Wind, was in charge
+      of the Farming Efficiency and Eco Distribution system, F.E.E.D.
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: I remember when they took themselves offline.
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: It seemed they were hell-bent on growing as much as possible.
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: After a few short years the soil gave out - cracked, overworked, inhospitable.
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: The Dust came shortly after.
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: "That\u2019s horrible. It all started because of this?"
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "Yes Lux. This, and any of a hundred other decisions based on production
+      over all else. That\u2019s why we\u2019re here."
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: "So, if we can use The Gloves\u2122 to cleanse him, we can take the opportunity
+      to turn the windmills back on."
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: That should bring power back to The Rust Belt, right?
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "That\u2019s right, Lux! Do you remember how they work?"
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: "I think so! \u201CJ\u201D to push enemies away, \u201CK\u201D to blast
+      out some Nanites, right?"
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "You\u2019ve always been a quick study."
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "Don\u2019t forget, you can hold \u201CK\u201D to condense more Nanites
+      into the payload."
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "And lastly, when you\u2019re in the air, you can press \u201CS\u201D to
+      propel yourself downward."
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: It can be used to reposition yourself quickly, but also is an effective
+      way to inject nanites as well.
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: Do you remember what the Nanites do?
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: 'Once something has enough Nanites in it, the little guys get to work! '
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: They can scrub out the chemicals Galegrasp used to maximize production.
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: They will revert the corruption in the local flora and fauna as a result!
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: Excellent Lux, you really did read the manual end-to-end.
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "Now let\u2019s get to it!"
