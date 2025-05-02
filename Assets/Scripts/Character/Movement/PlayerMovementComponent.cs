@@ -17,6 +17,11 @@ public class PlayerMovementComponent : MonoBehaviour
     [SerializeField] private float _maxFallSpeed = 20f;             // The maximum fall speed of the player
     [SerializeField] private float _coyoteTime = 0.1f;              // The time the player can jump after leaving the ground
     [SerializeField] private float _jumpEpsilon = 0.1f;             // The epsilon value used to determine if the player is jumping
+    
+    [Header("JumpSlam Settings")]
+    [SerializeField] private float _slamSpeed = 2f;                 // How fast to move the player as they are slamming
+    [SerializeField] private GameEvent _slamStopEvent;              // The event to fire when the slam stops and the projectile should be destroyed
+    
 
     
     [Header("Knockback Settings")]
@@ -77,6 +82,16 @@ public class PlayerMovementComponent : MonoBehaviour
     public void ApplyKnockback(Vector2 knockbackDirection)
     {
         _stateMachine.TransitionTo<KnockbackState>();
+    }
+
+    public void SetJumpSlamState()
+    {
+        _stateMachine.TransitionTo<JumpSlamState>();
+    }
+
+    public bool GetJumpSlamState()
+    {
+        return _stateMachine.CurrentState.GetType() == typeof(JumpSlamState);
     }
     #endregion
     #region Unity MonoBehaviour Callbacks
@@ -456,6 +471,50 @@ public class PlayerMovementComponent : MonoBehaviour
             {
                 Context._stateMachine.TransitionTo<FallingState>();
             }
+        }
+    }
+
+    private class JumpSlamState : BaseMovementState
+    {
+        public override void EnterState(BaseState<PlayerMovementComponent> previousState)
+        {
+            // Keep the variable positive, so invert here
+            if (Context.OnGround)
+            {
+                Context._stateMachine.TransitionTo<GroundState>();
+            }
+            Context._rigidbody2D.linearVelocityY = -Context._slamSpeed;
+            Context._rigidbody2D.linearVelocityX = 0;
+        }
+
+        public override void ExitState(BaseState<PlayerMovementComponent> nextState)
+        {
+            Context._slamStopEvent.Raise();
+        }
+
+        public override void Update()
+        {
+            
+        }
+
+        public override void ExecuteJump()
+        {
+            
+        }
+
+        public override void AbortJump()
+        {
+            
+        }
+
+        public override void OnLeftGround()
+        {
+            
+        }
+
+        public override void OnLandedOnGround()
+        {
+            Context._stateMachine.TransitionTo<GroundState>();
         }
     }
     #endregion

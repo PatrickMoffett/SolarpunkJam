@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e2d4a3589a741b68006b53c55fc312a, type: 3}
+  m_Script: {fileID: 11500000, guid: 58899a85f7f342749d28b49051e462de, type: 3}
   m_Name: JumpSlam
   m_EditorClassIdentifier: 
   passiveAbility: 0
   activationCost: {fileID: 0}
   cooldown: {fileID: 11400000, guid: c8919b071d662564b9d815342d1e6f80, type: 2}
-  projectilePrefab: {fileID: 7222478627731710155, guid: c42259f26502eda439e0590619adbeb1, type: 3}
-  projectileLifetime: -1
-  projectileVelocity: 5
-  spawnOffset: {x: 0, y: 0}
+  stopEvent: {fileID: 11400000, guid: 0d0b27f070e556648a172f8d2f36f6d2, type: 2}
+  projectilePrefab: {fileID: 7222478627731710155, guid: 2017a1a22ac854549b5b3dd5f93c7163, type: 3}
+  projectileLifetime: 5
+  spawnOffset: {x: 0, y: 1}
   effectsToApplyOnHit:
-  - {fileID: 11400000, guid: c8919b071d662564b9d815342d1e6f80, type: 2}
+  - {fileID: 11400000, guid: cb4d0c556dde7bc40a1e89efe79e3fa4, type: 2}
   audioEvent: {fileID: 11400000, guid: 093a7218ce3512640bb6e7441b6a631f, type: 2}

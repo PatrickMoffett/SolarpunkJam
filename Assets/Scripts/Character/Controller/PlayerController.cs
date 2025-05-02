@@ -130,8 +130,9 @@ public class PlayerController : MonoBehaviour
             attackDirection = vector2;
         }
         // Jump slam attack
-        if (vector2.y < 0 && !_movementComponent.OnGround)
+        if (vector2.y < 0 && !_movementComponent.GetJumpSlamState() && !_movementComponent.OnGround)
         {
+            _movementComponent.SetJumpSlamState();
             attackDirection = Vector2.down;
             _movementComponent.SetMoveDirection(Vector2.down);
             EndAttack(_jumpAttacks, JUMP_SLAM_ANIM_TRIGGER);

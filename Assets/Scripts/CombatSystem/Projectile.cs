@@ -15,13 +15,19 @@ public class Projectile : MonoBehaviour
     private GameObject owner;
     
     private static GameObject _bucket;
+
+    public bool isBucketable = true;
     private void Start()
     {
         if (!_bucket)
         {
             _bucket = new GameObject("Projectile_Bucket");
         }
-        transform.parent = _bucket.transform;
+
+        if (isBucketable)
+        {
+            transform.parent = _bucket.transform;
+        }
     }
 
     private void OnDestroy()
@@ -76,7 +82,7 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void DestroyProjectile()
+    public void DestroyProjectile()
     {
         Destroy(gameObject);
     }

@@ -224,6 +224,8 @@ MonoBehaviour:
   _maxFallSpeed: 20
   _coyoteTime: 0.1
   _jumpEpsilon: 0.2
+  _slamSpeed: 2
+  _slamStopEvent: {fileID: 11400000, guid: 0d0b27f070e556648a172f8d2f36f6d2, type: 2}
   _knockbackSpeed: 5
   _knockbackDirection: {x: 1, y: 1}
   _knockbackTime: 0.5
@@ -249,7 +251,7 @@ MonoBehaviour:
   _bossAttacks:
   - {fileID: 11400000, guid: 7911d8e348b5f7543a26875b14be4118, type: 2}
   _jumpAttacks:
-  - {fileID: 11400000, guid: 805fb05a19798f244801e696ac092252, type: 2}
+  - {fileID: 11400000, guid: a6821158ef9f2ce428916dc3fe7615aa, type: 2}
   shotChargeTime: 5
 --- !u!212 &9045273776370784416
 SpriteRenderer:
