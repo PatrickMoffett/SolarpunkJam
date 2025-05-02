@@ -526,7 +526,7 @@ public class PlayerMovementComponent : MonoBehaviour
 
         public override void OnLandedOnGround()
         {
-            Context._stateMachine.TransitionTo<GroundState>();
+            Context._stateMachine.TransitionTo<KnockbackState>();
         }
     }
     #endregion
