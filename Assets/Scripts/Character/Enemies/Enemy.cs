@@ -13,6 +13,9 @@ public class Enemy : Character
     [ShowIf("_applyCollisionEffects")]
     [SerializeField] private List<StatusEffect> _collisionEffectsToApply;
 
+    [Header("Death")]
+    [SerializeField] private GameObject _cleansedObjectToSpawn;
+
     private LootSpawner _lootSpawner;
     private Rigidbody2D _rigidbody2D;
     public void Kill()
@@ -85,7 +88,10 @@ public class Enemy : Character
         {
             _lootSpawner.SpawnLoot();
         }
-
+        if(_cleansedObjectToSpawn != null)
+        {
+            Instantiate(_cleansedObjectToSpawn, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
     }
 

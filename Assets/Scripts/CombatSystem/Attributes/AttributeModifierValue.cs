@@ -78,11 +78,6 @@ public class AttributeModifierValue
                 Debug.LogError("No Source Combat System Found (May have been destroyed");
                 return 0f;
             }
-            if (!( _targetCombatSystem))
-            {
-                Debug.LogError("Attribute Modifier Value missing properties");
-                return 0f;
-            }
             switch (valueType)
             {
                 case ValueType.Constant:
@@ -95,6 +90,11 @@ public class AttributeModifierValue
                     }
                     else
                     {
+                        if (!(_targetCombatSystem))
+                        {
+                            Debug.LogError("Attribute Modifier Value missing Target Attribute Set");
+                            return 0f;
+                        }
                         return ((_targetCombatSystem.GetAttributeSet().GetCurrentAttributeValue(sourceAttributeType)
                                  + preCoefficientAddition) * coefficient) + postCoefficientAddition;
                     }

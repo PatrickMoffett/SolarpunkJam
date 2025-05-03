@@ -80,7 +80,8 @@ public class Mushroom : Enemy
         AbilityTargetData targetData = new AbilityTargetData
         {
             sourceCharacterLocation = origin,
-            sourceCharacterDirection = launch
+            sourceCharacterDirection = launch,
+            animationTrigger = "Attack",
         };
         _rangedAttackAbility.TryActivate(targetData);
     }
