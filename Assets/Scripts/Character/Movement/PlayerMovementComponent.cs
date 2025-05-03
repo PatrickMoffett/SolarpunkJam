@@ -140,14 +140,14 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     #endregion
     #region Collision Callbacks
-    private void OnGroundTriggerEnter()
+    private void OnGroundTriggerEnter(Collider2D collision)
     {
         if(_groundObserver.GetTriggerCount() == 1)
         {
             OnLandedOnGround();
         }
     }
-    private void OnGroundTriggerExit()
+    private void OnGroundTriggerExit(Collider2D collision)
     {
 #if UNITY_EDITOR
         if(!gameObject.activeSelf)

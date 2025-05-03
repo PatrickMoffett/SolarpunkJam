@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 8615602920627309866}
   - component: {fileID: 8323487410501457288}
   - component: {fileID: 5816265045431779826}
-  m_Layer: 0
+  - component: {fileID: 950706583823181585}
+  m_Layer: 9
   m_Name: MushroomEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +37,8 @@ Transform:
   m_LocalPosition: {x: -32.73, y: -8.67, z: 0.06562042}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3317840801689146565}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5963372360672549620
@@ -116,6 +118,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669433f9e4943544e9ebe7772337f853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _applyCollisionEffects: 1
+  _playerCollisionObserver: {fileID: 1491981273145108479}
+  _collisionEffectsToApply:
+  - {fileID: 11400000, guid: f2184fbdb1e4d79418c0190dc8f2a443, type: 2}
   rangedAttackAbility: {fileID: 11400000, guid: 934b2e9282a8441469ee94a3b2b05897, type: 2}
   attackRange: 13
 --- !u!95 &8279554745267931745
@@ -268,3 +274,102 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &950706583823181585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261417087593002842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 404ee0c507214c54683938a1b27ecafb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drops: []
+  singleLootSpawn: 1
+--- !u!1 &7752090991498096881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3317840801689146565}
+  - component: {fileID: 2994661037459794400}
+  - component: {fileID: 1491981273145108479}
+  m_Layer: 11
+  m_Name: PlayerTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3317840801689146565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752090991498096881}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1541910829387530776}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &2994661037459794400
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752090991498096881}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -0.3}
+  m_Radius: 0.37
+--- !u!114 &1491981273145108479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752090991498096881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91aadea0115de9747b8714460b84784b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _broadcastOnCollisionEnter: 0
+  _broadcastOnCollisionExit: 0
+  _broadcastOnTriggerEnter: 1
+  _broadcastOnTriggerExit: 1

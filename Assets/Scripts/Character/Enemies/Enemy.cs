@@ -1,9 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+[RequireComponent(typeof(LootSpawner))]
+[RequireComponent(typeof(CombatSystem))]
 public class Enemy : Character
 {
-    
+    [Header("Collision")]
+    [SerializeField] private bool _applyCollisionEffects = true;
+    [ShowIf("_applyCollisionEffects")]
+    [SerializeField] private CollisionObserver2D _playerCollisionObserver;
+    [ShowIf("_applyCollisionEffects")]
+    [SerializeField] private List<StatusEffect> _collisionEffectsToApply;
+
     private LootSpawner _lootSpawner;
     private Rigidbody2D _rigidbody2D;
     public void Kill()
@@ -19,9 +28,45 @@ public class Enemy : Character
         Attribute knockback = _attributeSet.GetAttribute(GlobalAttributes.KnockbackAttribute);
         Assert.IsNotNull(knockback, "Knockback attribute not found in the attribute set.");
         knockback.OnValueChanged += OnApplyKnockback;
-        
+
         _rigidbody2D = GetComponent<Rigidbody2D>();
+        Assert.IsNotNull(_rigidbody2D, $"Rigidbody2D not found on {gameObject.name}.");
+        
         _lootSpawner = GetComponent<LootSpawner>();
+        Assert.IsNotNull(_lootSpawner, $"LootSpawner not found on {gameObject.name}.");
+
+    }
+    protected virtual void OnEnable()
+    {
+        if (_playerCollisionObserver != null)
+        {
+            _playerCollisionObserver.OnTriggerEnter += OnPlayerTriggerEnter;
+        }
+    }
+    protected virtual void OnDisable()
+    {
+        if (_playerCollisionObserver != null)
+        {
+            _playerCollisionObserver.OnTriggerEnter -= OnPlayerTriggerEnter;
+        }
+    }
+    protected virtual void OnPlayerTriggerEnter(Collider2D collision)
+    {
+        if (_applyCollisionEffects)
+        {
+            collision.gameObject.TryGetComponent(out CombatSystem playerCombatSystem);
+            if (playerCombatSystem == null)
+            {
+                return;
+            }
+            foreach (var effect in _collisionEffectsToApply)
+            {
+                if (effect != null)
+                {
+                    playerCombatSystem.ApplyStatusEffect(new OutgoingStatusEffectInstance(effect,_combatSystem));
+                }
+            }
+        }
     }
 
     private void OnHealthChanged(Attribute attribute, float newValue)

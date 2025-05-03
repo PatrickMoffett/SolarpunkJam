@@ -15,8 +15,8 @@ TagManager:
   - TileMapLevelGeometry
   - Player
   - Enemy
-  - 
-  - 
+  - Item
+  - EnemyContactTrigger
   - 
   - 
   - 

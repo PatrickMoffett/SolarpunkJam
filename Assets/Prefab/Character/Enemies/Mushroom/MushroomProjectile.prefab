@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7359148022614240489}
   - component: {fileID: 3798406727617326998}
   - component: {fileID: 2433619817384510305}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MushroomProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 5567031890876163869}
   - component: {fileID: 2660679378482496319}
   - component: {fileID: 6150798643660235208}
-  m_Layer: 0
+  - component: {fileID: 6057573727019818059}
+  m_Layer: 10
   m_Name: Mana Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,3 +271,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6057573727019818059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7744278790260704857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4368966c9291a25428898e9173bccdea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
