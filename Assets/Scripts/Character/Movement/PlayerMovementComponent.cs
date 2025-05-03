@@ -302,10 +302,8 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     private class GroundState : BaseMovementState
     {
-        bool _jumpRequested = false;
         public override void ExecuteJump()
         {
-            _jumpRequested = true;
             Context._stateMachine.TransitionTo<JumpingState>();
         }
 
