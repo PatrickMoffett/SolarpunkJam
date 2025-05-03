@@ -6,10 +6,13 @@ using UnityEngine.Assertions;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private float initialDelay = 0f;
     [SerializeField] private float spawnDelay = 2f;
     [SerializeField] private int maxEnemiesSpawned = 5;
     [SerializeField] private bool dontSpawnOnScreen = false;
+    [SerializeField] private bool respawnOnDeath = true;
 
+    private bool initialDelayPassed = false;
     private int currentEnemiesSpawned = 0;
     private Coroutine spawnCoroutine;
     private void Start()
@@ -38,12 +41,16 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDeath(Character character)
     {
-        currentEnemiesSpawned--;
+        if (!respawnOnDeath)
+        {
+            currentEnemiesSpawned--;
+        }
         character.OnCharacterDeath -= OnEnemyDeath;
     }
 
     IEnumerator SpawnEnemyCoroutine()
     {
+        yield return new WaitForSeconds(initialDelay);
         while (true)
         { 
             yield return new WaitForSeconds(spawnDelay);

@@ -196,7 +196,9 @@ MonoBehaviour:
   flightSpeed: 4
   bobAmplitude: 2
   bobFrequency: 0.2
-  bobPhase: 0
+  bobPhase: 3.14
+  patrolDistance: 34.74
+  offscreenMargin: 2
   previewDistance: 19.97
   previewSegments: 16
 --- !u!50 &4894145120342100485
