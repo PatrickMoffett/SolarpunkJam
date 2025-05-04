@@ -226,7 +226,7 @@ MonoBehaviour:
   _maxFallSpeed: 20
   _coyoteTime: 0.1
   _jumpEpsilon: 0.2
-  _slamSpeed: 2
+  _slamSpeed: 10
   _slamStopEvent: {fileID: 11400000, guid: 0d0b27f070e556648a172f8d2f36f6d2, type: 2}
   _knockbackSpeed: 5
   _knockbackDirection: {x: -1, y: 1}
