@@ -37,6 +37,9 @@ namespace Abilities
             stopEvent.RegisterListener(projectile.GetComponent<GameEventListener>());
             projectileComponent.isBucketable = false;
             projectileComponent.SetOwner(_owner);
+            // So starting the collider disabled and turning it on actually makes it collide properly. I hate it, but it works.
+            Collider2D colliderComponent = projectile.GetComponent<Collider2D>();
+            colliderComponent.enabled = true;
             // Set negative lifetime to make it live forever (or until destroyed by something else)
             if (projectileLifetime >= 0)
             {
