@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     private const string BOSS_ANIM_TRIGGER = "BossAbility";
     private const string DAMAGED_ANIM_TRIGGER = "Hit";
     private const string JUMP_SLAM_ANIM_TRIGGER = "JumpSlam";
+    private const string WALK_ANIM_BOOL = "Walking";
+    private const string START_WALK_ANIM_TRIGGER = "StartWalking";
+    private const string STOP_WALK_ANIM_TRIGGER = "StopWalking";
     
     private InputSystem_Actions _input;
     private PlayerMovementComponent _movementComponent;
@@ -45,12 +48,14 @@ public class PlayerController : MonoBehaviour
     [Tooltip("How long thew player needs to hold the button down for a charge attack. Make negative to disable")]
     [SerializeField] private float shotChargeTime;
 
+    private Animator _animator;
     private bool isCharging = false;
     private float chargeTimeCounter = 0;
     private Vector2 attackDirection = Vector2.right;
     private void Awake()
     {
         Services.ServiceLocator.Instance.Get<PlayerManager>().SetPlayerController(this);
+        _animator = GetComponent<Animator>();
 
         _input = new InputSystem_Actions();
         _movementComponent = GetComponent<PlayerMovementComponent>();
@@ -156,6 +161,28 @@ public class PlayerController : MonoBehaviour
         {
             attackDirection = vector2;
         }
+
+        if (vector2.x != 0)
+        {
+            if (!_animator.GetBool(WALK_ANIM_BOOL))
+            {
+                Debug.Log($"[{GetType().Name}] Setting walk trigger");
+                _animator.ResetTrigger(STOP_WALK_ANIM_TRIGGER);
+                _animator.SetTrigger(START_WALK_ANIM_TRIGGER);
+            }
+
+            _animator.SetBool(WALK_ANIM_BOOL, true);
+        }
+        else
+        {
+            if (_animator.GetBool(WALK_ANIM_BOOL))
+            {
+                Debug.Log($"[{GetType().Name}] Unsetting walk trigger");
+                _animator.ResetTrigger(START_WALK_ANIM_TRIGGER);
+                _animator.SetTrigger(STOP_WALK_ANIM_TRIGGER);
+            }
+            _animator.SetBool(WALK_ANIM_BOOL, false);
+        }
         // Jump slam attack
         if (vector2.y < 0 && !_movementComponent.GetJumpSlamState() && !_movementComponent.OnGround)
         {
@@ -174,8 +201,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         
-        // TODO: Better way to do this. Caching the animator seems jank, there has to be anothee location this can be done
-        GetComponent<Animator>().SetTrigger(DAMAGED_ANIM_TRIGGER);
+        _animator.SetTrigger(DAMAGED_ANIM_TRIGGER);
     }
 
     // TODO: Actually differentiate attacks based on button pressed/time pressed/etc...
