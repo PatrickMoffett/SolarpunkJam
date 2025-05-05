@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5b1ef3d7f96cef4cae7cce63bccd98c, type: 3}
   m_Name: DialogueSystemSettings
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSystemSettings
-  letterDelay: 0.05
+  letterDelay: 0.03
   speedUpDelay: 0.01
   dialoguePrefab: {fileID: 6103163667761269053, guid: 4aeb1d9997c764b479bff4352225efc7, type: 3}

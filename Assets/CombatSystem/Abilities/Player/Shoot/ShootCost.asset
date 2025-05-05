@@ -29,11 +29,13 @@ MonoBehaviour:
     operation: 1
     attributeModifierValue:
       valueType: 0
-      constantFloat: 2
+      constantFloat: 1
       attributeSet: 0
       sourceAttributeType: {fileID: 0}
       preCoefficientAddition: 0
       coefficient: 0
       postCoefficientAddition: 0
       customValueCalculation: {fileID: 0}
+  providedTags: []
+  immunityTags: []
   grantedAbilities: []
