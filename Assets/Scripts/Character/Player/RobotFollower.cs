@@ -12,13 +12,21 @@ public class RobotFollower : MonoBehaviour
     [SerializeField] private float bobHeight = 0.5f;
     [SerializeField] private float bobFrequency = 1f;
 
+    [Header("Direction")]
+    private bool startFacingRight = true;
+
     private Vector3 _basePosition;
     private Vector3 _velocity = Vector3.zero;
+    private bool lookingRight = true;
 
     void Start()
     {
         Assert.IsNotNull(target, "Target Transform is not assigned in the inspector.");
         _basePosition = transform.position;
+        if (!startFacingRight)
+        {
+            lookingRight = false;
+        }
     }
 
     void Update()
@@ -26,6 +34,25 @@ public class RobotFollower : MonoBehaviour
         if (target == null)
             return;
 
+        Move();
+        UpdateDirection();
+    }
+
+    private void UpdateDirection()
+    {
+        if ((lookingRight && target.position.x < transform.position.x)
+            || (!lookingRight && target.position.x > transform.position.x))
+        {
+            lookingRight = !lookingRight;
+            transform.localScale = new Vector3(
+                -transform.localScale.x,
+                transform.localScale.y,
+                transform.localScale.z);
+        }
+    }
+
+    private void Move()
+    {
         // move towards target
         _basePosition = Vector3.SmoothDamp(
             _basePosition,

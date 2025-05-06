@@ -31,9 +31,12 @@ MonoBehaviour:
       valueType: 0
       constantFloat: 1
       attributeSet: 0
-      sourceAttributeType: {fileID: 11400000, guid: 99fafdf068b2bda44b950fbcebcafb8b, type: 2}
+      sourceAttributeType: {fileID: 0}
       preCoefficientAddition: 0
       coefficient: 1
       postCoefficientAddition: 0
       customValueCalculation: {fileID: 0}
+  providedTags: []
+  immunityTags:
+  - {fileID: 11400000, guid: 0464070cc2e9c26468f41ced9e521c1d, type: 2}
   grantedAbilities: []

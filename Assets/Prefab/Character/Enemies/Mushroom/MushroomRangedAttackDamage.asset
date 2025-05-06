@@ -37,5 +37,6 @@ MonoBehaviour:
       postCoefficientAddition: 0
       customValueCalculation: {fileID: 0}
   providedTags: []
-  immunityTags: []
+  immunityTags:
+  - {fileID: 11400000, guid: 0464070cc2e9c26468f41ced9e521c1d, type: 2}
   grantedAbilities: []

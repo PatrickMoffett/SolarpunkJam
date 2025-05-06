@@ -15,7 +15,7 @@ MonoBehaviour:
   durationType: 1
   duration:
     valueType: 0
-    constantFloat: 0.8
+    constantFloat: 1.2
     attributeSet: 0
     sourceAttributeType: {fileID: 0}
     preCoefficientAddition: 0

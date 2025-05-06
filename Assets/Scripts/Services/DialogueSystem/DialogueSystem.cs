@@ -59,7 +59,10 @@ public class DialogueSystem : IService
     /// </summary>
     public void StartDialogue(Dialogue dialogue)
     {
-        Time.timeScale = 0f; // Ensure time is running at normal speed
+        if (_settings.allowPauseTimeDuringDialogue)
+        {
+            Time.timeScale = 0f;
+        }
         lines.Clear();
         foreach (var line in dialogue.lines)
         {
@@ -143,7 +146,10 @@ public class DialogueSystem : IService
 
     void EndDialogue()
     {
-        Time.timeScale = 1f; // Ensure time is running at normal speed
+        if(_settings.allowPauseTimeDuringDialogue)
+        {
+            Time.timeScale = 1f; // Ensure time is running at normal speed
+        }
         _dialogueUI.UIObject.SetActive(false);
         OnDialogueEnd?.Invoke();
     }

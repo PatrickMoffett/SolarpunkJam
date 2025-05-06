@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DialogueSystemSettings
   letterDelay: 0.03
   speedUpDelay: 0.01
+  allowPauseTimeDuringDialogue: 0
   dialoguePrefab: {fileID: 6103163667761269053, guid: 4aeb1d9997c764b479bff4352225efc7, type: 3}
