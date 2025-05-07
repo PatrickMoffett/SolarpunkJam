@@ -118,7 +118,7 @@ public class DialogueSystem : IService
         GameObject go = ServiceLocator.Instance.Get<MonoBehaviorService>().gameObject;
         while (true)
         {
-            float playTime = dialogueLine.character.voiceBlip.Play(go);
+            float playTime = dialogueLine.character.voiceBlip.Play();
             yield return new WaitForSecondsRealtime(playTime);
         }
     }

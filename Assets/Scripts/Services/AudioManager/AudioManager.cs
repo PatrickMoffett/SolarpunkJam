@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace Services
 {
@@ -151,6 +152,10 @@ namespace Services
             GameObject temp = new GameObject("SFX");
             temp.transform.position = location;
             AudioSource audioSource = temp.AddComponent<AudioSource>();
+            if(!CheckIfOnScreen(location))
+            {
+                return audioSource;
+            }
             audioSource.outputAudioMixerGroup = _params.sfxGroup;
             audioSource.clip = clipToPlay;
             audioSource.volume = volume;
@@ -161,14 +166,23 @@ namespace Services
             Object.Destroy(audioSource.gameObject,clipToPlay.length);
             return audioSource;
         }
-        
+        private bool CheckIfOnScreen(Vector3 position)
+        {
+            if (Camera.main == null)
+            {
+                return false;
+            }
+            Vector3 screenPoint = Camera.main.WorldToViewportPoint(position);
+            return screenPoint.x >= 0 && screenPoint.x <= 1 && screenPoint.y >= 0 && screenPoint.y <= 1;
+        }
         /// <summary>
         /// Plays a sound effect once using the SFX output mixer group.
         /// </summary>
         /// <param name="clipToPlay">The AudioClip to play.</param>
-        public void PlaySfx(AudioClip clipToPlay)
+        public void PlaySfx(AudioClip clipToPlay, float volume = 1f, float pitch = 1f)
         {
-            _sfxAudioSource.PlayOneShot(clipToPlay);
+            _sfxAudioSource.pitch = pitch;
+            _sfxAudioSource.PlayOneShot(clipToPlay, volume);
         }
         
         /// <summary>

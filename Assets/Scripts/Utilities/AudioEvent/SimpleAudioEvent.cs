@@ -32,6 +32,25 @@ public class SimpleAudioEvent : AudioEvent , IResetOnExitPlay
         _lastTimePlayed = 0f;
     }
 
+    public override float Play()
+    {
+        if (clips.Length == 0) return 0f;
+
+        if (Time.fixedUnscaledTime - _lastTimePlayed < minimumReplayTime) return 0f;
+        _lastTimePlayed = Time.fixedUnscaledTime;
+
+        AudioClip clip = clips[Random.Range(0, clips.Length)];
+        float volume_ = Random.Range(volume.minValue, volume.maxValue);
+        float pitch_ = Random.Range(pitch.minValue, pitch.maxValue);
+
+        ServiceLocator.Instance.Get<AudioManager>()
+            .PlaySfx(clip, volume_, pitch_);
+        //GameObject sfx = ServiceLocator.Instance.Get<AudioManager>()
+        //    .PlaySfxAtLocation(clip, gameObject.transform.position, volume_, pitch_, spatialBlend)
+        //    .gameObject;
+
+        return clip.length;
+    }
     public override float Play(GameObject gameObject)
     {
         if (clips.Length == 0) return 0f;
