@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4dc54b5b708446ba9b30b46a09088f29, type: 3}
-  m_Name: ProfSpeechBlip_ASO 1
+  m_Name: BossDamaged_ASO
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 29fcd8d4078580d42b13f31a43fe8c02, type: 3}
+  - {fileID: 8300000, guid: 066199e208bde2e4ea007f0715b5b586, type: 3}
   volume:
     minValue: 1
     maxValue: 1
   pitch:
-    minValue: 0.6807228
-    maxValue: 0.87349397
+    minValue: 1
+    maxValue: 1
   spatialBlend: 0
   minimumReplayTime: 0

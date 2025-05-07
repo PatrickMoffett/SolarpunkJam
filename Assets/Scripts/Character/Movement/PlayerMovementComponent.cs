@@ -34,6 +34,7 @@ public class PlayerMovementComponent : MonoBehaviour
 
     [Header("Sound Effect")]
     [SerializeField] private SimpleAudioEvent _jumpAudioEvent;
+    [SerializeField] private SimpleAudioEvent _jumpSlamAudioEvent;
     #endregion
     #region Private Variables
     private StateMachine<PlayerMovementComponent, BaseMovementState> _stateMachine;
@@ -499,6 +500,7 @@ public class PlayerMovementComponent : MonoBehaviour
 
         public override void ExitState(BaseState<PlayerMovementComponent> nextState)
         {
+            Context._jumpSlamAudioEvent.Play(Context.gameObject);
             Context._slamStopEvent.Raise();
         }
 

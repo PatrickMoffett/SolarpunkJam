@@ -12,6 +12,7 @@ public class CollidableEffectComponent : MonoBehaviour
     [SerializeField] private bool _destroyOnApplication = true;
     [SerializeField] private bool _canApplyToNonPlayer = false;
     [SerializeField] private List<StatusEffect> _effectsToApply = new List<StatusEffect>();
+    [SerializeField] private SimpleAudioEvent _healAudioEvent;
 
     private CombatSystem _combatSystem;
 
@@ -37,7 +38,7 @@ public class CollidableEffectComponent : MonoBehaviour
                 return;
             }
         }
-
+        _healAudioEvent.Play(gameObject);
         foreach (var effect in _effectsToApply)
         {
             OutgoingStatusEffectInstance effectInstance = new OutgoingStatusEffectInstance(effect, _combatSystem);
@@ -45,6 +46,7 @@ public class CollidableEffectComponent : MonoBehaviour
         }
         if (_destroyOnApplication)
         {
+
             Destroy(gameObject);
         }
     }

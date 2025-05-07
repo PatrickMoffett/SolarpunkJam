@@ -159,6 +159,7 @@ MonoBehaviour:
   _canApplyToNonPlayer: 0
   _effectsToApply:
   - {fileID: 11400000, guid: 32eede32064a0bf4f888d6d7d42d1a25, type: 2}
+  _healAudioEvent: {fileID: 11400000, guid: 2edf0a2d200e02e43b6e55a4e104d4f3, type: 2}
 --- !u!50 &8891755008985044627
 Rigidbody2D:
   serializedVersion: 5
