@@ -18,7 +18,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 847685573818089373, guid: dfedd48a6d67c0b44afd4ce408e729d9, type: 3}
   spawnDelay: 0
   projectileLifetime: 10
-  projectileVelocity: 15
+  projectileVelocity: 20
   spawnOffset: {x: 0, y: 0}
   effectsToApplyOnHit:
   - {fileID: 11400000, guid: 7cd22e2a1afaae943a4eaeb0873dafa0, type: 2}
