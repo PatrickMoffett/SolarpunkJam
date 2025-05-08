@@ -15,8 +15,13 @@ public class EnemySpawner : MonoBehaviour
     private bool initialDelayPassed = false;
     private int currentEnemiesSpawned = 0;
     private Coroutine spawnCoroutine;
+    public static GameObject _bucket;
     private void Start()
     {
+        if (!_bucket)
+        {
+            _bucket = new GameObject("SpawnedEnemy_Bucket");
+        }
         spawnCoroutine = StartCoroutine(SpawnEnemyCoroutine());
     }
     private void OnDestroy()
@@ -31,6 +36,9 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnPosition = transform.position;
         spawnPosition.y = transform.position.y;
         GameObject enemyObject = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+        // add the enemy to the bucket
+        enemyObject.transform.parent = _bucket.transform;
 
         Enemy enemy = enemyObject.GetComponent<Enemy>();
         Assert.IsNotNull(enemy, $"Enemy prefab does not have an Enemy component.");

@@ -8,6 +8,7 @@ public class TumbleWeed : Enemy
     [SerializeField] private GameObject deathEffect;
     private Rigidbody2D _rb;
 
+    private static GameObject _vfxBucket;
     protected override void Awake()
     {
         base.Awake();
@@ -22,6 +23,10 @@ public class TumbleWeed : Enemy
     {
         base.Start();
 
+        if(_vfxBucket == null)
+        {
+            _vfxBucket = new GameObject("VFXBucket");
+        }
         _rb.linearVelocity = new Vector2(speed, _rb.linearVelocity.y);
     }
 
@@ -52,7 +57,9 @@ public class TumbleWeed : Enemy
 
     private void PlayDeathEffect()
     {
-        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        GameObject effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        // add the effect to the bucket
+        effect.transform.parent = _vfxBucket.transform;
     }
 
     private void OnHitWall(Collider2D collision)
