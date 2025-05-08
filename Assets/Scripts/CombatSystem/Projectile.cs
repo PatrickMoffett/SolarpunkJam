@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     {
         if (!_bucket)
         {
-            _bucket = new GameObject("SpawnedEnemy_Bucket");
+            _bucket = new GameObject("Projectile_Bucket");
         }
 
         if (isBucketable)

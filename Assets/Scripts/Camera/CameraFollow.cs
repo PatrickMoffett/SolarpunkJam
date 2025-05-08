@@ -18,6 +18,7 @@ public class CameraFollow : MonoBehaviour
     #region Private Variables
     private Transform followTarget;
     private Vector3 currentVelocity;  // for SmoothDamp
+    private bool isStaticCameraMode = false;
     #endregion
     #region Public Interface
     public void SetDeadZoneOffset(Vector3 deadZoneOffset)
@@ -35,6 +36,11 @@ public class CameraFollow : MonoBehaviour
     public void SetFollowTarget(Transform followTarget)
     {
         this.followTarget = followTarget;
+    }
+    public void SetStaticCameraMode(bool isStatic)
+    {
+        // TODO: This is a quick fix to prevent the camera from moving when the player is in a static camera mode.
+        isStaticCameraMode = isStatic;
     }
     public Vector2 GetDeadZone()
     {
@@ -127,6 +133,10 @@ public class CameraFollow : MonoBehaviour
     }
     private void ClampPositionToMaxDistanceFromTarget()
     {
+        if(isStaticCameraMode)
+        {
+            return;
+        }
         // After SmoothDamp, clamp against the same box you're drawing:
         Vector3 clampCenter = followTarget.position - deadZoneOffset;
         Vector3 halfExtents = new Vector3(
@@ -151,6 +161,10 @@ public class CameraFollow : MonoBehaviour
     }
     private Vector3 CalculateTargetPosition()
     {
+        if(isStaticCameraMode)
+        {
+            return followTarget.position;
+        }
         // Figure out how far outside the dead-zone we are
         Vector3 delta = followTarget.position - deadZoneOffset - transform.position;
         Vector3 offset = Vector3.zero;
