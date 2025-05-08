@@ -88,12 +88,10 @@ public class PlayerMovementComponent : MonoBehaviour
 
         _stateMachine.TransitionTo<KnockbackState>();
     }
-
     public void SetJumpSlamState()
     {
         _stateMachine.TransitionTo<JumpSlamState>();
     }
-
     public bool GetJumpSlamState()
     {
         return _stateMachine.CurrentState.GetType() == typeof(JumpSlamState);
@@ -484,7 +482,6 @@ public class PlayerMovementComponent : MonoBehaviour
             }
         }
     }
-
     private class JumpSlamState : BaseMovementState
     {
         public override void EnterState(BaseState<PlayerMovementComponent> previousState)
