@@ -231,6 +231,7 @@ MonoBehaviour:
   _knockbackDirection: {x: -1, y: 1}
   _knockbackTime: 0.5
   _jumpAudioEvent: {fileID: 11400000, guid: aab6fb66b0a8dd34596be577e8abc27a, type: 2}
+  _jumpSlamAudioEvent: {fileID: 11400000, guid: fdeb17def4726544cbc6e5b333c00844, type: 2}
 --- !u!114 &8468066183239496644
 MonoBehaviour:
   m_ObjectHideFlags: 0
