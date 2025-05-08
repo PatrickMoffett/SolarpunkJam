@@ -7,7 +7,8 @@ public class BossEncounterManager : MonoBehaviour
 {
     [SerializeField] GameObject _staticCameraTarget;
     [SerializeField] Dialogue _dialogue;
-
+    [SerializeField] DoorHandler _entranceDoor;
+    [SerializeField] DoorHandler _exitDoor;
     enum BossEncounterState
     {
         Uninitiated,
@@ -39,6 +40,7 @@ public class BossEncounterManager : MonoBehaviour
         ds.StartDialogue(_dialogue);
 
         _state = BossEncounterState.Intro;
+        _entranceDoor.CloseDoor();
         // TODO: Close the doors
 
     }
@@ -56,4 +58,9 @@ public class BossEncounterManager : MonoBehaviour
         // Start the boss fight music
         // Start the boss fight logic
     }
+
+
+    /*TODO: end the boss fight
+    _exitDoor.OpenDoor();
+    */
 }
