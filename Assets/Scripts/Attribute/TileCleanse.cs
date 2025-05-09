@@ -67,7 +67,14 @@ public class TileCleanse : MonoBehaviour
             Tile tile = _tilemap.GetTile<Tile>(current.Item1);
             if (tile != null && tile != _grassTile)
             {
-                _tilemap.SetTile(current.Item1, _grassTile);
+                if (current.Item1.y == position.y)
+                {
+                    _tilemap.SetTile(current.Item1, _grassTile);
+                }
+                else
+                {
+                    _tilemap.SetTile(current.Item1, _dirtTile);
+                }
             }
             if (current.Item2 < max)
             {
