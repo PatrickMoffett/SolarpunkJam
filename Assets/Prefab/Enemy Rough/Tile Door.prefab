@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 892154483978112661}
   - component: {fileID: 4844346773755580727}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2473477167998452870}
   - component: {fileID: 3115155018130483171}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7657652839967894116}
   - component: {fileID: 6234733495700966603}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1780234022765599715}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bot Pair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5194035567269453294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Top Pair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5746125457331556799}
   - component: {fileID: 4911733360708452915}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4685088962132550303}
   - component: {fileID: 5514168604605894603}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -510,7 +510,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1086048146337110196}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mid Pair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +546,7 @@ GameObject:
   - component: {fileID: 5166867579761403058}
   - component: {fileID: 4025544916067322004}
   - component: {fileID: 8433158528140618704}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tile Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.89, y: 3.2282696}
+  m_Size: {x: 1.95, y: 3.2282696}
   m_EdgeRadius: 0
 --- !u!114 &4025544916067322004
 MonoBehaviour:
@@ -645,7 +645,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8262295200886895988}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -699,7 +699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7296369000588180566}
   - component: {fileID: 4354002699411898114}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ML
   m_TagString: Untagged
   m_Icon: {fileID: 0}

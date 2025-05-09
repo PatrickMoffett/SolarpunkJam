@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
 
+[RequireComponent(typeof(Animator))]
 public class BossAI : Enemy
 {
     [Header("Boss Events")]
@@ -43,10 +44,17 @@ public class BossAI : Enemy
     private Coroutine _delayedWindDisableCoroutine;
     private PlayerMovementComponent _playerMovementComponent;
 
-
+    private const string ANIM_CHARGE = "Charging";
+    private const string ANIM_WIND_ATTACK = "WindAttack";
+    private const string ANIM_SUMMONING = "Summoning";
+    private Vector3 _cachedScale;
+    private Animator _animator;
     protected override void OnEnable()
     {
         base.OnEnable();
+        _cachedScale = transform.localScale;
+        _animator = GetComponent<Animator>();
+        Assert.IsNotNull(_animator, "Animator not found on BossAI.");
         Assert.IsNotNull(OnBossStart, "OnBossStart event not assigned.");
         Assert.IsNotNull(OnBossEnd, "OnBossEnd event not assigned.");
         OnBossStart.OnGameEvent += StartBossFight;
@@ -57,7 +65,17 @@ public class BossAI : Enemy
         base.OnDisable();
         OnBossStart.OnGameEvent -= StartBossFight;
     }
-
+    private void SetFacingDirection(bool faceLeft)
+    {
+        if (faceLeft)
+        {
+            transform.localScale = new Vector3(_cachedScale.x, _cachedScale.y, _cachedScale.z);
+        }
+        else
+        {
+            transform.localScale = new Vector3(-_cachedScale.x, _cachedScale.y, _cachedScale.z);
+        }
+    }
     protected override void Die()
     {
         base.Die();
@@ -124,6 +142,9 @@ public class BossAI : Enemy
 
     private IEnumerator TornadoSpawnAttack()
     {
+        // play tornado attack animation
+        _animator.SetTrigger(ANIM_SUMMONING);
+
         float timeElapsed = 0f;
         for(int i = 0; i < numberOfTornadoes; ++i)
         {
@@ -150,6 +171,7 @@ public class BossAI : Enemy
     {
         while (Vector3.Distance(transform.position, target) > 0.1f)
         {
+            SetFacingDirection(target.x < transform.position.x);
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 target,
@@ -170,6 +192,10 @@ public class BossAI : Enemy
         // apply wind push
         var dir = isLeft ? Vector2.right : Vector2.left;
         _playerMovementComponent.AddConstantAcceleration(dir * windPushAccel);
+
+        // play wind attack animation
+        _animator.SetBool(ANIM_WIND_ATTACK,true);
+        SetFacingDirection(!isLeft);
 
         if (isLeft)
         {
@@ -200,6 +226,7 @@ public class BossAI : Enemy
             rightDoorHandler.CloseDoor();
             rightTumbleWeedSpawner.SetActive(false);
         }
+        _animator.SetBool(ANIM_WIND_ATTACK, false);
     }
     private IEnumerator DelayedWindDisable()
     {
@@ -218,6 +245,8 @@ public class BossAI : Enemy
             : chargeAttackLocationLeft.position;
 
         yield return MoveToPosition(start, bossSpeed);
+        _animator.SetTrigger(ANIM_CHARGE);
+        SetFacingDirection(!fromLeft);
         yield return new WaitForSeconds(chargeAttackDelay);
         yield return MoveToPosition(end, chargeAttackMoveSpeed);
     }
