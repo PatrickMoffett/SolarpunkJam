@@ -22,4 +22,4 @@ MonoBehaviour:
   spawnOffset: {x: 0.5, y: -0.2}
   effectsToApplyOnHit:
   - {fileID: 11400000, guid: 782771eedc2548041be24ba726a4faae, type: 2}
-  audioEvent: {fileID: 0}
+  audioEvent: {fileID: 11400000, guid: ae4940a170f8529458d9f1a483d6029c, type: 2}

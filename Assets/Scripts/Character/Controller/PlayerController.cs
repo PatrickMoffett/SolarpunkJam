@@ -47,7 +47,13 @@ public class PlayerController : MonoBehaviour
     
     [Tooltip("How long thew player needs to hold the button down for a charge attack. Make negative to disable")]
     [SerializeField] private float shotChargeTime;
-
+    
+    [Header("Sound Effects")]
+    [Tooltip("The sound to play when the charge timer is complete")]
+    [SerializeField] private SimpleAudioEvent chargeSoundEvent;
+    [Tooltip("The sound to play when the player takes damage")]
+    [SerializeField] private SimpleAudioEvent damagedSoundEvent;
+    
     private Animator _animator;
     private bool isCharging = false;
     private float chargeTimeCounter = 0;
@@ -66,7 +72,7 @@ public class PlayerController : MonoBehaviour
         _input.Player.Move.performed += ctx => Move(ctx.ReadValue<Vector2>());
         _input.Player.Move.canceled += ctx => Move(Vector2.zero);
         
-        _input.Player.Shoot.performed += ctx => StartAttack();
+        _input.Player.Shoot.performed += ctx => StartAttack(shotChargeTime);
         _input.Player.Shoot.canceled += ctx => EndAttack(_shootAttacks, SHOOT_ANIM_TRIGGER, shotChargeTime);
         _input.Player.Punch.canceled += ctx => EndAttack(_punchAttacks, PUNCH_ANIM_TRIGGER);
         _input.Player.BossSkill.canceled += ctx => EndAttack(_bossAttacks, BOSS_ANIM_TRIGGER);
@@ -200,15 +206,19 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        
+
+        if (damagedSoundEvent)
+        {
+            damagedSoundEvent.Play(gameObject);
+        }
         _animator.SetTrigger(DAMAGED_ANIM_TRIGGER);
     }
 
     // TODO: Actually differentiate attacks based on button pressed/time pressed/etc...
-    private void StartAttack()
+    private void StartAttack(float chargeTime)
     {
         isCharging = true;
-        StartCoroutine(IncrementCharge());
+        StartCoroutine(IncrementCharge(chargeTime));
     }
 
     private void EndAttack(List<Ability> abilities, string animationTrigger, float chargeTime = -1)
@@ -234,11 +244,19 @@ public class PlayerController : MonoBehaviour
         chosenAttack.TryActivate(target);
     }
 
-    private IEnumerator IncrementCharge()
+    private IEnumerator IncrementCharge(float chargeTime)
     {
         while (isCharging)
         {
             chargeTimeCounter += Time.deltaTime;
+            if (chargeTimeCounter >= chargeTime)
+            {
+                if (chargeSoundEvent)
+                {
+                    chargeSoundEvent.Play(gameObject);
+                }
+                break;
+            }
             yield return null;
         }
     }

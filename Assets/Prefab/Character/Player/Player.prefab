@@ -254,7 +254,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7911d8e348b5f7543a26875b14be4118, type: 2}
   _jumpAttacks:
   - {fileID: 11400000, guid: a6821158ef9f2ce428916dc3fe7615aa, type: 2}
-  shotChargeTime: 5
+  shotChargeTime: 3
+  chargeSoundEvent: {fileID: 11400000, guid: 718165d7b8b41b64680bd2dd64ed2364, type: 2}
+  damagedSoundEvent: {fileID: 11400000, guid: 77bfff2c485b96e41a310726af22163a, type: 2}
 --- !u!212 &9045273776370784416
 SpriteRenderer:
   m_ObjectHideFlags: 0
