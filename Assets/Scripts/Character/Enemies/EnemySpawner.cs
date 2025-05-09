@@ -54,11 +54,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void OnEnemyDeath(Character character)
     {
+        character.OnCharacterDeath -= OnEnemyDeath;
         if (!respawnOnDeath)
         {
             currentEnemiesSpawned--;
         }
-        character.OnCharacterDeath -= OnEnemyDeath;
     }
 
     IEnumerator SpawnEnemyCoroutine()

@@ -56,6 +56,16 @@ public class Enemy : Character
         {
             _playerCollisionObserver.OnTriggerEnter -= OnPlayerTriggerEnter;
         }
+        Attribute health = _attributeSet.GetAttribute(GlobalAttributes.HealthAttribute);
+        if (health != null)
+        {
+            health.OnValueChanged -= OnHealthChanged;
+        }
+        Attribute knockback = _attributeSet.GetAttribute(GlobalAttributes.KnockbackAttribute);
+        if (knockback != null)
+        {
+            knockback.OnValueChanged -= OnApplyKnockback;
+        }
     }
     protected virtual void OnPlayerTriggerEnter(Collider2D collision)
     {
@@ -86,8 +96,8 @@ public class Enemy : Character
 
     protected virtual void Die()
     {
+        Destroy(gameObject);
         OnCharacterDeath?.Invoke(this);
-
         if (_lootSpawner != null)
         {
             _lootSpawner.SpawnLoot();
@@ -103,7 +113,6 @@ public class Enemy : Character
             Assert.IsNotNull(tileCleanser, $"TileCleanse component not found on {gameObject.name}.");
             tileCleanser.tileCleanse(_cleanseRange);
         }
-        Destroy(gameObject);
     }
 
     private void OnApplyKnockback(Attribute attribute, float previousValue)

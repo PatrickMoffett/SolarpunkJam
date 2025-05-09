@@ -9,19 +9,6 @@ public class CutscenePlayerController : MonoBehaviour
 {
     private InputSystem_Actions _input;
 
-    private void Awake()
-    {
-        _input = new InputSystem_Actions();
-
-        _input.Dialogue.NextDialogue.performed += ctx => NextDialogue();
-        _input.Dialogue.SkipDialogue.performed += ctx => SkipDialogue();
-        _input.Dialogue.SpeedUpDialogue.started += ctx => SpeedUpDialogue(true);
-        _input.Dialogue.SpeedUpDialogue.canceled += ctx => SpeedUpDialogue(false);
-
-        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueStart += OnDialogueStart;
-        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueEnd += OnDialogueEnd;
-    }
-
     private void SpeedUpDialogue(bool shouldSpeedUp)
     {
         ServiceLocator.Instance.Get<DialogueSystem>().SetSpeedUpText(shouldSpeedUp);
@@ -48,8 +35,21 @@ public class CutscenePlayerController : MonoBehaviour
         _input.Player.Disable();
     }
 
+    private void Awake()
+    {
+        _input = new InputSystem_Actions();
+    }
     private void OnEnable()
     {
+
+        _input.Dialogue.NextDialogue.performed += ctx => NextDialogue();
+        _input.Dialogue.SkipDialogue.performed += ctx => SkipDialogue();
+        _input.Dialogue.SpeedUpDialogue.started += ctx => SpeedUpDialogue(true);
+        _input.Dialogue.SpeedUpDialogue.canceled += ctx => SpeedUpDialogue(false);
+
+        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueStart += OnDialogueStart;
+        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueEnd += OnDialogueEnd;
+
         _input.Enable();
         _input.Dialogue.Disable();
     }
@@ -57,5 +57,13 @@ public class CutscenePlayerController : MonoBehaviour
     private void OnDisable()
     {
         _input.Disable();
+
+        _input.Dialogue.NextDialogue.performed -= ctx => NextDialogue();
+        _input.Dialogue.SkipDialogue.performed -= ctx => SkipDialogue();
+        _input.Dialogue.SpeedUpDialogue.started -= ctx => SpeedUpDialogue(true);
+        _input.Dialogue.SpeedUpDialogue.canceled -= ctx => SpeedUpDialogue(false);
+
+        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueStart -= OnDialogueStart;
+        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueEnd -= OnDialogueEnd;
     }
 }
