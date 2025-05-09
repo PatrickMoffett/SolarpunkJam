@@ -171,7 +171,7 @@ MonoBehaviour:
   attributes:
   - type: {fileID: 11400000, guid: ba40c831763d40043aa3b6937c045bc9, type: 2}
     value:
-      baseValue: 10
+      baseValue: 90
   - type: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
     value:
       baseValue: 10
@@ -192,7 +192,7 @@ MonoBehaviour:
       baseValue: 5
   - type: {fileID: 11400000, guid: 00487a6e262922742ae2e4fba74d15a3, type: 2}
     value:
-      baseValue: 80
+      baseValue: 160
 --- !u!114 &4478712841784188728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,9 +222,11 @@ MonoBehaviour:
   _airControl: 1
   _groundObserver: {fileID: 3925894556471443856}
   _lowJumpGravityMultiplier: 2
-  _maxFallSpeed: 20
+  _maxSpeedEver: {x: 8, y: 20}
   _coyoteTime: 0.1
   _jumpEpsilon: 0.2
+  _movementDampening: 80
+  _windSpeedModifier: 0.5
   _slamSpeed: 10
   _slamStopEvent: {fileID: 11400000, guid: 0d0b27f070e556648a172f8d2f36f6d2, type: 2}
   _knockbackSpeed: 5

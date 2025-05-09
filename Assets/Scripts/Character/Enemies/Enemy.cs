@@ -17,10 +17,19 @@ public class Enemy : Character
     [SerializeField] private GameObject _cleansedObjectToSpawn;
 
     private LootSpawner _lootSpawner;
-    private Rigidbody2D _rigidbody2D;
+    protected Rigidbody2D _rigidbody2D;
     public void Kill()
     {
         Die();
+    }
+    protected override void Awake()
+    {
+        base.Awake();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        Assert.IsNotNull(_rigidbody2D, $"Rigidbody2D not found on {gameObject.name}.");
+
+        _lootSpawner = GetComponent<LootSpawner>();
+        Assert.IsNotNull(_lootSpawner, $"LootSpawner not found on {gameObject.name}.");
     }
     protected virtual void Start()
     {
@@ -31,13 +40,6 @@ public class Enemy : Character
         Attribute knockback = _attributeSet.GetAttribute(GlobalAttributes.KnockbackAttribute);
         Assert.IsNotNull(knockback, "Knockback attribute not found in the attribute set.");
         knockback.OnValueChanged += OnApplyKnockback;
-
-        _rigidbody2D = GetComponent<Rigidbody2D>();
-        Assert.IsNotNull(_rigidbody2D, $"Rigidbody2D not found on {gameObject.name}.");
-        
-        _lootSpawner = GetComponent<LootSpawner>();
-        Assert.IsNotNull(_lootSpawner, $"LootSpawner not found on {gameObject.name}.");
-
     }
     protected virtual void OnEnable()
     {

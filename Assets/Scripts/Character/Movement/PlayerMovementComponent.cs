@@ -17,10 +17,11 @@ public class PlayerMovementComponent : MonoBehaviour
     [SerializeField] private bool _airControl = false;              // Whether or not a player can steer while jumping;
     [SerializeField] private CollisionObserver2D _groundObserver;   // The ground observer used to check if the player is on the ground
     [SerializeField] private float _lowJumpGravityMultiplier = 2.5f;// The gravity multiplier used when the player is holding the jump button
-    [SerializeField] private float _maxFallSpeed = 20f;             // The maximum fall speed of the player
+    [SerializeField] private Vector2 _maxSpeedEver = new Vector2(20f,20f);             // The maximum speed of the player
     [SerializeField] private float _coyoteTime = 0.1f;              // The time the player can jump after leaving the ground
     [SerializeField] private float _jumpEpsilon = 0.1f;             // The epsilon value used to determine if the player is jumping
-    
+    [SerializeField] private float _movementDampening = 100f;         // The amount of damping accel
+    [SerializeField] private float _windSpeedModifier = .5f;
     [Header("JumpSlam Settings")]
     [SerializeField] private float _slamSpeed = 2f;                 // How fast to move the player as they are slamming
     [SerializeField] private GameEvent _slamStopEvent;              // The event to fire when the slam stops and the projectile should be destroyed
@@ -41,11 +42,12 @@ public class PlayerMovementComponent : MonoBehaviour
     // Anim Variables
     private const string FALL_ANIM_TRIGGER = "Falling";
     private const string JUMP_ANIM_TRIGGER = "Jump";
-    
+
     // Direction variables
     private bool _facingRight = true;                               // For determining which way the player is currently facing.
     private Vector2 _movementDirection = Vector2.zero;
     private Vector2 _cachedKnockbackVelocity = Vector2.zero; // The direction of the knockback
+    private Vector2 _constantAccel = Vector2.zero; // The constant force to apply to the player
     #region Cached Components
     private Rigidbody2D _rigidbody2D;
     private Animator _anim;
@@ -95,6 +97,18 @@ public class PlayerMovementComponent : MonoBehaviour
     public bool GetJumpSlamState()
     {
         return _stateMachine.CurrentState.GetType() == typeof(JumpSlamState);
+    }
+    public void AddConstantAcceleration(Vector2 acceleration)
+    {
+        _constantAccel += acceleration;
+    }
+    public void SubtractConstantAcceleration(Vector2 acceleration)
+    {
+        _constantAccel -= acceleration;
+    }
+    public void ResetConstantAcceleration()
+    {
+        _constantAccel = Vector2.zero;
     }
     #endregion
     #region Unity MonoBehaviour Callbacks
@@ -242,9 +256,9 @@ public class PlayerMovementComponent : MonoBehaviour
     #region Motion Updates
     private void ClampFallSpeed()
     {
-        if (_rigidbody2D.linearVelocity.y < -_maxFallSpeed)
+        if (_rigidbody2D.linearVelocity.y < -_maxSpeedEver.y)
         {
-            _rigidbody2D.linearVelocityY = -_maxFallSpeed;
+            _rigidbody2D.linearVelocityY = -_maxSpeedEver.y;
         }
     }
     private void AddJumpVelocity()
@@ -257,37 +271,60 @@ public class PlayerMovementComponent : MonoBehaviour
     }
     private void UpdateXVelocity(float moveDirectionX, float acceleration)
     {
-        Vector2 currentVelocity = _rigidbody2D.linearVelocity;
+        var v = _rigidbody2D.linearVelocity;
+        float dt = Time.deltaTime;
 
-        if (moveDirectionX == 0f)
+        // 1) apply input + wind
+        v.x += moveDirectionX * acceleration * dt
+             + _constantAccel.x * dt;
+
+        // 2) dampening when neither input nor wind
+        if (moveDirectionX == 0f && Mathf.Abs(_constantAccel.x) < Mathf.Epsilon)
         {
-            // If the player is not moving, we want to decelerate
-            if (currentVelocity.x > 0f)
-            {
-                currentVelocity.x -= acceleration * Time.deltaTime;
-                if (currentVelocity.x < 0f)
-                {
-                    currentVelocity.x = 0f;
-                }
-            }
-            else if (currentVelocity.x < 0f)
-            {
-                currentVelocity.x += acceleration * Time.deltaTime;
-                if (currentVelocity.x > 0f)
-                {
-                    currentVelocity.x = 0f;
-                }
-            }
+            float brake = _movementDampening * dt;
+            if (Mathf.Abs(v.x) < brake)
+                v.x = 0f;
+            else
+                v.x -= Mathf.Sign(v.x) * brake;
+        }
+
+        // 3) choose your clamp based on wind vs. input
+        bool windPresent = Mathf.Abs(_constantAccel.x) > Mathf.Epsilon;
+        // windHelping: either no input (wind-only) or input in same dir as wind
+        bool windHelping =
+            windPresent
+            && (moveDirectionX == 0f
+                || Mathf.Sign(moveDirectionX) == Mathf.Sign(_constantAccel.x));
+
+        if (windHelping)
+        {
+            // allow you to exceed your own move-speed, up to the absolute cap
+            v.x = Mathf.Clamp(v.x, -_maxSpeedEver.x, _maxSpeedEver.x);
         }
         else
         {
-            currentVelocity.x += moveDirectionX * acceleration * Time.deltaTime;
+            // if we're pushing into the wind lower max speed
+            if(windPresent)
+            {
+                v.x = Mathf.Clamp(
+                    v.x,
+                    -_movementSpeed.CurrentValue * _windSpeedModifier,
+                     _movementSpeed.CurrentValue * .7f
+                );
+            }
+            else
+            {
+                v.x = Mathf.Clamp(
+                    v.x,
+                    -_movementSpeed.CurrentValue,
+                     _movementSpeed.CurrentValue
+                );
+            }
         }
 
-        // Apply the speed to the player
-        currentVelocity.x = Mathf.Clamp(currentVelocity.x, -_movementSpeed.CurrentValue, _movementSpeed.CurrentValue);
-        currentVelocity.y = _rigidbody2D.linearVelocity.y;
-        _rigidbody2D.linearVelocity = currentVelocity;
+        // 4) write back
+        v.y = _rigidbody2D.linearVelocity.y;
+        _rigidbody2D.linearVelocity = v;
     }
     #endregion
     #region MovementStates

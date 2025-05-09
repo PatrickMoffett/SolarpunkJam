@@ -15,6 +15,10 @@ MonoBehaviour:
   lines:
   - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
     text: Hello! This is a test dialogue. We are testing the dialogue here
+    startDelay: 0.75
+    eventToBroadcast: {fileID: 0}
   - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
     text: Isn't this system neat? Doesn't it work great? (I hope). Definitely not
       broken at all
+    startDelay: 0
+    eventToBroadcast: {fileID: 0}

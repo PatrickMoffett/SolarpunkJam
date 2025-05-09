@@ -16,7 +16,8 @@ public class EnemySpawner : MonoBehaviour
     private int currentEnemiesSpawned = 0;
     private Coroutine spawnCoroutine;
     public static GameObject _bucket;
-    private void Start()
+
+    private void OnEnable()
     {
         if (!_bucket)
         {
@@ -24,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         }
         spawnCoroutine = StartCoroutine(SpawnEnemyCoroutine());
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (spawnCoroutine != null)
         {
@@ -37,6 +38,10 @@ public class EnemySpawner : MonoBehaviour
         spawnPosition.y = transform.position.y;
         GameObject enemyObject = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
+        if (!_bucket)
+        {
+            _bucket = new GameObject("SpawnedEnemy_Bucket");
+        }
         // add the enemy to the bucket
         enemyObject.transform.parent = _bucket.transform;
 

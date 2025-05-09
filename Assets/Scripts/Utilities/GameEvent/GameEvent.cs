@@ -5,6 +5,7 @@
 // Date:   10/04/17
 // ----------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,10 +17,11 @@ public class GameEvent : ScriptableObject
     /// </summary>
     private readonly List<GameEventListener> _eventListeners = 
         new List<GameEventListener>();
-
+    public event Action OnGameEvent;
     public void Raise()
     {
-        for(int i = _eventListeners.Count -1; i >= 0; i--)
+        OnGameEvent?.Invoke();
+        for (int i = _eventListeners.Count -1; i >= 0; i--)
             _eventListeners[i].OnEventRaised();
     }
 

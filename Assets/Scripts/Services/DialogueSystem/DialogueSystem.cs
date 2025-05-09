@@ -69,7 +69,6 @@ public class DialogueSystem : IService
             lines.Enqueue(line);
         }
         OnDialogueStart?.Invoke();
-        _dialogueUI.UIObject.SetActive(true);
         ShowNextLine();
     }
 
@@ -90,13 +89,28 @@ public class DialogueSystem : IService
         var line = lines.Dequeue();
         _portraitImage.sprite = line.character.portrait;
         currentFullText = line.text;
+
         typingCoroutine = ServiceLocator.Instance.Get<MonoBehaviorService>().
-            StartCoroutine(RevealDialogueLine(line));
-        audioBlipCoroutine = ServiceLocator.Instance.Get<MonoBehaviorService>().
-            StartCoroutine(PlayDialogueBlips(line));
+            StartCoroutine(StartDialogueLine(line));
     }
 
-    IEnumerator RevealDialogueLine(DialogueLine dialogueLine)
+    IEnumerator StartDialogueLine(DialogueLine dialogueLine)
+    {
+        if (dialogueLine.eventToBroadcast != null)
+        {
+            dialogueLine.eventToBroadcast.Raise();
+        }
+        yield return new WaitForSecondsRealtime(dialogueLine.startDelay);
+
+        // Set UI to active if it wasn't already
+        _dialogueUI.UIObject.SetActive(true);
+
+        typingCoroutine = ServiceLocator.Instance.Get<MonoBehaviorService>().
+            StartCoroutine(StartDialogueText(dialogueLine));
+        audioBlipCoroutine = ServiceLocator.Instance.Get<MonoBehaviorService>().
+            StartCoroutine(PlayDialogueBlips(dialogueLine));
+    }
+    IEnumerator StartDialogueText(DialogueLine dialogueLine)
     {
         isCurrentLineFinished = false;
         AudioManager audioManager = ServiceLocator.Instance.Get<AudioManager>();
@@ -115,6 +129,7 @@ public class DialogueSystem : IService
     }
     IEnumerator PlayDialogueBlips(DialogueLine dialogueLine)
     {
+        yield return new WaitForSecondsRealtime(dialogueLine.startDelay);
         GameObject go = ServiceLocator.Instance.Get<MonoBehaviorService>().gameObject;
         while (true)
         {
@@ -128,10 +143,12 @@ public class DialogueSystem : IService
         {
             ServiceLocator.Instance.Get<MonoBehaviorService>()
                 .StopCoroutine(typingCoroutine);
+        }
+        if(audioBlipCoroutine != null)
+        {
             ServiceLocator.Instance.Get<MonoBehaviorService>()
                 .StopCoroutine(audioBlipCoroutine);
         }
-
         _dialogueText.text = currentFullText;
         isCurrentLineFinished = true;
     }

@@ -172,7 +172,6 @@ public class PlayerController : MonoBehaviour
         {
             if (!_animator.GetBool(WALK_ANIM_BOOL))
             {
-                Debug.Log($"[{GetType().Name}] Setting walk trigger");
                 _animator.ResetTrigger(STOP_WALK_ANIM_TRIGGER);
                 _animator.SetTrigger(START_WALK_ANIM_TRIGGER);
             }
@@ -183,7 +182,6 @@ public class PlayerController : MonoBehaviour
         {
             if (_animator.GetBool(WALK_ANIM_BOOL))
             {
-                Debug.Log($"[{GetType().Name}] Unsetting walk trigger");
                 _animator.ResetTrigger(START_WALK_ANIM_TRIGGER);
                 _animator.SetTrigger(STOP_WALK_ANIM_TRIGGER);
             }

@@ -7,10 +7,15 @@ using UnityEngine.Rendering.VirtualTexturing;
 public class BossEncounterManager : MonoBehaviour
 {
     [SerializeField] GameObject _staticCameraTarget;
-    [SerializeField] Dialogue _dialogue;
+    [SerializeField] Dialogue _startdialogue;
+    [SerializeField] Dialogue _endDialogue;
     [SerializeField] DoorHandler _entranceDoor;
     [SerializeField] DoorHandler _exitDoor;
     [SerializeField] AudioClip _bossFightMusic;
+
+    [SerializeField] GameEvent BossFightStart;
+    [SerializeField] GameEvent BossFightEnd;
+
     enum BossEncounterState
     {
         Uninitiated,
@@ -19,6 +24,11 @@ public class BossEncounterManager : MonoBehaviour
         Completed
     }
     private BossEncounterState _state = BossEncounterState.Uninitiated;
+    private void Awake()
+    {
+        BossFightEnd.OnGameEvent += OnBossFightEnd;
+    }
+
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (_state == BossEncounterState.Uninitiated
@@ -39,11 +49,10 @@ public class BossEncounterManager : MonoBehaviour
         // Start the boss intro dialogue
         DialogueSystem ds = ServiceLocator.Instance.Get<DialogueSystem>();
         ds.OnDialogueEnd += OnBossIntroDialogueEnd;
-        ds.StartDialogue(_dialogue);
+        ds.StartDialogue(_startdialogue);
 
         _state = BossEncounterState.Intro;
         _entranceDoor.CloseDoor();
-        // TODO: Close the doors
 
     }
 
@@ -57,13 +66,21 @@ public class BossEncounterManager : MonoBehaviour
     {
         _state = BossEncounterState.Fight;
 
+
         ServiceLocator.Instance.Get<MusicManager>().StartSong(_bossFightMusic, .2f, false);
-        // Todo: Start the boss fight
-        // Start the boss fight logic
+
+        BossFightStart.Raise();
     }
 
+    private void OnBossFightEnd()
+    {
+        _exitDoor.OpenDoor();
+        ServiceLocator.Instance.Get<DialogueSystem>().StartDialogue(_endDialogue);
 
-    /*TODO: end the boss fight
-    _exitDoor.OpenDoor();
-    */
+        // Set the camera target back to the player
+        CameraFollow camera = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerFollowCamera();
+        GameObject player = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter().gameObject;
+        camera.SetStaticCameraMode(false);
+        camera.SetFollowTarget(player.transform);
+    }
 }
