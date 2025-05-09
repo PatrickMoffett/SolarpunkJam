@@ -15,6 +15,8 @@ public class Enemy : Character
 
     [Header("Death")]
     [SerializeField] private GameObject _cleansedObjectToSpawn;
+    [SerializeField] private GameObject _tileCleanser;
+    [SerializeField] private Vector2Int _cleanseRange;
 
     private LootSpawner _lootSpawner;
     protected Rigidbody2D _rigidbody2D;
@@ -93,6 +95,13 @@ public class Enemy : Character
         if(_cleansedObjectToSpawn != null)
         {
             Instantiate(_cleansedObjectToSpawn, transform.position, Quaternion.identity);
+        }
+        if(_tileCleanser != null)
+        {
+            GameObject cleanser = Instantiate(_tileCleanser, new Vector3 (transform.position.x, transform.position.y-1, transform.position.z), Quaternion.identity);
+            TileCleanse tileCleanser = cleanser.GetComponent<TileCleanse>();
+            Assert.IsNotNull(tileCleanser, $"TileCleanse component not found on {gameObject.name}.");
+            tileCleanser.tileCleanse(_cleanseRange);
         }
         Destroy(gameObject);
     }
