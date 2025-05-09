@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e9dd558eb9b8d4141997a6f06a5aaa6b
+guid: df0f5f111a0823e40aea0acdaf79acf3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4436979801232287695
-    second: Thumbnail_MainMenu_0
+      213: -6637247532062434468
+    second: chibi_professor_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Thumbnail_MainMenu_0
+      name: chibi_professor_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1005
-        height: 587
+        x: 437
+        y: 166
+        width: 1178
+        height: 1724
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 13857fff06eac62c0800000000000000
-      internalID: -4436979801232287695
+      spriteID: c5b94150982c3e3a0800000000000000
+      internalID: -6637247532062434468
       vertices: []
       indices: 
       edges: []
