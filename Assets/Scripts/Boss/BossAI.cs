@@ -143,7 +143,7 @@ public class BossAI : Enemy
     private IEnumerator TornadoSpawnAttack()
     {
         // play tornado attack animation
-        _animator.SetTrigger(ANIM_SUMMONING);
+        _animator.SetBool(ANIM_SUMMONING, true);
 
         float timeElapsed = 0f;
         for(int i = 0; i < numberOfTornadoes; ++i)
@@ -165,6 +165,7 @@ public class BossAI : Enemy
             timeElapsed += tornadoSpawnInterval;
         }
         yield return new WaitForSeconds(tornadoAttackDuration - timeElapsed);
+        _animator.SetBool(ANIM_SUMMONING, false);
     }
 
     private IEnumerator MoveToPosition(Vector3 target, float speed)
@@ -245,9 +246,11 @@ public class BossAI : Enemy
             : chargeAttackLocationLeft.position;
 
         yield return MoveToPosition(start, bossSpeed);
-        _animator.SetTrigger(ANIM_CHARGE);
+        _animator.SetBool(ANIM_CHARGE, true);
         SetFacingDirection(!fromLeft);
         yield return new WaitForSeconds(chargeAttackDelay);
         yield return MoveToPosition(end, chargeAttackMoveSpeed);
+        _animator.SetBool(ANIM_CHARGE, false);
+
     }
 }
