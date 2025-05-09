@@ -2,6 +2,7 @@ using Services;
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 public class BossEncounterManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BossEncounterManager : MonoBehaviour
     [SerializeField] Dialogue _dialogue;
     [SerializeField] DoorHandler _entranceDoor;
     [SerializeField] DoorHandler _exitDoor;
+    [SerializeField] AudioClip _bossFightMusic;
     enum BossEncounterState
     {
         Uninitiated,
@@ -54,8 +56,9 @@ public class BossEncounterManager : MonoBehaviour
     private void StartBossFight()
     {
         _state = BossEncounterState.Fight;
+
+        ServiceLocator.Instance.Get<MusicManager>().StartSong(_bossFightMusic, .2f, false);
         // Todo: Start the boss fight
-        // Start the boss fight music
         // Start the boss fight logic
     }
 
