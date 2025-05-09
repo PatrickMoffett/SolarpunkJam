@@ -12,7 +12,6 @@ public class BossAI : Enemy
 
     [Header("General")]
     [SerializeField] private float bossSpeed = 5f;
-    [SerializeField] private Dialogue endDialogue;
     [Header("Wind Attack")]
     [SerializeField] private float windPushAccel = 10f;
     [SerializeField] private float windAttackDuration = 5f;
@@ -80,7 +79,6 @@ public class BossAI : Enemy
         leftWindParticleSystem.Stop();
         rightWindParticleSystem.Stop();
         
-        ServiceLocator.Instance.Get<DialogueSystem>().StartDialogue(endDialogue);
         OnBossEnd.Raise();
     }
     protected override void Start()
@@ -100,7 +98,7 @@ public class BossAI : Enemy
         Assert.IsNotNull(chargeAttackLocationRight, "Charge Attack Location Right not assigned.");
         Assert.IsNotNull(tornadoPrefab, "Tornado Prefab not assigned.");
         Assert.IsNotNull(TornadoSpawnAttackLocation, "Tornado Spawn Attack Location not assigned.");
-        Assert.IsNotNull(endDialogue, "End Dialogue not assigned.");
+
     }
 
     private IEnumerator PerformBossSequence()
