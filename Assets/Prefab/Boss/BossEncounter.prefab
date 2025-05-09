@@ -4892,10 +4892,10 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
@@ -4925,9 +4925,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _staticCameraTarget: {fileID: 4321584117317585683}
-  _dialogue: {fileID: 11400000, guid: ecbd0fd3b570ed14a89abf761504861b, type: 2}
+  _startdialogue: {fileID: 11400000, guid: ecbd0fd3b570ed14a89abf761504861b, type: 2}
+  _endDialogue: {fileID: 11400000, guid: ecbd0fd3b570ed14a89abf761504861b, type: 2}
   _entranceDoor: {fileID: 0}
   _exitDoor: {fileID: 0}
+  _bossFightMusic: {fileID: 8300000, guid: 1ab02d55f4391784ca6ec9602e0a9afd, type: 3}
   BossFightStart: {fileID: 11400000, guid: a060ec4c90e72e84f836cc67c467b9b0, type: 2}
   BossFightEnd: {fileID: 11400000, guid: 98501efdd7706c440b4e9cb248c4fd47, type: 2}
 --- !u!1 &973280327984705677
@@ -5020,10 +5022,11 @@ MonoBehaviour:
   _collisionEffectsToApply:
   - {fileID: 11400000, guid: f4b7c1dc10878e642b71a6e377bd2b45, type: 2}
   _cleansedObjectToSpawn: {fileID: 0}
+  _tileCleanser: {fileID: 0}
+  _cleanseRange: {x: 0, y: 0}
   OnBossStart: {fileID: 11400000, guid: a060ec4c90e72e84f836cc67c467b9b0, type: 2}
   OnBossEnd: {fileID: 11400000, guid: 98501efdd7706c440b4e9cb248c4fd47, type: 2}
   bossSpeed: 5
-  endDialogue: {fileID: 11400000, guid: ecbd0fd3b570ed14a89abf761504861b, type: 2}
   windPushAccel: 90
   windAttackDuration: 5
   windPushExtension: 2
@@ -5039,8 +5042,8 @@ MonoBehaviour:
   chargeAttackDelay: 0.5
   chargeAttackLocationLeft: {fileID: 4226693607388175764}
   chargeAttackLocationRight: {fileID: 8883387990152701263}
-  numberOfTornadoes: 5
-  tornadoSpeed: 5
+  numberOfTornadoes: 10
+  tornadoSpeed: 6
   tornadoSpawnInterval: 0.5
   tornadoPrefab: {fileID: 4212555068339059012, guid: 0d0069f2c329c224ebc2bca3be5528ae, type: 3}
   tornadoAttackDuration: 10

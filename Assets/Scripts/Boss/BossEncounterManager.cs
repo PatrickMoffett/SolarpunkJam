@@ -1,8 +1,5 @@
 using Services;
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
 
 public class BossEncounterManager : MonoBehaviour
 {
@@ -24,11 +21,15 @@ public class BossEncounterManager : MonoBehaviour
         Completed
     }
     private BossEncounterState _state = BossEncounterState.Uninitiated;
-    private void Awake()
+
+    private void OnEnable()
     {
         BossFightEnd.OnGameEvent += OnBossFightEnd;
     }
-
+    private void OnDisable()
+    {
+        BossFightEnd.OnGameEvent -= OnBossFightEnd;
+    }
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (_state == BossEncounterState.Uninitiated
