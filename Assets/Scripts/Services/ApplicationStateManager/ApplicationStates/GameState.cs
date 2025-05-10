@@ -11,6 +11,8 @@ namespace Services
 
         private UIWidget _uiWidget;
 
+        private int _levelIndex = 2;
+
         public GameState()
         {
 
@@ -45,17 +47,16 @@ namespace Services
             int currentLevelIndex = ServiceLocator.Instance.Get<LevelSceneManager>().GetLevelIndex();
             if (currentLevelIndex == 0)
             {
-                ServiceLocator.Instance.Get<LevelSceneManager>().LoadNextLevel();
+                ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(_levelIndex);
             }
 #else
-            ServiceLocator.Instance.Get<LevelSceneManager>().LoadNextLevel();
+            ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(_levelIndex);
 #endif
             
         }
 
         private void FinishStateSetup()
         {
-            _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
             ServiceLocator.Instance.Get<LevelSceneManager>().LevelLoaded -= FinishStateSetup;
         }
 

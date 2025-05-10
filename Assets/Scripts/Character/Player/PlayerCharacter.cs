@@ -103,6 +103,6 @@ public class PlayerCharacter : Character
     private void Die()
     {
         OnCharacterDeathStart?.Invoke(this);
-        ServiceLocator.Instance.Get<ApplicationStateManager>().PushState<GameOverState>();
+        ServiceLocator.Instance.Get<ApplicationStateManager>().PushState<GameOverState>(true);
     }
 }
