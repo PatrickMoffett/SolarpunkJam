@@ -42,7 +42,9 @@ namespace Services
             _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
             _uiWidget.UIObject.GetComponent<UIMainMenu>()?.Setup();
             ServiceLocator.Instance.Get<MusicManager>().StartSong(_mainMenuMusic, 1f);
+#if !UNITY_EDITOR
             ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(0);
+#endif
         }
 
         protected override void SetupStateInBackground(StackStateMachineBaseState prevState, Dictionary<string, object> options)

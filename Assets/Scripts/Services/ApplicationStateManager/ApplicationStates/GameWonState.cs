@@ -7,7 +7,7 @@ namespace Services
     public class GameWonState : BaseApplicationState
     {
         public readonly string UI_PREFAB = UIPrefabs.UIGameWon;
-        public readonly int SCENE_INDEX = (int)SceneIndexes.INITIAL_SCENE;
+        public readonly int SCENE_INDEX = (int)SceneIndexes.GAME_WON;
         private UIWidget _uiWidget;
 
         public GameWonState()
