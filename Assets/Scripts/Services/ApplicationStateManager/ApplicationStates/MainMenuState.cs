@@ -33,8 +33,7 @@ namespace Services
             {
                 _uiWidget.UIObject.SetActive(true);
             }
-
-            //ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(SCENE_NAME);
+            ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(0);
         }
 
         protected override void SetupState(StackStateMachineBaseState prevState, Dictionary<string, object> options)
@@ -43,7 +42,7 @@ namespace Services
             _uiWidget = ServiceLocator.Instance.Get<UIManager>().LoadUI(UI_PREFAB);
             _uiWidget.UIObject.GetComponent<UIMainMenu>()?.Setup();
             ServiceLocator.Instance.Get<MusicManager>().StartSong(_mainMenuMusic, 1f);
-
+            ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(0);
         }
 
         protected override void SetupStateInBackground(StackStateMachineBaseState prevState, Dictionary<string, object> options)

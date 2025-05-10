@@ -290,5 +290,22 @@ public class PlayerController : MonoBehaviour
     private void OnDisable()
     {
         _input.Disable();
+
+        _input.Player.Jump.started -= ctx => ExecuteJump();
+        _input.Player.Jump.canceled -= ctx => AbortJump();
+        _input.Player.Move.performed -= ctx => Move(ctx.ReadValue<Vector2>());
+        _input.Player.Move.canceled -= ctx => Move(Vector2.zero);
+
+        _input.Player.Shoot.performed -= ctx => StartAttack(shotChargeTime);
+        _input.Player.Shoot.canceled -= ctx => EndAttack(_shootAttacks, SHOOT_ANIM_TRIGGER, shotChargeTime);
+        _input.Player.Punch.canceled -= ctx => EndAttack(_punchAttacks, PUNCH_ANIM_TRIGGER);
+        _input.Player.BossSkill.canceled -= ctx => EndAttack(_bossAttacks, BOSS_ANIM_TRIGGER);
+
+        _input.Dialogue.NextDialogue.performed -= ctx => NextDialogue();
+        _input.Dialogue.SkipDialogue.performed -= ctx => SkipDialogue();
+        _input.Dialogue.SpeedUpDialogue.started -= ctx => SpeedUpDialogue(true);
+        _input.Dialogue.SpeedUpDialogue.canceled -= ctx => SpeedUpDialogue(false);
+
+        _input.Universal.Pause.performed -= ctx => ToggleMenu();
     }
 }

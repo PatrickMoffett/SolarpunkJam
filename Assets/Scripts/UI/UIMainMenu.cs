@@ -8,7 +8,7 @@ public class UIMainMenu : MonoBehaviour
     {
         // Disable quit button on WebGL builds
 #if UNITY_WEBGL
-        _quitButton?.SetActive(false);
+        //_quitButton?.SetActive(false);
 #endif
     }
     
