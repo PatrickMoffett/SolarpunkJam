@@ -5017,6 +5017,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b16277891ae4b624089da424fbfcbed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieOnCollisionWithPlayer: 0
   _applyCollisionEffects: 1
   _playerCollisionObserver: {fileID: 3924697233328422285}
   _collisionEffectsToApply:
@@ -5032,6 +5033,7 @@ MonoBehaviour:
   windPushExtension: 2
   leftTumbleWeedSpawner: {fileID: 7713629581536409472}
   rightTumbleWeedSpawner: {fileID: 5910740933043734006}
+  leftManaSpawner: {fileID: 6090495716568475052}
   leftDoorHandler: {fileID: 0}
   rightDoorHandler: {fileID: 0}
   leftWindParticleSystem: {fileID: 7604185286675047965}
@@ -10317,6 +10319,56 @@ MonoBehaviour:
   maxEnemiesSpawned: 100
   dontSpawnOnScreen: 0
   respawnOnDeath: 1
+--- !u!1 &6090495716568475052
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7137309107612477962}
+  - component: {fileID: 132097053754867521}
+  m_Layer: 0
+  m_Name: PotionSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &7137309107612477962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090495716568475052}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 141, y: 80.5, z: 1.1392227}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6179833718710873864}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &132097053754867521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6090495716568475052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e76fe4817d78a64499887921e6474ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 3149205211050070495, guid: a64064b6900a28747974f1e317851526, type: 3}
+  initialDelay: 0
+  spawnDelay: 4
+  maxEnemiesSpawned: 100
+  dontSpawnOnScreen: 0
+  respawnOnDeath: 1
 --- !u!1 &6197969922210098587
 GameObject:
   m_ObjectHideFlags: 0
@@ -10383,6 +10435,7 @@ Transform:
   - {fileID: 4575603456178018533}
   - {fileID: 7558868519826880589}
   - {fileID: 24113187885928262}
+  - {fileID: 7137309107612477962}
   - {fileID: 4893865947814464739}
   - {fileID: 8887059136134289966}
   - {fileID: 4226693607388175764}

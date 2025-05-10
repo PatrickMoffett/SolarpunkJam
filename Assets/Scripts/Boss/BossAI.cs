@@ -19,6 +19,7 @@ public class BossAI : Enemy
     [SerializeField] private float windPushExtension = 2f;
     [SerializeField] private GameObject leftTumbleWeedSpawner;
     [SerializeField] private GameObject rightTumbleWeedSpawner;
+    [SerializeField] private GameObject leftManaSpawner;
     [SerializeField] private DoorHandler leftDoorHandler;
     [SerializeField] private DoorHandler rightDoorHandler;
     [SerializeField] private ParticleSystem leftWindParticleSystem;
@@ -93,6 +94,7 @@ public class BossAI : Enemy
         leftDoorHandler.CloseDoor();
         rightDoorHandler.OpenDoor();
         leftTumbleWeedSpawner.SetActive(false);
+        leftManaSpawner.SetActive(false);
         rightTumbleWeedSpawner.SetActive(false);
         leftWindParticleSystem.Stop();
         rightWindParticleSystem.Stop();
@@ -107,6 +109,7 @@ public class BossAI : Enemy
         _playerMovementComponent = player.GetComponent<PlayerMovementComponent>();
         Assert.IsNotNull(_playerMovementComponent, "PlayerMovementComponent not found.");
         Assert.IsNotNull(leftTumbleWeedSpawner, "Left Tumble Weed Spawner not assigned.");
+        Assert.IsNotNull(leftManaSpawner, "Left Mana Spawner not assigned.");
         Assert.IsNotNull(rightTumbleWeedSpawner, "Right Tumble Weed Spawner not assigned.");
         Assert.IsNotNull(leftDoorHandler, "Left Door Handler not assigned.");
         Assert.IsNotNull(rightDoorHandler, "Right Door Handler not assigned.");
@@ -202,6 +205,7 @@ public class BossAI : Enemy
         {
             leftDoorHandler.OpenDoor();
             leftTumbleWeedSpawner.SetActive(true);
+            leftManaSpawner.SetActive(true);
             leftWindParticleSystem.Play();
         }
         else
@@ -221,6 +225,7 @@ public class BossAI : Enemy
         {
             leftDoorHandler.CloseDoor();
             leftTumbleWeedSpawner.SetActive(false);
+            leftManaSpawner.SetActive(false);
         }
         else
         {

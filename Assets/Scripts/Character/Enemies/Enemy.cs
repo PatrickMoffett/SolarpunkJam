@@ -7,6 +7,7 @@ using UnityEngine.Assertions;
 public class Enemy : Character
 {
     [Header("Collision")]
+    [SerializeField] private bool dieOnCollisionWithPlayer = false;
     [SerializeField] private bool _applyCollisionEffects = true;
     [ShowIf("_applyCollisionEffects")]
     [SerializeField] private CollisionObserver2D _playerCollisionObserver;
@@ -83,6 +84,10 @@ public class Enemy : Character
                     playerCombatSystem.ApplyStatusEffect(new OutgoingStatusEffectInstance(effect,_combatSystem));
                 }
             }
+        }
+        if (dieOnCollisionWithPlayer)
+        {
+            Die();
         }
     }
 
