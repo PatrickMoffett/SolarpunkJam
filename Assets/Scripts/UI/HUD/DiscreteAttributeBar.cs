@@ -8,6 +8,8 @@ using UnityEngine.Assertions;
 [RequireComponent(typeof(RectTransform))]
 public class DiscreteAttributeBar : MonoBehaviour
 {
+    [SerializeField] private bool _isBossHealthbar = false;
+
     [Header("Attribute")]
     [SerializeField] protected AttributeType attributeType;
     [SerializeField] protected GameObject segmentPrefab;
@@ -50,21 +52,36 @@ public class DiscreteAttributeBar : MonoBehaviour
 
     private void OnEnable()
     {
-        ServiceLocator.Instance.Get<PlayerManager>().OnPlayerCharacterChanged += OnPlayerCharacterChanged;
+        if (!_isBossHealthbar)
+        {
+            ServiceLocator.Instance.Get<PlayerManager>().OnPlayerCharacterChanged += OnCharacterChanged;
+        }
     }
     private void OnDisable()
     {
-        ServiceLocator.Instance.Get<PlayerManager>().OnPlayerCharacterChanged -= OnPlayerCharacterChanged;
+        if (!_isBossHealthbar)
+        {
+            ServiceLocator.Instance.Get<PlayerManager>().OnPlayerCharacterChanged -= OnCharacterChanged;
+        }
     }
     private void Start()
     {
-        PlayerCharacter playerCharacter = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter();
-        if (playerCharacter != null)
+        if (_isBossHealthbar)
         {
-            OnPlayerCharacterChanged(playerCharacter);
+            BossAI boss = GameObject.Find("BossCharacter")?.GetComponent<BossAI>();
+            Assert.IsNotNull(boss, $"[{nameof(DiscreteAttributeBar)}] Boss not found in the scene.");
+            OnCharacterChanged(boss);
+        }
+        else 
+        { 
+            PlayerCharacter playerCharacter = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter();
+            if (playerCharacter != null)
+            {
+                OnCharacterChanged(playerCharacter);
+            }
         }
     }
-    private void OnPlayerCharacterChanged(PlayerCharacter character)
+    private void OnCharacterChanged(Character character)
     {
         if (_attribute != null)
         {

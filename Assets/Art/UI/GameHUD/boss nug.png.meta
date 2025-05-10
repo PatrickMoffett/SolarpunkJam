@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 06b49384e9f2cb74f8250ec36dc7d46b
+guid: 40011047709ef72409d2273f0c103867
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5260768088795682106
-    second: SP Nug_Blue_0
+      213: 8761200099972460024
+    second: boss nug_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -101,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SP Nug_Blue_0
+      name: boss nug_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ca6f95cb4ffdf6b0800000000000000
-      internalID: -5260768088795682106
+      spriteID: 8fda9f47219069970800000000000000
+      internalID: 8761200099972460024
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a43de6850e7dd1c4dbcf5af31326ff8f
+    spriteID: 70e0ab8e3eedf9b41a9c04f5a473d890
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      SP Nug_Blue_0: -5260768088795682106
+      boss nug_0: 8761200099972460024
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

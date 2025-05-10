@@ -890,6 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4835d99b146180a40ab7c6f8ad2aafb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isBossHealthbar: 0
   attributeType: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
   segmentPrefab: {fileID: 91021353674364762, guid: e13a822da17c00f43b3607d69f507d74, type: 3}
   spaceBetweenSegments: 1
@@ -963,6 +964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4835d99b146180a40ab7c6f8ad2aafb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isBossHealthbar: 0
   attributeType: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
   segmentPrefab: {fileID: 91021353674364762, guid: f41cd1c877fb44143b9a5a172268b799, type: 3}
   spaceBetweenSegments: 1
@@ -1133,6 +1135,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3495624898644409642}
+  - component: {fileID: 6270021496122623288}
+  - component: {fileID: 2895549021475592744}
   m_Layer: 5
   m_Name: UIGame
   m_TagString: Untagged
@@ -1160,6 +1164,62 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6270021496122623288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6103163667761269053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef13bc8bc914d69a9c5628f34e09c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: a060ec4c90e72e84f836cc67c467b9b0, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7060647689936003579}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+--- !u!114 &2895549021475592744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6103163667761269053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef13bc8bc914d69a9c5628f34e09c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 98501efdd7706c440b4e9cb248c4fd47, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7060647689936003579}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7060647689936003579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1177,7 +1237,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7594082451041362591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1222,8 +1282,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4835d99b146180a40ab7c6f8ad2aafb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attributeType: {fileID: 11400000, guid: 5c62a901bfdcfbb4b9500469def3f4c0, type: 2}
-  segmentPrefab: {fileID: 91021353674364762, guid: e13a822da17c00f43b3607d69f507d74, type: 3}
+  _isBossHealthbar: 1
+  attributeType: {fileID: 11400000, guid: dda8e1286e006ba4dbd17fa84b729151, type: 2}
+  segmentPrefab: {fileID: 91021353674364762, guid: fb014be35dcf93f4fafabdfebb0aa457, type: 3}
   spaceBetweenSegments: 1
   segmentsLeftPad: 22
   segmentsRightPad: 0

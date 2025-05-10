@@ -157,7 +157,6 @@ public class BossAI : Enemy
             GameObject tornado = Instantiate(tornadoPrefab, spawnPos, Quaternion.identity);
             
             Vector2 dir= UnityEngine.Random.insideUnitCircle.normalized;
-            Debug.Log("Tornado Speed: " + tornadoSpeed * dir);
             tornado.GetComponent<Tornado>().Launch(dir*tornadoSpeed);
             tornado.GetComponent<Rigidbody2D>().linearVelocity = dir * tornadoSpeed;
             Destroy(tornado, tornadoAttackDuration - timeElapsed);
