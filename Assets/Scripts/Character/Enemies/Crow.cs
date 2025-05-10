@@ -50,7 +50,7 @@ public class Crow : Enemy
         }
         else
         {
-            if (IsOffscreenBeyondMargin())
+            //if (IsOffscreenBeyondMargin())
             {
                 // reverse and reset
                 flightDirection = -flightDirection;
