@@ -15,6 +15,7 @@ public class DialogueEndTransition : MonoBehaviour
     }
     private void OnDialogueEnd()
     {
+        ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueEnd -= OnDialogueEnd;
         ServiceLocator.Instance.Get<ApplicationStateManager>().PushState<GameWonState>(true);
     }
 }

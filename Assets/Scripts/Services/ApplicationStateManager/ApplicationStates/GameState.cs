@@ -46,7 +46,7 @@ namespace Services
             //don't load the next level if we're testing out a level in the editor
             // and we didn't launch the gamestate from the initial/menu scene (which should be index 0)
             int currentLevelIndex = ServiceLocator.Instance.Get<LevelSceneManager>().GetLevelIndex();
-            if (currentLevelIndex == _levelIndex)
+            if (currentLevelIndex != _levelIndex)
             {
                 ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(_levelIndex);
             }
