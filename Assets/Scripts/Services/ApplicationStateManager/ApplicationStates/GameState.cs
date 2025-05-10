@@ -12,7 +12,7 @@ namespace Services
 
         private UIWidget _uiWidget;
 
-        private int _levelIndex = 2;
+        private int _levelIndex = (int)Constants.SceneIndexes.GAME_SCENE;
 
         public GameState()
         {
@@ -46,7 +46,7 @@ namespace Services
             //don't load the next level if we're testing out a level in the editor
             // and we didn't launch the gamestate from the initial/menu scene (which should be index 0)
             int currentLevelIndex = ServiceLocator.Instance.Get<LevelSceneManager>().GetLevelIndex();
-            if (currentLevelIndex == 0)
+            if (currentLevelIndex == _levelIndex)
             {
                 ServiceLocator.Instance.Get<LevelSceneManager>().LoadLevel(_levelIndex);
             }
