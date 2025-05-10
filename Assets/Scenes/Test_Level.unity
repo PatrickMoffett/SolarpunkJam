@@ -1499,7 +1499,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1878070105
-  m_SortingLayer: 3
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -12570,6 +12570,7 @@ MonoBehaviour:
   _canApplyToNonPlayer: 0
   _effectsToApply:
   - {fileID: 11400000, guid: 3d589f6ea8a38c34a9b3ac66ce041085, type: 2}
+  _healAudioEvent: {fileID: 11400000, guid: dca9edcc0d95d484ba2f2aae3cc0e1f4, type: 2}
 --- !u!61 &660794711
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12928,6 +12929,7 @@ MonoBehaviour:
   _canApplyToNonPlayer: 0
   _effectsToApply:
   - {fileID: 11400000, guid: 4537034a747b6ed42b5017db61c7bfa7, type: 2}
+  _healAudioEvent: {fileID: 0}
 --- !u!114 &1007245435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13594,6 +13596,7 @@ MonoBehaviour:
   _canApplyToNonPlayer: 0
   _effectsToApply:
   - {fileID: 11400000, guid: 4537034a747b6ed42b5017db61c7bfa7, type: 2}
+  _healAudioEvent: {fileID: 0}
 --- !u!61 &1190860315
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14041,6 +14044,7 @@ MonoBehaviour:
   _canApplyToNonPlayer: 0
   _effectsToApply:
   - {fileID: 11400000, guid: 32eede32064a0bf4f888d6d7d42d1a25, type: 2}
+  _healAudioEvent: {fileID: 11400000, guid: dca9edcc0d95d484ba2f2aae3cc0e1f4, type: 2}
 --- !u!61 &1505802619
 BoxCollider2D:
   m_ObjectHideFlags: 0

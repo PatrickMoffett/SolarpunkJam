@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private const string WALK_ANIM_BOOL = "Walking";
     private const string START_WALK_ANIM_TRIGGER = "StartWalking";
     private const string STOP_WALK_ANIM_TRIGGER = "StopWalking";
+    private const string CHARGE_ANIM_BOOL = "Charging";
     
     private InputSystem_Actions _input;
     private PlayerMovementComponent _movementComponent;
@@ -47,6 +48,9 @@ public class PlayerController : MonoBehaviour
     
     [Tooltip("How long thew player needs to hold the button down for a charge attack. Make negative to disable")]
     [SerializeField] private float shotChargeTime;
+    
+    [Tooltip("The charging VFX object to enable/disable based on player charge state")]
+    [SerializeField] private GameObject chargeVFX;
     
     [Header("Sound Effects")]
     [Tooltip("The sound to play when the charge timer is complete")]
@@ -83,7 +87,7 @@ public class PlayerController : MonoBehaviour
         _input.Dialogue.SpeedUpDialogue.canceled += ctx => SpeedUpDialogue(false);
 
         _input.Universal.Pause.performed += ctx => ToggleMenu();
-
+        
         ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueStart += OnDialogueStart;
         ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueEnd += OnDialogueEnd;
     }
@@ -216,6 +220,8 @@ public class PlayerController : MonoBehaviour
     private void StartAttack(float chargeTime)
     {
         isCharging = true;
+        chargeVFX.SetActive(true);
+        _animator.SetBool(CHARGE_ANIM_BOOL, true);
         StartCoroutine(IncrementCharge(chargeTime));
     }
 
@@ -238,6 +244,9 @@ public class PlayerController : MonoBehaviour
             }
             chargeTimeCounter = 0;
         }
+
+        chargeVFX.SetActive(false);
+        _animator.SetBool(CHARGE_ANIM_BOOL, false);
         chosenAttack.Initialize(gameObject);
         chosenAttack.TryActivate(target);
     }
