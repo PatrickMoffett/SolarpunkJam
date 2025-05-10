@@ -23,9 +23,14 @@ public class TileCleanse : MonoBehaviour
         Transform loc = gameObject.transform;
         int count = 0;
         GameObject tilemapObject = GameObject.Find("Tilemap");
-        if (tilemapObject)
+        if (tilemapObject != null)
         {
             _tilemap = tilemapObject.GetComponent<Tilemap>();
+            if(_tilemap == null)
+            {
+                Debug.LogError("Tilemap component not found on Tilemap object.");
+                return;
+            }
         }
         else
         {

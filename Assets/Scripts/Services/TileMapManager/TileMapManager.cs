@@ -18,6 +18,11 @@ public class TileMapManager : IService
 
     void Start()
     {
+        ServiceLocator.Instance.Get<LevelSceneManager>().LevelLoaded += OnLevelLoaded;
+    }
+
+    public void OnLevelLoaded()
+    {
         GameObject tilemapObject = GameObject.Find("Tilemap");
         if (tilemapObject)
         {
@@ -28,7 +33,6 @@ public class TileMapManager : IService
             Debug.LogError("Tilemap object not found in the scene.");
         }
     }
-
     public Vector2Int GetTileCoordAtWorldPosition(Vector3 worldPosition)
     {
         return (Vector2Int)_tilemap.WorldToCell(worldPosition);

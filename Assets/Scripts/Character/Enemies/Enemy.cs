@@ -120,6 +120,7 @@ public class Enemy : Character
         {
             return; // already dying
         }
+
         _isDying = true;
         _animator.SetBool(ANIM_DYING, true);
 
