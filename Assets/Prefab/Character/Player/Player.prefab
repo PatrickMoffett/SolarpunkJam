@@ -340,6 +340,10 @@ MonoBehaviour:
   _windSpeedModifier: 0.5
   _slamSpeed: 10
   _slamStopEvent: {fileID: 11400000, guid: 0d0b27f070e556648a172f8d2f36f6d2, type: 2}
+  _standingChargePosition: {fileID: 0}
+  _jumpingChargePosition: {fileID: 0}
+  _fallingChargePosition: {fileID: 0}
+  _chargeEffectObject: {fileID: 0}
   _knockbackSpeed: 5
   _knockbackDirection: {x: -1, y: 1}
   _knockbackTime: 0.5
@@ -367,8 +371,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7911d8e348b5f7543a26875b14be4118, type: 2}
   _jumpAttacks:
   - {fileID: 11400000, guid: a6821158ef9f2ce428916dc3fe7615aa, type: 2}
-  shotChargeTime: 3
+  shotChargeTime: 2
   chargeVFX: {fileID: 2783101778249351298}
+  chargeIcon: {fileID: 0}
   chargeSoundEvent: {fileID: 11400000, guid: 718165d7b8b41b64680bd2dd64ed2364, type: 2}
   damagedSoundEvent: {fileID: 11400000, guid: 77bfff2c485b96e41a310726af22163a, type: 2}
 --- !u!212 &9045273776370784416
