@@ -14,25 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lines:
   - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
-    text: "Phew! They were tough.\r"
+    text: "Here it is, the Beacon! Turning this on will reactivate the windmills
+      for the whole Belt!\r"
     startDelay: 0.75
     eventToBroadcast: {fileID: 0}
-  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
-    text: "You did great, Lux, I\u2019m so proud of you! But there\u2019s not a moment
-      to lose. \r"
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: "Will this bring the plants back, professor?\r"
     startDelay: 0
     eventToBroadcast: {fileID: 0}
   - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
-    text: 'Quick, take me to the central control chamber for the windmills. '
-    startDelay: 0
-    eventToBroadcast: {fileID: 0}
-  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
-    text: I can get them spinning again from there. Soon the Rust Belt will have
-      power for the first time in decades!
+    text: "It\u2019s a start, Lux. We have many more facilities similar to this to
+      bring back online.\r"
     startDelay: 0
     eventToBroadcast: {fileID: 0}
   - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
-    text: Isn't this system neat? Doesn't it work great? (I hope). Definitely not
-      broken at all
+    text: "So after I beat a few more Bots, we\u2019ll be able to save everyone?\r"
+    startDelay: 0
+    eventToBroadcast: {fileID: 0}
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "It\u2019ll take more than that, Lux! \r"
+    startDelay: 0
+    eventToBroadcast: {fileID: 0}
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: "We\u2019ll do our part, but everyone\u2019s going to have to work together
+      to make our world a better place for your generation."
+    startDelay: 0
+    eventToBroadcast: {fileID: 0}
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: "We\u2019ll have to find a way to work with these Bots to focus on reclaiming
+      what was lost.\r"
+    startDelay: 0
+    eventToBroadcast: {fileID: 0}
+  - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
+    text: "This is making me feel pumped! Let\u2019s get to work!"
     startDelay: 0
     eventToBroadcast: {fileID: 0}
