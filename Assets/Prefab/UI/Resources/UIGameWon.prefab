@@ -677,7 +677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Dustbowl was cleansed!
+  m_text: The Rust Belt was restored!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a4c708264000a3e41a5a5cb6a9e86e0f, type: 2}
   m_sharedMaterial: {fileID: 7636350309137251582, guid: a4c708264000a3e41a5a5cb6a9e86e0f, type: 2}

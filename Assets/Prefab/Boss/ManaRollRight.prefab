@@ -211,7 +211,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 32eede32064a0bf4f888d6d7d42d1a25, type: 2}
   _cleansedObjectToSpawn: {fileID: 0}
   _tileCleanser: {fileID: 0}
+  _otherObjectsToSpawnOnDeath: []
   _cleanseRange: {x: 0, y: 0}
+  _deathDestroyDelay: 0
   speed: 5
   wallCollisionObserver: {fileID: 1343653454927238754}
   deathEffect: {fileID: 8073280247134044443, guid: 7fc3b0754277e234297c6d72dca91984, type: 3}

@@ -1,5 +1,4 @@
 ﻿using Services;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -157,9 +156,9 @@ public class BossAI : Enemy
             GameObject tornado = Instantiate(tornadoPrefab, spawnPos, Quaternion.identity);
             
             Vector2 dir= UnityEngine.Random.insideUnitCircle.normalized;
-            tornado.GetComponent<Tornado>().Launch(dir*tornadoSpeed);
-            tornado.GetComponent<Rigidbody2D>().linearVelocity = dir * tornadoSpeed;
-            Destroy(tornado, tornadoAttackDuration - timeElapsed);
+            Tornado ts = tornado.GetComponent<Tornado>();
+            ts.Launch(dir*tornadoSpeed);
+            ts.SetLifetime(tornadoAttackDuration - timeElapsed);
             yield return new WaitForSeconds(tornadoSpawnInterval);
             timeElapsed += tornadoSpawnInterval;
         }

@@ -22,7 +22,7 @@ public class DialogueSystem : IService
     private string currentFullText;
     private bool isSpeedUpActive = false;
     private bool isCurrentLineFinished = false;
-
+    private bool isWaitingForDelay = false;
     public event Action OnDialogueStart;
     public event Action OnDialogueEnd;
     public DialogueSystem()
@@ -100,8 +100,9 @@ public class DialogueSystem : IService
         {
             dialogueLine.eventToBroadcast.Raise();
         }
+        isWaitingForDelay = true;
         yield return new WaitForSecondsRealtime(dialogueLine.startDelay);
-
+        isWaitingForDelay = false;
         // Set UI to active if it wasn't already
         _dialogueUI.UIObject.SetActive(true);
 
@@ -139,6 +140,10 @@ public class DialogueSystem : IService
     }
     public void ForceCompleteLine()
     {
+        if(isWaitingForDelay)
+        {
+            return;
+        }
         if (typingCoroutine != null)
         {
             ServiceLocator.Instance.Get<MonoBehaviorService>()
@@ -155,6 +160,10 @@ public class DialogueSystem : IService
 
     public void RequestNextLine()
     {
+        if(isWaitingForDelay)
+        {
+            return;
+        }
         if(isCurrentLineFinished)
         {
             ShowNextLine();

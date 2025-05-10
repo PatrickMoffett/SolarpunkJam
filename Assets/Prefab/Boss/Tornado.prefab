@@ -365,4 +365,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0cc57ec107ee2164fa739003ebe9ec72, type: 2}
   _cleansedObjectToSpawn: {fileID: 0}
   _tileCleanser: {fileID: 0}
+  _otherObjectsToSpawnOnDeath: []
   _cleanseRange: {x: 0, y: 0}
+  _deathDestroyDelay: 0.5
+  BossFightEnded: {fileID: 11400000, guid: 98501efdd7706c440b4e9cb248c4fd47, type: 2}
+  fadeDuration: 0.5
