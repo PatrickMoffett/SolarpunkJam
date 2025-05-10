@@ -25,6 +25,7 @@ public class Enemy : Character
     [SerializeField] private float _deathDestroyDelay = 0.5f;
     
     private const string ANIM_DYING = "Dying";
+    private const float UPWARD_KNOCKBACK = 1f;
     protected bool _isDying = false;
     
     private LootSpawner _lootSpawner;
@@ -172,6 +173,7 @@ public class Enemy : Character
         }
         // Set the knockback
         _rigidbody2D.linearVelocityX = attribute.CurrentValue;
+        _rigidbody2D.linearVelocityY = UPWARD_KNOCKBACK;
         attribute.SetAttributeBaseValueDangerous(0);
     }
     

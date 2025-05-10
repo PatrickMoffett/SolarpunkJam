@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4435404c5bc7ecd4aaf3695a43015cb2, type: 3}
   m_Name: PunchDirectionality
   m_EditorClassIdentifier: 
-  scalar: 2
+  scalar: 3
   scaleX: 1
