@@ -72,7 +72,14 @@ public class TileCleanse : MonoBehaviour
             {
                 if (current.Item1.y == position.y)
                 {
-                    _tilemap.SetTile(current.Item1, _grassTile);
+                    Vector3Int upperChecker = new Vector3Int(current.Item1.x, position.y + 1, 0);
+                    Tile upperTile = _tilemap.GetTile<Tile>(upperChecker);
+                    if (upperTile == null)
+                    {
+                        _tilemap.SetTile(current.Item1, _grassTile);
+                    }
+                    else
+                    _tilemap.SetTile(current.Item1, _dirtTile);
                 }
                 else
                 {
