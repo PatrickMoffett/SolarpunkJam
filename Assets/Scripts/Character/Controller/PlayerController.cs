@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour
         isCharging = true;
         chargeVFX.SetActive(true);
         chargeIcon.SetActive(true);
-        _animator.SetBool(CHARGE_ANIM_BOOL, true);
+        //_animator.SetBool(CHARGE_ANIM_BOOL, true);
         StartCoroutine(IncrementCharge(chargeTime));
     }
 
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
 
         chargeVFX.SetActive(false);
         chargeIcon.SetActive(false);
-        _animator.SetBool(CHARGE_ANIM_BOOL, false);
+        //_animator.SetBool(CHARGE_ANIM_BOOL, false);
         chosenAttack.Initialize(gameObject);
         chosenAttack.TryActivate(target);
     }
