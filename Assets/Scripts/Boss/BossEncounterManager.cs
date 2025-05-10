@@ -9,6 +9,7 @@ public class BossEncounterManager : MonoBehaviour
     [SerializeField] DoorHandler _entranceDoor;
     [SerializeField] DoorHandler _exitDoor;
     [SerializeField] AudioClip _bossFightMusic;
+    [SerializeField] AudioClip _postBossMusic;
 
     [SerializeField] GameEvent BossFightStart;
     [SerializeField] GameEvent BossFightEnd;
@@ -68,7 +69,7 @@ public class BossEncounterManager : MonoBehaviour
         _state = BossEncounterState.Fight;
 
 
-        ServiceLocator.Instance.Get<MusicManager>().StartSong(_bossFightMusic, .2f, false);
+        ServiceLocator.Instance.Get<MusicManager>().StartSong(_bossFightMusic, 2f, true);
 
         BossFightStart.Raise();
     }
@@ -77,7 +78,7 @@ public class BossEncounterManager : MonoBehaviour
     {
         _exitDoor.OpenDoor();
         ServiceLocator.Instance.Get<DialogueSystem>().StartDialogue(_endDialogue);
-
+        ServiceLocator.Instance.Get<MusicManager>().StartSong(_postBossMusic, 2f, true);
         // Set the camera target back to the player
         CameraFollow camera = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerFollowCamera();
         GameObject player = ServiceLocator.Instance.Get<PlayerManager>().GetPlayerCharacter().gameObject;

@@ -4892,10 +4892,10 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_ContactCaptureLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_CallbackLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
@@ -4925,11 +4925,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _staticCameraTarget: {fileID: 4321584117317585683}
-  _startdialogue: {fileID: 11400000, guid: ecbd0fd3b570ed14a89abf761504861b, type: 2}
-  _endDialogue: {fileID: 11400000, guid: ecbd0fd3b570ed14a89abf761504861b, type: 2}
+  _startdialogue: {fileID: 11400000, guid: 7a51db1f91659f94d82463e17cf10379, type: 2}
+  _endDialogue: {fileID: 11400000, guid: 0d5fb8f7dec28e34a905a400d0bd2619, type: 2}
   _entranceDoor: {fileID: 0}
   _exitDoor: {fileID: 0}
   _bossFightMusic: {fileID: 8300000, guid: 1ab02d55f4391784ca6ec9602e0a9afd, type: 3}
+  _postBossMusic: {fileID: 8300000, guid: c479916e2ca2b0c4e843179f16390b1b, type: 3}
   BossFightStart: {fileID: 11400000, guid: a060ec4c90e72e84f836cc67c467b9b0, type: 2}
   BossFightEnd: {fileID: 11400000, guid: 98501efdd7706c440b4e9cb248c4fd47, type: 2}
 --- !u!1 &973280327984705677
@@ -4982,7 +4983,7 @@ GameObject:
   - component: {fileID: 1269485699304208450}
   - component: {fileID: 7162206753461089401}
   m_Layer: 9
-  m_Name: Boss
+  m_Name: BossCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossStartDialogue
   m_EditorClassIdentifier: 
   lines:
-  - character: {fileID: 0}
+  - character: {fileID: 11400000, guid: 9ac533d67e9b6924e894b47e15b787e7, type: 2}
     text: Who dares interrupt me from The Work?
     startDelay: 0.75
     eventToBroadcast: {fileID: 0}
@@ -21,7 +21,7 @@ MonoBehaviour:
     text: "I\u2019m here to turn the windmills back on. Our people need power!"
     startDelay: 0
     eventToBroadcast: {fileID: 0}
-  - character: {fileID: 0}
+  - character: {fileID: 11400000, guid: 9ac533d67e9b6924e894b47e15b787e7, type: 2}
     text: "Hmph, the so-called \u201Cpeople\u201D gave me My Task, and now they want
       me to stop? Never!"
     startDelay: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
       it!"
     startDelay: 0
     eventToBroadcast: {fileID: 0}
-  - character: {fileID: 0}
+  - character: {fileID: 11400000, guid: 9ac533d67e9b6924e894b47e15b787e7, type: 2}
     text: "I maximized production, little one. The earth breaking was a result of
       flawed human thinking. I\u2019m just following my directive."
     startDelay: 0
@@ -40,7 +40,7 @@ MonoBehaviour:
     text: Your directive was wrong! We can make it better, you just have to stop!
     startDelay: 0
     eventToBroadcast: {fileID: 0}
-  - character: {fileID: 0}
+  - character: {fileID: 11400000, guid: 9ac533d67e9b6924e894b47e15b787e7, type: 2}
     text: "If you want me to stop, you\u2019re welcome to try and make me."
     startDelay: 0
     eventToBroadcast: {fileID: 0}
