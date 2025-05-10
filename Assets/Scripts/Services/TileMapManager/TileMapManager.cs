@@ -20,9 +20,15 @@ public class TileMapManager : IService
     void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        FindTileMap();
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        FindTileMap();
+    }
+
+    private void FindTileMap()
     {
         GameObject tilemapObject = GameObject.Find("Tilemap");
         if (tilemapObject)
@@ -34,8 +40,14 @@ public class TileMapManager : IService
             Debug.LogError("Tilemap object not found in the scene.");
         }
     }
+
     public Vector2Int GetTileCoordAtWorldPosition(Vector3 worldPosition)
     {
+        if(_tilemap == null)
+        {
+            Debug.LogError("Tilemap is not initialized.");
+            return Vector2Int.zero;
+        }
         return (Vector2Int)_tilemap.WorldToCell(worldPosition);
     }
 
