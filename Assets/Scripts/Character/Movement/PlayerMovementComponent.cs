@@ -410,7 +410,10 @@ public class PlayerMovementComponent : MonoBehaviour
         public override void Update()
         {
             Context.UpdateCharacterDirection();
-            Context.UpdateXVelocity(Context._movementDirection.x, Context._airAccel.CurrentValue);
+            if (Context._airControl)
+            {
+                Context.UpdateXVelocity(Context._movementDirection.x, Context._airAccel.CurrentValue);
+            }
             Context.ClampFallSpeed();
             Context.UpdateCharacterAnim();
         }
@@ -458,7 +461,10 @@ public class PlayerMovementComponent : MonoBehaviour
         public override void Update()
         {
             Context.UpdateCharacterDirection();
-            Context.UpdateXVelocity(Context._movementDirection.x, Context._movementAccel.CurrentValue);
+            if (Context._airControl)
+            {
+                Context.UpdateXVelocity(Context._movementDirection.x, Context._movementAccel.CurrentValue);
+            }
             Context.ClampFallSpeed();
             Context.UpdateCharacterAnim();
         }
