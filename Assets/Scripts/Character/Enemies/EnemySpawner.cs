@@ -47,14 +47,14 @@ public class EnemySpawner : MonoBehaviour
 
         Enemy enemy = enemyObject.GetComponent<Enemy>();
         Assert.IsNotNull(enemy, $"Enemy prefab does not have an Enemy component.");
-        enemy.OnCharacterDeath += OnEnemyDeath;
+        enemy.OnCharacterDeathStart += OnEnemyDeath;
 
         currentEnemiesSpawned++;
     }
 
     private void OnEnemyDeath(Character character)
     {
-        character.OnCharacterDeath -= OnEnemyDeath;
+        character.OnCharacterDeathStart -= OnEnemyDeath;
         if (!respawnOnDeath)
         {
             currentEnemiesSpawned--;

@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AttributeSet))]
 public class Character : MonoBehaviour
 {
-    public Action<Character> OnCharacterDeath;
+    public Action<Character> OnCharacterDeathStart;
     protected CombatSystem _combatSystem;
     protected AttributeSet _attributeSet;
     protected virtual void Awake()

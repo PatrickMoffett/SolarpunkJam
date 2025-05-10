@@ -83,7 +83,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1669113659
-  m_SortingLayer: 6
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 2782969744498179184, guid: 15d9a0387275cf14d9fd85ae18cd8581, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -187,11 +187,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 820bf43381d500b46a35a29e12f68ce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieOnCollisionWithPlayer: 0
   _applyCollisionEffects: 1
   _playerCollisionObserver: {fileID: 71563891211367128}
   _collisionEffectsToApply:
   - {fileID: 11400000, guid: 30605ce7bec0dce4eb3cd3298af9fad5, type: 2}
   _cleansedObjectToSpawn: {fileID: 7201301926100759567, guid: 6bb9eceb11659474986f4e1fea01b5fb, type: 3}
+  _tileCleanser: {fileID: 0}
+  _otherObjectsToSpawnOnDeath:
+  - {fileID: 8073280247134044443, guid: 7fc3b0754277e234297c6d72dca91984, type: 3}
+  _cleanseRange: {x: 0, y: 0}
+  _deathDestroyDelay: 0.5
   flightDirection: {x: -1, y: 0}
   flightSpeed: 4
   bobAmplitude: 2

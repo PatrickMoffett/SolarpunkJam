@@ -1,9 +1,12 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 
 [RequireComponent(typeof(LootSpawner))]
 [RequireComponent(typeof(CombatSystem))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : Character
 {
     [Header("Collision")]
@@ -17,13 +20,22 @@ public class Enemy : Character
     [Header("Death")]
     [SerializeField] private GameObject _cleansedObjectToSpawn;
     [SerializeField] private GameObject _tileCleanser;
+    [SerializeField] private List<GameObject> _otherObjectsToSpawnOnDeath = new List<GameObject>();
     [SerializeField] private Vector2Int _cleanseRange;
-
+    [SerializeField] private float _deathDestroyDelay = 0.5f;
+    
+    private const string ANIM_DYING = "Dying";
+    protected bool _isDying = false;
+    
     private LootSpawner _lootSpawner;
     protected Rigidbody2D _rigidbody2D;
+    protected Animator _animator;
     public void Kill()
     {
-        Die();
+        if (!_isDying)
+        {
+            Die();
+        }
     }
     protected override void Awake()
     {
@@ -33,6 +45,9 @@ public class Enemy : Character
 
         _lootSpawner = GetComponent<LootSpawner>();
         Assert.IsNotNull(_lootSpawner, $"LootSpawner not found on {gameObject.name}.");
+
+        _animator = GetComponent<Animator>();
+        Assert.IsNotNull(_animator, "Animator not found on BossAI.");
     }
     protected virtual void Start()
     {
@@ -70,7 +85,7 @@ public class Enemy : Character
     }
     protected virtual void OnPlayerTriggerEnter(Collider2D collision)
     {
-        if (_applyCollisionEffects)
+        if (_applyCollisionEffects && !_isDying)
         {
             collision.gameObject.TryGetComponent(out CombatSystem playerCombatSystem);
             if (playerCombatSystem == null)
@@ -101,27 +116,54 @@ public class Enemy : Character
 
     protected virtual void Die()
     {
+        if(_isDying)
+        {
+            return; // already dying
+        }
+        _isDying = true;
+        _animator.SetBool(ANIM_DYING, true);
+
+        OnCharacterDeathStart?.Invoke(this);
+
+        StartCoroutine(DeathDelay());
+    }
+    private IEnumerator DeathDelay()
+    {
+        yield return new WaitForSeconds(_deathDestroyDelay);
+        FinishDeath();
+    }
+    protected virtual void FinishDeath()
+    {
         Destroy(gameObject);
-        OnCharacterDeath?.Invoke(this);
         if (_lootSpawner != null)
         {
             _lootSpawner.SpawnLoot();
         }
-        if(_cleansedObjectToSpawn != null)
+        if (_cleansedObjectToSpawn != null)
         {
             Instantiate(_cleansedObjectToSpawn, transform.position, Quaternion.identity);
         }
-        if(_tileCleanser != null)
+        if (_tileCleanser != null)
         {
-            GameObject cleanser = Instantiate(_tileCleanser, new Vector3 (transform.position.x, transform.position.y-1, transform.position.z), Quaternion.identity);
+            GameObject cleanser = Instantiate(_tileCleanser, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
             TileCleanse tileCleanser = cleanser.GetComponent<TileCleanse>();
             Assert.IsNotNull(tileCleanser, $"TileCleanse component not found on {gameObject.name}.");
             tileCleanser.tileCleanse(_cleanseRange);
         }
+        foreach(var prefab in _otherObjectsToSpawnOnDeath)
+        {
+            if (prefab != null)
+            {
+                Instantiate(prefab, transform.position, Quaternion.identity);
+            }
+        }
     }
-
     private void OnApplyKnockback(Attribute attribute, float previousValue)
     {
+        if (_isDying)
+        {
+            return; // already dying
+        }
         // Don't let a 0 set through
         if (attribute.CurrentValue == 0)
         {

@@ -118,13 +118,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 669433f9e4943544e9ebe7772337f853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieOnCollisionWithPlayer: 0
   _applyCollisionEffects: 1
   _playerCollisionObserver: {fileID: 1491981273145108479}
   _collisionEffectsToApply:
   - {fileID: 11400000, guid: f2184fbdb1e4d79418c0190dc8f2a443, type: 2}
   _cleansedObjectToSpawn: {fileID: 5280716180398409632, guid: 5d52fa34dbcc182499d700a9ff7f9bf3, type: 3}
   _tileCleanser: {fileID: 3542614052710032756, guid: dc28ae92f840d5742b6125ad99ad4f10, type: 3}
+  _otherObjectsToSpawnOnDeath:
+  - {fileID: 8073280247134044443, guid: 7fc3b0754277e234297c6d72dca91984, type: 3}
   _cleanseRange: {x: 3, y: 2}
+  _deathDestroyDelay: 0.5
   rangedAttackAbility: {fileID: 11400000, guid: 934b2e9282a8441469ee94a3b2b05897, type: 2}
   attackRange: 13
 --- !u!95 &8279554745267931745

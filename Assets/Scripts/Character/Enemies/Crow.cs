@@ -40,6 +40,8 @@ public class Crow : Enemy
 
     void Update()
     {
+        if (_isDying) return;
+
         _bobTime += Time.deltaTime;
 
         if (!_turnPending)

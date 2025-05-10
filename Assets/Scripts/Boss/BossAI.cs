@@ -48,14 +48,12 @@ public class BossAI : Enemy
     private const string ANIM_CHARGE = "Charging";
     private const string ANIM_WIND_ATTACK = "WindAttack";
     private const string ANIM_SUMMONING = "Summoning";
+
     private Vector3 _cachedScale;
-    private Animator _animator;
     protected override void OnEnable()
     {
         base.OnEnable();
         _cachedScale = transform.localScale;
-        _animator = GetComponent<Animator>();
-        Assert.IsNotNull(_animator, "Animator not found on BossAI.");
         Assert.IsNotNull(OnBossStart, "OnBossStart event not assigned.");
         Assert.IsNotNull(OnBossEnd, "OnBossEnd event not assigned.");
         OnBossStart.OnGameEvent += StartBossFight;
@@ -79,10 +77,9 @@ public class BossAI : Enemy
     }
     protected override void Die()
     {
-        base.Die();
-       
         EndBossFight();
         StopAllCoroutines();
+        base.Die();
     }
     private void StartBossFight()
     {
