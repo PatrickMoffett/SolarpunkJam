@@ -583,6 +583,7 @@ MonoBehaviour:
   chargeIcon: {fileID: 711763224092699505}
   chargeSoundEvent: {fileID: 11400000, guid: 718165d7b8b41b64680bd2dd64ed2364, type: 2}
   damagedSoundEvent: {fileID: 11400000, guid: 77bfff2c485b96e41a310726af22163a, type: 2}
+  pauseSoundEvent: {fileID: 11400000, guid: 8099c5423ac6e94429b3b983353f3078, type: 2}
 --- !u!212 &9045273776370784416
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SimpleAudioEvent chargeSoundEvent;
     [Tooltip("The sound to play when the player takes damage")]
     [SerializeField] private SimpleAudioEvent damagedSoundEvent;
+    [Tooltip("The sound to play when pausing and unpausing")]
+    [SerializeField] private SimpleAudioEvent pauseSoundEvent;
     
     private Animator _animator;
     private bool isCharging = false;
@@ -103,7 +105,12 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
+        
+        if (pauseSoundEvent)
+        {
+            pauseSoundEvent.Play();
+        }
+        
         var currentState = ServiceLocator.Instance.Get<ApplicationStateManager>().GetCurrentState();
         if (currentState.GetType() == typeof(GameState))
         {
