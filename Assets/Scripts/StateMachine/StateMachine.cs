@@ -1,5 +1,6 @@
-
+using UnityEngine;
 using System;
+using System.Diagnostics;
 
 namespace StateMachine
 {
@@ -31,6 +32,11 @@ namespace StateMachine
             // create & init the new
             var newState = new TNewState();
             newState.Initialize(_context);
+
+            /*if(_currentState != null)
+            {
+                UnityEngine.Debug.Log($"Transitioning to {newState.GetType().Name} from {_currentState.GetType().Name}");
+            }*/
 
             // exit old
             _currentState?.ExitState(newState);

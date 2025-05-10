@@ -169,7 +169,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -4323035744774721539, guid: a322549ca6ec6714093f63fedb5fe850, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -358,8 +358,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48045c8b3069f840a98adcd8c9ef766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieOnCollisionWithPlayer: 0
   _applyCollisionEffects: 1
   _playerCollisionObserver: {fileID: 8003288952206191560}
   _collisionEffectsToApply:
   - {fileID: 11400000, guid: 0cc57ec107ee2164fa739003ebe9ec72, type: 2}
   _cleansedObjectToSpawn: {fileID: 0}
+  _tileCleanser: {fileID: 0}
+  _cleanseRange: {x: 0, y: 0}

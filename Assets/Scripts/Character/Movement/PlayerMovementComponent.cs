@@ -566,7 +566,8 @@ public class PlayerMovementComponent : MonoBehaviour
 
         public override void OnLandedOnGround()
         {
-            Context._stateMachine.TransitionTo<KnockbackState>();
+            Vector2 direction = Context._facingRight ? Vector2.left : Vector2.right;
+            Context.ApplyKnockback(direction);
         }
     }
     #endregion
