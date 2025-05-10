@@ -194,7 +194,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 404ee0c507214c54683938a1b27ecafb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drops: []
+  drops:
+  - prefab: {fileID: 7467977647329332869, guid: d4669a00eda66fc4892de5dc8e6cbc89, type: 3}
+    dropWeight: 1
+  - prefab: {fileID: 7744278790260704857, guid: d387eb5b71651154f9da060fd4e00a83, type: 3}
+    dropWeight: 2
+  - prefab: {fileID: 0}
+    dropWeight: 3
   singleLootSpawn: 1
 --- !u!114 &7661575426533718130
 MonoBehaviour:
