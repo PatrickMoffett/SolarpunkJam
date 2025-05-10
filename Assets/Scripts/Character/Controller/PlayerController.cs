@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Abilities;
 using Services;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovementComponent))]
 public class PlayerController : MonoBehaviour
@@ -76,26 +77,89 @@ public class PlayerController : MonoBehaviour
         _movementComponent = GetComponent<PlayerMovementComponent>();
         _attributes = GetComponent<AttributeSet>();
 
-        _input.Player.Jump.started += ctx => ExecuteJump();
-        _input.Player.Jump.canceled += ctx => AbortJump();
-        _input.Player.Move.performed += ctx => Move(ctx.ReadValue<Vector2>());
-        _input.Player.Move.canceled += ctx => Move(Vector2.zero);
-        
-        _input.Player.Shoot.performed += ctx => StartAttack(shotChargeTime);
-        _input.Player.Shoot.canceled += ctx => EndAttack(_shootAttacks, SHOOT_ANIM_TRIGGER, shotChargeTime);
-        _input.Player.Punch.canceled += ctx => EndAttack(_punchAttacks, PUNCH_ANIM_TRIGGER);
-        _input.Player.BossSkill.canceled += ctx => EndAttack(_bossAttacks, BOSS_ANIM_TRIGGER);
+        // Jump
+        _input.Player.Jump.started += OnJumpStarted;
+        _input.Player.Jump.canceled += OnJumpCanceled;
 
-        _input.Dialogue.NextDialogue.performed += ctx => NextDialogue();
-        _input.Dialogue.SkipDialogue.performed += ctx => SkipDialogue();
-        _input.Dialogue.SpeedUpDialogue.started += ctx => SpeedUpDialogue(true);
-        _input.Dialogue.SpeedUpDialogue.canceled += ctx => SpeedUpDialogue(false);
+        // Move
+        _input.Player.Move.performed += OnMovePerformed;
+        _input.Player.Move.canceled += OnMoveCanceled;
 
-        _input.Universal.Pause.performed += ctx => ToggleMenu();
-        
+        // Attacks
+        _input.Player.Shoot.performed += OnShootPerformed;
+        _input.Player.Shoot.canceled += OnShootCanceled;
+        _input.Player.Punch.canceled += OnPunchCanceled;
+        _input.Player.BossSkill.canceled += OnBossSkillCanceled;
+
+        // Dialogue
+        _input.Dialogue.NextDialogue.performed += OnNextDialogue;
+        _input.Dialogue.SkipDialogue.performed += OnSkipDialogue;
+        _input.Dialogue.SpeedUpDialogue.started += OnSpeedUpStarted;
+        _input.Dialogue.SpeedUpDialogue.canceled += OnSpeedUpCanceled;
+
+        _input.Universal.Pause.performed += ToggleMenu;
+
         ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueStart += OnDialogueStart;
         ServiceLocator.Instance.Get<DialogueSystem>().OnDialogueEnd += OnDialogueEnd;
     }
+    private void OnEnable()
+    {
+        _input.Enable();
+        _input.Dialogue.Disable();
+
+    }
+
+    private void OnDisable()
+    {
+        _input.Disable();
+
+        // Jump
+        _input.Player.Jump.started -= OnJumpStarted;
+        _input.Player.Jump.canceled -= OnJumpCanceled;
+
+        // Move
+        _input.Player.Move.performed -= OnMovePerformed;
+        _input.Player.Move.canceled -= OnMoveCanceled;
+
+        // Attacks
+        _input.Player.Shoot.performed -= OnShootPerformed;
+        _input.Player.Shoot.canceled -= OnShootCanceled;
+        _input.Player.Punch.canceled -= OnPunchCanceled;
+        _input.Player.BossSkill.canceled -= OnBossSkillCanceled;
+
+        // Dialogue
+        _input.Dialogue.NextDialogue.performed -= OnNextDialogue;
+        _input.Dialogue.SkipDialogue.performed -= OnSkipDialogue;
+        _input.Dialogue.SpeedUpDialogue.started -= OnSpeedUpStarted;
+        _input.Dialogue.SpeedUpDialogue.canceled -= OnSpeedUpCanceled;
+
+        // Menu
+        _input.Universal.Pause.performed -= ToggleMenu;
+
+        _input.Universal.Pause.performed -= ctx => ToggleMenu();
+    }
+    private void ToggleMenu(InputAction.CallbackContext ctx) => ToggleMenu();
+    private void OnJumpStarted(InputAction.CallbackContext ctx) => ExecuteJump();
+    private void OnJumpCanceled(InputAction.CallbackContext ctx) => AbortJump();
+
+    private void OnMovePerformed(InputAction.CallbackContext ctx) => Move(ctx.ReadValue<Vector2>());
+    private void OnMoveCanceled(InputAction.CallbackContext ctx) => Move(Vector2.zero);
+
+    private void OnShootPerformed(InputAction.CallbackContext ctx) => StartAttack(shotChargeTime);
+    private void OnShootCanceled(InputAction.CallbackContext ctx) =>
+        EndAttack(_shootAttacks, SHOOT_ANIM_TRIGGER, shotChargeTime);
+
+    private void OnPunchCanceled(InputAction.CallbackContext ctx) =>
+        EndAttack(_punchAttacks, PUNCH_ANIM_TRIGGER);
+
+    private void OnBossSkillCanceled(InputAction.CallbackContext ctx) =>
+        EndAttack(_bossAttacks, BOSS_ANIM_TRIGGER);
+
+    private void OnNextDialogue(InputAction.CallbackContext ctx) => NextDialogue();
+    private void OnSkipDialogue(InputAction.CallbackContext ctx) => SkipDialogue();
+    private void OnSpeedUpStarted(InputAction.CallbackContext ctx) => SpeedUpDialogue(true);
+    private void OnSpeedUpCanceled(InputAction.CallbackContext ctx) => SpeedUpDialogue(false);
+
 
     private void ToggleMenu()
     {
@@ -278,34 +342,5 @@ public class PlayerController : MonoBehaviour
             }
             yield return null;
         }
-    }
-    
-    private void OnEnable()
-    {
-        _input.Enable();
-        _input.Dialogue.Disable();
-
-    }
-
-    private void OnDisable()
-    {
-        _input.Disable();
-
-        _input.Player.Jump.started -= ctx => ExecuteJump();
-        _input.Player.Jump.canceled -= ctx => AbortJump();
-        _input.Player.Move.performed -= ctx => Move(ctx.ReadValue<Vector2>());
-        _input.Player.Move.canceled -= ctx => Move(Vector2.zero);
-
-        _input.Player.Shoot.performed -= ctx => StartAttack(shotChargeTime);
-        _input.Player.Shoot.canceled -= ctx => EndAttack(_shootAttacks, SHOOT_ANIM_TRIGGER, shotChargeTime);
-        _input.Player.Punch.canceled -= ctx => EndAttack(_punchAttacks, PUNCH_ANIM_TRIGGER);
-        _input.Player.BossSkill.canceled -= ctx => EndAttack(_bossAttacks, BOSS_ANIM_TRIGGER);
-
-        _input.Dialogue.NextDialogue.performed -= ctx => NextDialogue();
-        _input.Dialogue.SkipDialogue.performed -= ctx => SkipDialogue();
-        _input.Dialogue.SpeedUpDialogue.started -= ctx => SpeedUpDialogue(true);
-        _input.Dialogue.SpeedUpDialogue.canceled -= ctx => SpeedUpDialogue(false);
-
-        _input.Universal.Pause.performed -= ctx => ToggleMenu();
     }
 }
