@@ -2,6 +2,7 @@ using Services;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Tilemaps;
 
 public class TileMapManager : IService
@@ -18,10 +19,10 @@ public class TileMapManager : IService
 
     void Start()
     {
-        ServiceLocator.Instance.Get<LevelSceneManager>().LevelLoaded += OnLevelLoaded;
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void OnLevelLoaded()
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         GameObject tilemapObject = GameObject.Find("Tilemap");
         if (tilemapObject)
