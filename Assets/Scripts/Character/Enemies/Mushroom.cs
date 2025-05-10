@@ -28,6 +28,7 @@ public class Mushroom : Enemy
     }
     private void Update()
     {
+        if(_isDying) return;
         if (Vector2.Distance(transform.position, _target.transform.position) <= attackRange)
         {
             if (_rangedAttackAbility.CanActivate(new AbilityTargetData()))

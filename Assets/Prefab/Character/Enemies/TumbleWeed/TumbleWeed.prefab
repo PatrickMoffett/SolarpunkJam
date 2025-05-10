@@ -264,7 +264,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -435317915
-  m_SortingLayer: 5
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 4276734994559300151, guid: 0b133b280c26c334ea71ea5cb4fbb9b9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -289,11 +289,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f008b3980fc14d44794dce8bc51e71b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieOnCollisionWithPlayer: 0
   _applyCollisionEffects: 1
   _playerCollisionObserver: {fileID: 4722570507886370150}
   _collisionEffectsToApply:
   - {fileID: 11400000, guid: 4991b2f845a0dc04b987bce67dd03663, type: 2}
   _cleansedObjectToSpawn: {fileID: 0}
+  _tileCleanser: {fileID: 0}
+  _otherObjectsToSpawnOnDeath: []
+  _cleanseRange: {x: 0, y: 0}
+  _deathDestroyDelay: 0
   speed: -5
   wallCollisionObserver: {fileID: 1343653454927238754}
   deathEffect: {fileID: 8073280247134044443, guid: e8affe12fec609044a823600b8e8ac66, type: 3}

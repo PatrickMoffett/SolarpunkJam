@@ -51,7 +51,10 @@ public class PlayerController : MonoBehaviour
     
     [Tooltip("The charging VFX object to enable/disable based on player charge state")]
     [SerializeField] private GameObject chargeVFX;
-    
+
+    [Tooltip("The charging Icon to put over the Players Glove")]
+    [SerializeField] private GameObject chargeIcon;
+
     [Header("Sound Effects")]
     [Tooltip("The sound to play when the charge timer is complete")]
     [SerializeField] private SimpleAudioEvent chargeSoundEvent;
@@ -221,6 +224,7 @@ public class PlayerController : MonoBehaviour
     {
         isCharging = true;
         chargeVFX.SetActive(true);
+        chargeIcon.SetActive(true);
         _animator.SetBool(CHARGE_ANIM_BOOL, true);
         StartCoroutine(IncrementCharge(chargeTime));
     }
@@ -246,6 +250,7 @@ public class PlayerController : MonoBehaviour
         }
 
         chargeVFX.SetActive(false);
+        chargeIcon.SetActive(false);
         _animator.SetBool(CHARGE_ANIM_BOOL, false);
         chosenAttack.Initialize(gameObject);
         chosenAttack.TryActivate(target);

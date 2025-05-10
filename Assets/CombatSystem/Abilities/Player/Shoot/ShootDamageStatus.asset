@@ -29,7 +29,7 @@ MonoBehaviour:
     operation: 1
     attributeModifierValue:
       valueType: 0
-      constantFloat: 20
+      constantFloat: 1
       attributeSet: 0
       sourceAttributeType: {fileID: 0}
       preCoefficientAddition: 0

@@ -5024,7 +5024,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f4b7c1dc10878e642b71a6e377bd2b45, type: 2}
   _cleansedObjectToSpawn: {fileID: 0}
   _tileCleanser: {fileID: 0}
+  _otherObjectsToSpawnOnDeath:
+  - {fileID: 8073280247134044443, guid: 7fc3b0754277e234297c6d72dca91984, type: 3}
   _cleanseRange: {x: 0, y: 0}
+  _deathDestroyDelay: 0.5
   OnBossStart: {fileID: 11400000, guid: a060ec4c90e72e84f836cc67c467b9b0, type: 2}
   OnBossEnd: {fileID: 11400000, guid: 98501efdd7706c440b4e9cb248c4fd47, type: 2}
   bossSpeed: 5
@@ -10365,7 +10368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3149205211050070495, guid: a64064b6900a28747974f1e317851526, type: 3}
   initialDelay: 0
-  spawnDelay: 4
+  spawnDelay: 3.5
   maxEnemiesSpawned: 100
   dontSpawnOnScreen: 0
   respawnOnDeath: 1

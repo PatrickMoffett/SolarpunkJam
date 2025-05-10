@@ -25,9 +25,13 @@ public class PlayerMovementComponent : MonoBehaviour
     [Header("JumpSlam Settings")]
     [SerializeField] private float _slamSpeed = 2f;                 // How fast to move the player as they are slamming
     [SerializeField] private GameEvent _slamStopEvent;              // The event to fire when the slam stops and the projectile should be destroyed
-    
 
-    
+    [Header("Charge Anim Settings")]
+    [SerializeField] private GameObject _standingChargePosition;
+    [SerializeField] private GameObject _jumpingChargePosition;
+    [SerializeField] private GameObject _fallingChargePosition;
+    [SerializeField] private GameObject _chargeEffectObject;
+
     [Header("Knockback Settings")]
     [SerializeField] private float _knockbackSpeed = 10f;           // The force of the knockback
     [SerializeField] private Vector2 _knockbackDirection = (Vector2.up + Vector2.left); // The direction of the knockback  
@@ -227,6 +231,7 @@ public class PlayerMovementComponent : MonoBehaviour
             }
             _anim.SetBool(JUMP_ANIM_TRIGGER, true);
             _anim.SetBool(FALL_ANIM_TRIGGER, false);
+            _chargeEffectObject.transform.position = _jumpingChargePosition.transform.position;
         }
         else if (_rigidbody2D.linearVelocityY < -_jumpEpsilon)
         {
@@ -237,9 +242,11 @@ public class PlayerMovementComponent : MonoBehaviour
             }
             _anim.SetBool(JUMP_ANIM_TRIGGER, false);
             _anim.SetBool(FALL_ANIM_TRIGGER, true);
+            _chargeEffectObject.transform.position = _fallingChargePosition.transform.position;
         }
         else
         {
+            _chargeEffectObject.transform.position = _standingChargePosition.transform.position;
             _anim.SetBool(JUMP_ANIM_TRIGGER, false);
             _anim.SetBool(FALL_ANIM_TRIGGER, false);
         }
@@ -445,7 +452,7 @@ public class PlayerMovementComponent : MonoBehaviour
         }
         public override void ExitState(BaseState<PlayerMovementComponent> nextState)
         {
-            if(_coyoteJumpCoroutine != null)
+            if (_coyoteJumpCoroutine != null)
             {
                 Context.StopCoroutine(_coyoteJumpCoroutine);
                 _coyoteJumpCoroutine = null;
