@@ -23,7 +23,11 @@ public class Enemy : Character
     [SerializeField] private List<GameObject> _otherObjectsToSpawnOnDeath = new List<GameObject>();
     [SerializeField] private Vector2Int _cleanseRange;
     [SerializeField] private float _deathDestroyDelay = 0.5f;
-    
+
+    [Header("Audio Events")]
+    [SerializeField] private AudioEvent _damagedAudioEvent;
+    [SerializeField] private AudioEvent _deathAudioEvent;
+
     private const string ANIM_DYING = "Dying";
     private const float UPWARD_KNOCKBACK = 1f;
     protected bool _isDying = false;
@@ -109,6 +113,10 @@ public class Enemy : Character
 
     private void OnHealthChanged(Attribute attribute, float newValue)
     {
+        if(_damagedAudioEvent != null && attribute.CurrentValue < newValue)
+        {
+            _damagedAudioEvent.Play(gameObject);
+        }
         if (attribute.CurrentValue <= 0f)
         {
             Die();
@@ -124,6 +132,11 @@ public class Enemy : Character
 
         _isDying = true;
         _animator.SetBool(ANIM_DYING, true);
+
+        if (_deathAudioEvent != null)
+        {
+            _deathAudioEvent.Play(gameObject);
+        }
 
         OnCharacterDeathStart?.Invoke(this);
 

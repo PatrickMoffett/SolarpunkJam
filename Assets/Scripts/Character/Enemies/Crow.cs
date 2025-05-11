@@ -37,7 +37,10 @@ public class Crow : Enemy
         _bobTime = 0f;
         _cam = Camera.main;
     }
-
+    protected void OnDestroy()
+    {
+        
+    }
     void Update()
     {
         if (_isDying) return;

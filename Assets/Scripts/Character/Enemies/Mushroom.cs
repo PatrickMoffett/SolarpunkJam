@@ -7,7 +7,7 @@ public class Mushroom : Enemy
 {
     [SerializeField] RangedAttackAbility rangedAttackAbility;
     [SerializeField] float attackRange = 5f;
-
+    [SerializeField] SimpleAudioEvent attackAudioEvent;
     private const int newtonIters = 10;
     private const float tolerance = 0.001f;
 

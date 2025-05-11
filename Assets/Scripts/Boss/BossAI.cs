@@ -40,6 +40,10 @@ public class BossAI : Enemy
     [SerializeField] private float tornadoAttackDuration = 10f;
     [SerializeField] private Transform TornadoSpawnAttackLocation;
 
+    [Header("Audio Events")]
+    [SerializeField] private AudioEvent _chargeAttackAudioEvent;
+    [SerializeField] private AudioEvent _tornadoSummonAttackAudioEvent;
+
     private Coroutine _bossSequence;
     private Coroutine _delayedWindDisableCoroutine;
     private PlayerMovementComponent _playerMovementComponent;
@@ -154,7 +158,7 @@ public class BossAI : Enemy
                 TornadoSpawnAttackLocation.position.z
             );
             GameObject tornado = Instantiate(tornadoPrefab, spawnPos, Quaternion.identity);
-            
+            _tornadoSummonAttackAudioEvent.Play(tornado);
             Vector2 dir= UnityEngine.Random.insideUnitCircle.normalized;
             Tornado ts = tornado.GetComponent<Tornado>();
             ts.Launch(dir*tornadoSpeed);
@@ -249,6 +253,7 @@ public class BossAI : Enemy
         _animator.SetBool(ANIM_CHARGE, true);
         SetFacingDirection(!fromLeft);
         yield return new WaitForSeconds(chargeAttackDelay);
+        _chargeAttackAudioEvent.Play(gameObject);
         yield return MoveToPosition(end, chargeAttackMoveSpeed);
         _animator.SetBool(ANIM_CHARGE, false);
 

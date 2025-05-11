@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4894145120342100485}
   - component: {fileID: 1627401284640129442}
   - component: {fileID: 8802276600085815726}
+  - component: {fileID: -7377364579739231750}
   m_Layer: 9
   m_Name: CrowEnemy
   m_TagString: Untagged
@@ -298,6 +299,21 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &-7377364579739231750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5541130649680793715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28807b9c5f8baec4c96c95fb7a857e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioEvent: {fileID: 11400000, guid: b6f450ab0300326479207c982a50649e, type: 2}
+  _minInterval: 5
+  _maxInterval: 10
 --- !u!1 &9124455303228392263
 GameObject:
   m_ObjectHideFlags: 0

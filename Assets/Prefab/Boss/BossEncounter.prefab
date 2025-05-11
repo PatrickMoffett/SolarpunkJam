@@ -5028,7 +5028,9 @@ MonoBehaviour:
   _otherObjectsToSpawnOnDeath:
   - {fileID: 8073280247134044443, guid: 7fc3b0754277e234297c6d72dca91984, type: 3}
   _cleanseRange: {x: 0, y: 0}
-  _deathDestroyDelay: 0.5
+  _deathDestroyDelay: 2.5
+  _damagedAudioEvent: {fileID: 11400000, guid: a88c7f62b8e4dca4bad1ffd607227a09, type: 2}
+  _deathAudioEvent: {fileID: 11400000, guid: 049b90a7687a9f04fbfa88cebb392975, type: 2}
   OnBossStart: {fileID: 11400000, guid: a060ec4c90e72e84f836cc67c467b9b0, type: 2}
   OnBossEnd: {fileID: 11400000, guid: 98501efdd7706c440b4e9cb248c4fd47, type: 2}
   bossSpeed: 5
@@ -5048,12 +5050,14 @@ MonoBehaviour:
   chargeAttackDelay: 0.5
   chargeAttackLocationLeft: {fileID: 4226693607388175764}
   chargeAttackLocationRight: {fileID: 8883387990152701263}
-  numberOfTornadoes: 10
+  numberOfTornadoes: 8
   tornadoSpeed: 6
   tornadoSpawnInterval: 0.5
   tornadoPrefab: {fileID: 4212555068339059012, guid: 0d0069f2c329c224ebc2bca3be5528ae, type: 3}
   tornadoAttackDuration: 10
   TornadoSpawnAttackLocation: {fileID: 8106295367141346719}
+  _chargeAttackAudioEvent: {fileID: 11400000, guid: 8de461ea7785d984cb759b9294ad7a3d, type: 2}
+  _tornadoSummonAttackAudioEvent: {fileID: 11400000, guid: a0d1686d7b8dbd34094ee8391a5a7fea, type: 2}
 --- !u!212 &5527664296655304916
 SpriteRenderer:
   m_ObjectHideFlags: 0
