@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3542614052710032756
+--- !u!1 &1251808542449846604
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3608661428721412810}
-  - component: {fileID: 6009411151911294343}
-  - component: {fileID: 7827484545828239708}
+  - component: {fileID: 4500800453305011865}
+  - component: {fileID: 7716065917001437846}
+  - component: {fileID: 6942252822948139516}
   m_Layer: 0
-  m_Name: EnemyCleanser
+  m_Name: CornGrower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3608661428721412810
+--- !u!4 &4500800453305011865
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3542614052710032756}
+  m_GameObject: {fileID: 1251808542449846604}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -175.51, y: 39.53, z: 0}
-  m_LocalScale: {x: 0.7625, y: 0.4978125, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &6009411151911294343
+--- !u!212 &7716065917001437846
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3542614052710032756}
-  m_Enabled: 0
+  m_GameObject: {fileID: 1251808542449846604}
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -77,30 +77,36 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -4469358200174819191, guid: 12e296fab49bdc045a538a78770ae2c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.68, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7827484545828239708
-MonoBehaviour:
+--- !u!95 &6942252822948139516
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3542614052710032756}
+  m_GameObject: {fileID: 1251808542449846604}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2cea68d18e43e04488c6a30e2b43a7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _grassTile: {fileID: 11400000, guid: e8566a3c9f1d9c34c8b6d86fc27c8f99, type: 2}
-  _dirtTile: {fileID: 11400000, guid: 193f54ead425b2346ba61fb791c8320e, type: 2}
-  _corn: {fileID: 1251808542449846604, guid: 1820af792501e3748b20f60def4f9c0d, type: 3}
-  _tileCleanseEvent: {fileID: 11400000, guid: 5060d8c0d8a7a8f4baf6aae0122e8f48, type: 2}
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c390dd408eb101b4d8347db54c79d680, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

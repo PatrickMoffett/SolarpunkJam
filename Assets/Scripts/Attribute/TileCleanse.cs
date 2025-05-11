@@ -2,12 +2,14 @@ using Services;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
 
 public class TileCleanse : MonoBehaviour
 {
     [SerializeField] private Tile _grassTile;
     [SerializeField] private Tile _dirtTile;
+    [SerializeField] private GameObject _corn;
     [SerializeField] private GameEvent _tileCleanseEvent;
     private Tilemap _tilemap;
     
@@ -77,6 +79,14 @@ public class TileCleanse : MonoBehaviour
                     if (upperTile == null)
                     {
                         _tilemap.SetTile(current.Item1, _grassTile);
+                        float rand = Random.Range(0f, 5f);
+                        if(rand>4f)
+                        {
+                           GameObject createdCorn = Instantiate(_corn, new Vector3((current.Item1.x) + .5f, current.Item1.y + 2, 0), Quaternion.identity);
+                           Animator cornAnim = createdCorn.GetComponent<Animator>();
+                           Assert.IsNotNull(cornAnim, $"Corn not found on {gameObject.name}.");
+                           cornAnim.Play("CornGrowing");
+                        }
                     }
                     else
                     _tilemap.SetTile(current.Item1, _dirtTile);
