@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2624235662932448371}
   - component: {fileID: 4209192939798631952}
   - component: {fileID: 6236470887389294024}
+  - component: {fileID: 5820307859153144027}
   m_Layer: 6
   m_Name: ChargedShot
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: -485407967
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4884272028784134219, guid: 8ad7709376e986e4eba1d8c592365064, type: 3}
+  m_Sprite: {fileID: -8813637830891071922, guid: a6b2b33d49d129e4fb74e38ee342ab55, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -167,3 +168,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &5820307859153144027
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7222478627731710155}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5c51d85efd28f34f99a342d47e64e6d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
