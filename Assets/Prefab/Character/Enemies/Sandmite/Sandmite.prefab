@@ -357,7 +357,7 @@ MonoBehaviour:
   _playerCollisionObserver: {fileID: 9203771695796962179}
   _collisionEffectsToApply:
   - {fileID: 11400000, guid: 2fb8938e2cbfcfe40aa686c9558c30f3, type: 2}
-  _cleansedObjectToSpawn: {fileID: 0}
+  _cleansedObjectToSpawn: {fileID: 3936509287547984605, guid: afc65f3dd6c901b4b95d230aea7f914d, type: 3}
   _tileCleanser: {fileID: 3542614052710032756, guid: dc28ae92f840d5742b6125ad99ad4f10, type: 3}
   _otherObjectsToSpawnOnDeath:
   - {fileID: 8073280247134044443, guid: 7fc3b0754277e234297c6d72dca91984, type: 3}
