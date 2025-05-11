@@ -16,12 +16,17 @@ MonoBehaviour:
   - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
     text: "Here it is, the Beacon! Turning this on will reactivate the windmills
       for the whole Belt!\r"
-    startDelay: 0.75
+    startDelay: 0
+    eventToBroadcast: {fileID: 0}
+  - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
+    text: Alright let me activate it. ....................... and that should do
+      it!
+    startDelay: 0
     eventToBroadcast: {fileID: 0}
   - character: {fileID: 11400000, guid: 4d92717b3a6701049aba66184b0deee8, type: 2}
     text: "Will this bring the plants back, professor?\r"
     startDelay: 0
-    eventToBroadcast: {fileID: 0}
+    eventToBroadcast: {fileID: 11400000, guid: e462a157363882840be96d04d08f0841, type: 2}
   - character: {fileID: 11400000, guid: 88c2d1054421db14899bac5b84e3a982, type: 2}
     text: "It\u2019s a start, Lux. We have many more facilities similar to this to
       bring back online.\r"
